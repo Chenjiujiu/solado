@@ -1,18 +1,146 @@
-<li class="lvl1 parent megamenu">
+<style>
+.s-locale-selectors .icon {
+	vertical-align: sub;
+	width: 18px;
+	height: 18px;
+}
+.s-locale-selectors-list .active a{
+	font-weight: 800 !important;
+}
+.s-locale-selectors-list .active a::after{
+	content: '';
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	width: 8px;
+	height: 16px;
+	border-bottom: 2px solid #000000;
+	border-right: 2px solid #000000;
+	transform: translateY(-50%) rotate(45deg);
+}
+</style>
+<li class="lvl1 parent megamenu s-locale-selectors hidden">
 	<a href="javascript:void(0);" class="solado-menu-back-link">
 		<i class="ad ad-angle-left-l solado-menu-back"></i>
-		<span class="mobile-nav__title">1111</span>
+		<span class="mobile-nav__title">
+			<span class="s-locale-selectors-icon">
+				<svg t="1673941456512" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4317" width="48" height="48">
+					<path d="M512 0a512 512 0 1 1 0 1024A512 512 0 0 1 512 0zM130.752 409.472c-4.736 4.736-4.736 4.736 0 9.344-12.608 20.416-39.68 22.912-59.072 10.624a448.128 448.128 0 0 0 372.096 525.376l-0.384-0.32-7.68-3.84c14.4-4.608 33.472-4.608 47.68-4.608-4.736-28.032-4.736-51.264-4.736-79.36 0 0-109.568-79.232-109.568-125.952s14.272-69.952 0-69.952c-23.872 0-52.48 18.688-57.216 0-9.536-28.032-28.608-51.328-57.216-60.608-65.6 0-75.008-70.656-76.16-143.488l-0.064-19.84c0-23.424-28.608-23.424-47.68-37.376z m408.32-344.64l5.504 1.472c72.576 22.144 74.688 95.36 15.104 86.4 0 23.232 0 51.2-4.736 79.232-4.8 46.72-62.016 32.768-76.288 56.064-14.208 23.36 28.608 46.656 76.288 37.312 14.272 0 0-14.08 9.6-18.688 19.008-4.608 42.816-4.608 61.888 0a999.872 999.872 0 0 1-66.752 121.408c-9.6 13.952 0 41.984 0 60.608 0 140.096-66.752-32.64-76.288-27.968-9.536 9.344-52.352-9.344-71.424-9.344-19.072 0-9.6 37.312-28.608 37.312-38.144 0-28.608-9.344-28.608 4.608 0 18.688 4.672 56.064 4.672 112.064 0 18.688 38.144-4.608 61.952-4.608 28.608 0 47.68 23.296 66.752 32.64 33.28 14.08 66.688 60.736 90.496 65.28 23.808 4.8 4.736 42.048 33.28 37.376 14.272-4.608 33.344 4.736 42.88 18.688 14.336 18.688 4.8 42.112-14.272 56.064-28.544 27.968-38.08 60.608-52.352 125.952 7.808-2.56 17.024 3.968 24.64 11.84a448.64 448.64 0 0 0 318.144-277.504c-36.224 38.464-78.08 41.408-65.664 8.832-14.336-27.968-33.408-51.392-57.216-74.688-42.944-37.312-81.088-107.392 52.416-205.44-20.672-52.608 30.528-101.76 63.04-64.896a448 448 0 0 0-384.384-270.08z" fill="#000000" p-id="4318"></path>
+				</svg>
+			</span>
+			<span class="s-locale-selectors-title"></span>
+		</span>
 		<i class="ad ad-angle-right-l"></i>
 	</a>
-	<ul style="display: none;">
-		<li class="lvl-1">
-			<a href="javascript:void(0);" class="site-nav">222</a>
-		</li>
-		<li class="lvl-1">
-			<a href="javascript:void(0);" class="site-nav">3333</a>
-		</li>
-		<li class="lvl-1">
-			<a href="javascript:void(0);" class="site-nav">444</a>
-		</li>
-	</ul>
+	<ul style="display: none;" class="s-locale-selectors-list"></ul>
 </li>
+<script>
+	~function () {
+    let observer = null;
+    let root = null;
+    const SLocaleSelectors = document.querySelector('.site-header  .s-locale-selectors');
+    const SLocaleSelectorsList = document.querySelector('.site-header  .s-locale-selectors-list');
+
+    const SLocaleSelectorsMobile = document.querySelector('#MobileNav .s-locale-selectors');
+    const SLocaleSelectorsMobileList = document.querySelector('#MobileNav .s-locale-selectors-list');
+    window.addEventListener('DOMContentLoaded',()=>{
+			if(window.LocaleSelectors){
+				render()
+			}else{
+				check()
+			}
+    })
+		function check() {
+      observer = new MutationObserver(()=>{
+        if(window.LocaleSelectors && document.querySelector('.locale-selectors__container')){
+					render()
+          observer.disconnect();
+        }
+			});
+      observer.observe(document, {childList: true,subtree:true});
+    }
+		function render(){
+			root = window.LocaleSelectors?.root
+			if(!root){return false;}
+			if(matchMedia("screen and (max-width: 1024px)").matches){
+				renderMobile()
+			}else {
+				renderPc()
+			}
+		}
+    function renderMobile(){
+      setCurrent();
+      setOptionsMobile();
+      bindEvent()
+      SLocaleSelectorsMobile.classList.remove('hidden')
+		}
+    function renderPc(){
+      setCurrent();
+      setOptionsPc();
+      bindEvent()
+      SLocaleSelectors.classList.remove('hidden')
+		}
+    function setCurrent(){
+      const sel= root.querySelector('.locale-selectors__container .locale-selectors__selector')
+      const currentIndex = sel.selectedIndex;
+      const SLocaleSelectorsMobileTitle = document.querySelectorAll('.s-locale-selectors-title');
+      SLocaleSelectorsMobileTitle.forEach(item=>{
+      	item.innerHTML = sel.options[currentIndex].innerHTML;
+			})
+		}
+    function setOptionsMobile(){
+      const sel= root.querySelector('.locale-selectors__container .locale-selectors__selector')
+      const currentIndex = sel.selectedIndex;
+      const fragment = document.createDocumentFragment()
+			const options = root.querySelectorAll('.locale-selectors__container .locale-selectors__selector option')
+			options.forEach((item,index)=>{
+        const li = document.createElement('li');
+        li.classList.add('lvl-1','s-locale-selectors-item');
+				li.setAttribute('data-value',item.value)
+        li.innerHTML =`<a href="javascript:void(0);" class="site-nav">${item.innerHTML}</a>`
+				if(index == currentIndex){
+          li.classList.add('active')
+				}
+        fragment.appendChild(li)
+			})
+      SLocaleSelectorsMobileList.innerHTML='';
+      SLocaleSelectorsMobileList.appendChild(fragment);
+		}
+
+    function setOptionsPc(){
+
+
+    }
+    function bindEvent() {
+      SLocaleSelectorsList.addEventListener('click',(e)=>{
+        let tar = e.target
+				if(!tar.class.contain('s-locale-selectors-item')){
+          tar = tar.closest('.s-locale-selectors-item')
+				}
+        if(tar){
+         const value = tar.dataset.value
+					submit(value)
+				}
+			})
+      SLocaleSelectorsMobileList.addEventListener('click',(e)=>{
+        let tar = e.target
+        if(!tar.class.contain('s-locale-selectors-item')){
+          tar = tar.closest('.s-locale-selectors-item')
+        }
+        if(tar){
+          const value = tar.dataset.value
+          submit(value)
+        }
+
+			})
+
+
+    }
+    function submit(value) {
+      const form = document.querySelector('.locale-selectors__content form')
+			const select = document.querySelector('.locale-selectors__content .locale-selectors__selector')
+			select.value = value;
+      form.submit();
+		}
+  }()
+</script>

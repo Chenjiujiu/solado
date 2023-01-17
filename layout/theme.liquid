@@ -42,11 +42,6 @@
 {{ 'swiper.min.css' | asset_url | stylesheet_tag }}
 {{ 'swiper.min.js' | asset_url | script_tag }}
 {{ 'base.css' | asset_url | stylesheet_tag }}
-	<script>
-    window.addEventListener('message',(msg)=>{
-      console.log("接受到message22",msg)
-    })
-	</script>
 </head>
 <body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first }} {%- if settings.rtl -%}rtl {%- endif -%}lazyload"
 	{%- if settings.bodybg_img %} data-bgset="{% include 'bgset', image: settings.bodybg_img %}" data-sizes="auto" data-parent-fit="cover" style="background-image:url('{{ settings.bodybg_img | img_url: '50x50' }});"{%- endif -%}>
