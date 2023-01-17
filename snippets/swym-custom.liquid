@@ -1,0 +1,18 @@
+<script defer>
+  function swymCallbackFn(swat){   
+    var counter_elem = document.querySelector(".swym-wishlist-header-counter");
+    var ogRemoveWishlistDefault = swat.removeWishlistDefault;
+    swat.removeWishlistDefault = function(scb, ecb) {
+      ogRemoveWishlistDefault.call(this, function(resp){
+        swat.renderWishlistCount(counter_elem, function(count, element) {
+          console.log("debug - renderWishlistCount", count, element); 
+        });
+        scb(resp);
+      }, ecb);
+    }  
+}
+if(!window.SwymCallbacks){
+  window.SwymCallbacks = [];
+}
+  window.SwymCallbacks.push(swymCallbackFn);
+</script>

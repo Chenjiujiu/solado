@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "16337594509b33447b": {
+      "type": "logo-bar",
+      "blocks": {
+        "16337594509b33447b-0": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/5_0c0397a5-2ba0-4637-a9f6-86e68b3d6289.png",
+            "link": ""
+          }
+        },
+        "16337594509b33447b-1": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1_6bea7f1e-dc0a-446d-9714-c15ac0eaab06.png",
+            "link": ""
+          }
+        },
+        "16337594509b33447b-2": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/4.png",
+            "link": ""
+          }
+        },
+        "16337594509b33447b-3": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/3.png",
+            "link": ""
+          }
+        },
+        "16337594509b33447b-4": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2.png",
+            "link": ""
+          }
+        },
+        "16337594509b33447b-5": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/6.png",
+            "link": ""
+          }
+        },
+        "2e835dc5-f402-40f4-be7c-387eef8af697": {
+          "type": "logo_image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/3.png",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "16337594509b33447b-0",
+        "16337594509b33447b-1",
+        "16337594509b33447b-2",
+        "16337594509b33447b-3",
+        "16337594509b33447b-4",
+        "16337594509b33447b-5",
+        "2e835dc5-f402-40f4-be7c-387eef8af697"
+      ],
+      "settings": {
+        "top-offeset": "default",
+        "title": "Our Partners",
+        "subtitle": "",
+        "grid": 6,
+        "tablet-grid": 5,
+        "mobile-grid": 3
+      }
+    },
+    "1633759854d007fdc1": {
+      "type": "section-space",
+      "settings": {
+        "top-offeset": "default"
+      }
+    },
+    "brands": {
+      "type": "brand-list",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": false,
+        "breadcrumb": true,
+        "alphaList": true,
+        "navigation": true
+      }
+    }
+  },
+  "order": [
+    "16337594509b33447b",
+    "1633759854d007fdc1",
+    "brands"
+  ]
+}

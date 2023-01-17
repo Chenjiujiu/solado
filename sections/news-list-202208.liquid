@@ -1,0 +1,474 @@
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.js' | asset_url | script_tag }}
+<div class="news-list-202208 content-indent{% if section.settings.hide_mobile %} small--hide{% endif %} {{ section.settings.top-offeset}} wow fadeIn">
+  {% if section.settings.section_cov %}<div class="section-cover" style="background-color:{{section.settings.sec_bg_clr}};">{% endif%}	
+  <div class="custom-block{% if section.settings.snow_effect %} falling-snow{% endif %}{% if section.settings.snow_style == "style2" %} style2{% else %} style1{% endif %} {{section.settings.style}}{% unless section.settings.section_width %} page-width {% else %}fullwidth-{{section.id}} {% endunless %}">  
+
+    {%- if section.settings.title != blank  or section.settings.subtitle != blank -%}
+    <div class="sec-ttl {{ settings.title_align}} wow fadeIn">
+      <h3 class="h3">{{ section.settings.title }}</h3>
+      {%- if section.settings.subtitle != blank -%}<span>{{section.settings.subtitle}}</span>{%- endif -%}                 
+    </div>
+    {% endif %}
+
+    <div class="custom-content">
+     <div class="swiper mySwiper pc-show">
+      <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+
+      {%- assign custom_box = forloop.index | minus:1 -%}	 
+      {%- assign delay_time = 100 | times : custom_box -%}
+
+      {% case block.settings.width %}
+      {% when '25%' %}         
+      {%- assign block_width = 'small--one-half medium-up--one-quarter' -%}
+      {%- assign image_size = '350x' -%}
+      {% when '33.3333%' %}        
+      {%- assign block_width = 'small--one-whole medium-up--one-third' -%}
+      {%- assign image_size = '530x' -%}
+      {% when '50%' %}          
+      {%- assign block_width = 'small--one-whole medium-up--one-half' -%}
+      {%- assign image_size = '800x' -%}
+      {% when '66.6666%' %}         
+      {%- assign block_width = 'small--one-whole medium-up--two-thirds' -%}
+      {%- assign image_size = '850x' -%}
+      {% when '75%' %}        
+      {%- assign block_width = 'small--one-whole medium-up--three-quarters' -%}
+      {%- assign image_size = '850x' -%}
+      {% when '100%' %}          
+      {%- assign block_width = 'one-whole' -%}
+      {%- assign image_size = '1920x' -%}
+      {% endcase %}    
+
+      <div class="swiper-slide custom__item custom__item--{{block.id}} block_type_{{block.type}} {{ block_width }} {% if block.settings.alignment %}align--{{ block.settings.alignment }}{% endif %}" {{ block.shopify_attributes }}>
+        <div class="custom__item-inner custom__item-inner--{{ block.type }} wow fadeIn" data-wow-delay="{{delay_time}}ms">
+          {% case block.type %}
+          
+          {% when 'html' %}
+            {% if block.settings.code != blank %}
+              {{ block.settings.code }}
+            {% endif %}
+          {% endcase %}
+        </div>
+      </div>    
+    {% endfor %}
+   
+    </div>
+       <div class="swiper-pagination"></div>
+    </div>
+    <div class="mobile-show">
+    {% for block in section.blocks %}   
+      {% case block.type %}
+      
+      {% when 'html' %}
+        {% if block.settings.code != blank %}
+          {{ block.settings.code }}
+        {% endif %}
+      {% endcase %}
+    {% endfor %}
+    </div>
+    </div>
+    
+    {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+    {% endif %}
+  </div>
+  {% if section.settings.section_cov %}</div> {% endif%}
+</div>
+
+{% schema %}
+  {
+    "name": "News List 202208",
+    "class": "index-section",
+    "settings": [	 
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Custom content",
+		"info":"Use <strong>text here</strong> to make headings bold"
+      },
+ 	  {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Sub Heading",
+        "default": "Describe your products, collection, content etc..."
+      },
+	 {
+		 "type": "paragraph",
+		 "content":"Section==="
+      },
+	 {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        },
+		 {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": false
+	  },
+ 		{
+           "type": "checkbox",
+           "id": "hide_mobile",
+           "label": "Hide Section in Mobile?",
+           "default": false
+        },
+	 {
+        "type": "paragraph",
+        "content": "Left/Right Padding : Fullwidth Section Only==="
+      }, 	
+      {
+        "type": "range",
+        "id": "pad-desk",
+        "label": "Desktop",
+        "default": 55,
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-ipad",
+        "label": "Tablet",
+        "default": 15,
+        "min": 0,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-mbl",
+        "label": "Mobile",
+        "default": 10,
+        "min": 0,
+        "max": 20,
+        "step": 1
+      },	
+	  {
+        "type": "select",
+        "id": "prbox_style",
+        "label": "Products Grid Style",
+        "default": "style1",
+        "options": [
+          {
+            "value": "style1",
+            "label": "Style 1 - Default Info Center"
+          },
+          {
+            "value": "style2",
+            "label": "Style 2 - Info Hover Image"
+          },
+          {
+            "value": "style3",
+            "label": "Style 3 - Info Below Image"
+          },
+          {
+            "value": "style4",
+            "label": "Style 4 - Default Info Left"
+          }
+        ],
+		"info":"[Only for Products. chekout grid style](https://avon-demo.myshopify.com/pages/grid-style)"      
+      },	 
+ {
+        "type": "checkbox",
+        "id": "section_cov",
+     	"label": "Use Background?",
+        "default": false
+      },
+ {
+        "type": "color",
+        "id": "sec_bg_clr",
+        "label": "Background",
+		"default":"#fafafa",	
+		"info":"select light color"
+	  },
+{
+          "type": "select",
+          "id": "btn-size-desk",
+          "label": "Button Size: Desktop",
+          "default": "btn-sm",
+          "options": [
+          {
+          "label": "Small",
+          "value": "btn-sm"
+          },
+          {
+          "label": "Medium",
+          "value": "btn-md"
+          },
+          {
+          "label": "Large",
+          "value": "btn-lg"
+          }	
+          ]
+          }, 
+          {
+          "type": "select",
+          "id": "btn-size-mob",
+          "label": "Button Size : Mobile",
+          "default": "mob-btn-sm",
+          "options": [
+          {
+          "label": "Small",
+          "value": "mob-btn-sm"
+          },
+          {
+          "label": "Medium",
+          "value": "mob-btn-md"
+          },
+          {
+          "label": "Large",
+          "value": "mob-btn-lg"
+          }	
+          ]
+          }
+    ],
+    "blocks": [
+      {
+        "type": "html",
+        "name": "Custom HTML",
+        "settings": [
+          {
+            "type": "html",
+            "id": "code",
+            "label": "HTML"
+          },
+          {
+            "type": "select",
+            "id": "width",
+            "label": "Column width",
+            "default": "50%",
+            "options": [
+              {
+                "value": "25%",
+                "label": "25%"
+              },
+              {
+                "value": "33.3333%",
+                "label": "33.3333%"
+              },
+              {
+                "value": "50%",
+                "label": "50%"
+              },
+              {
+                "value": "66.6666%",
+                "label": "66.6666%"
+              },
+              {
+                "value": "75%",
+                "label": "75%"
+              },
+              {
+                "value": "100%",
+                "label": "100%"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "News List 202208",
+        "category": "7. Advanced Layout",
+        "blocks": [
+          {
+            "type": "html"
+          },
+          {
+            "type": "html"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<style>  
+
+   .news-list-202208  .swiper {
+        position: relative;
+         overflow: hidden;
+      }
+ .news-list-202208  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    padding:0;
+    align-items: start;
+  }
+.news-list-202208 .swiper-slide.medium-up--one-third{
+  width:33.33333%;
+}
+.news-list-202208  .swiper-slide.medium-up--one-quarter{
+	width:25%;
+}
+.news-list-202208  .swiper-slide.medium-up--one-half{
+    width:50%;
+  }
+.news-list-202208 .swiper-slide.medium-up--two-thirds {
+	width:66.66667%
+}
+.news-list-202208 .swiper-slide.medium-up--three-quarters {
+	width:75%
+}
+.news-list-202208 .swiper-slide.one-whole{
+    width:100%;
+  }
+.news-list-202208 .custom-content{
+   margin:0;
+ }
+.news-list-202208 .swiper-wrapper{
+        margin-bottom: 60px;
+  }
+.news-list-202208 .one-news{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        padding-left: 130px;
+        border-top: 2px solid #000000;
+        width: 100%;
+        position: relative;
+        margin-top: 12px;
+      }
+  .news-list-202208 .one-news .header-line{
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        border-radius: 100%;
+        background: #000;
+        position: absolute;
+        left: 130px;
+        top: -7px;
+      }
+     .news-list-202208 .one-news .news-title{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 80px;
+      }
+     .news-list-202208 .one-news .news-content{
+        text-align: left;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 30px;
+      }
+     .news-list-202208 .swiper-pagination .hideone{
+        display: none;
+      }
+     .news-list-202208 .swiper-pagination-bullet{
+        width: 13px;
+        height: 13px;
+        background: #fff;
+        border: solid 1px #000;
+        opacity: 1;
+      }
+    .news-list-202208  .swiper-pagination-bullet-active{
+        background:#000;
+      }
+    .news-list-202208  .swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet{
+        margin: 0 8px;
+      }
+  {% for block in section.blocks %}
+    .news-list-202208 .swiper-slide:nth-child({{forloop.index}}) .news-content {
+        width: 70%;
+      }
+  {% endfor %}
+.news-list-202208 .pc-show{
+  display:block;
+}
+.news-list-202208 .mobile-show{
+  display:none;
+}
+.news-list-202208 .mobile-show .one-news{
+    height: auto;
+    margin-top: 0;
+    padding-left: 0;
+    border-top: none;
+}
+.news-list-202208 .mobile-show .one-news .header-line{
+  display:none;
+}
+.news-list-202208 .mobile-show .one-news .news-title{
+  list-style: disc;
+  font-size:16px;
+}
+.news-list-202208 .mobile-show .one-news .news-content{
+      font-size: 12px;
+    line-height: 25px;
+}
+.news-list-202208.content-indent.default{
+      margin-top: 110px;
+}
+ @media only screen and (min-width: 1025px) {
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-desk}}px; padding-right:{{ section.settings.pad-desk}}px; }
+  } 
+  @media only screen and (max-width: 1024px) {
+     .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-ipad}}px; padding-right:{{ section.settings.pad-ipad}}px; }
+   } 
+  @media only screen and (max-width: 767px) {
+     .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-mbl}}px; padding-right:{{ section.settings.pad-mbl}}px; }
+    .news-list-202208 .pc-show{
+      display:none;
+    }
+    .news-list-202208 .mobile-show{
+      display:block;
+    }
+    .news-list-202208.content-indent.default{
+          margin-top: 50px;
+    }
+   } 
+</style>
+<script type="text/javascript">
+  window.addEventListener("DOMContentLoaded", function () {
+    var $mainContent = $("#shopify-section-{{section.id}}");
+      var swiper = new Swiper("#shopify-section-{{section.id}} .mySwiper", {
+        slidesPerView: "auto",
+        pagination: {
+          el: "#shopify-section-{{section.id}} .swiper-pagination",
+          clickable: true,
+          renderBullet: function (index, className) {
+            if(index===0 || index===3){
+                return '<span class="' + className + '"></span>';
+            }else{
+                var newClassName = className+" hideone"
+                return '<span class="' + newClassName + ' "></span>';
+            }
+            }
+        },
+      });
+  });;
+</script>

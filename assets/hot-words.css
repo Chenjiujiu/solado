@@ -1,0 +1,29 @@
+.custom-hot-words .hot-words-title {
+border-bottom: solid 1px #ededed;
+    line-height: 42px;
+    height: 42px;
+color:#464646;
+    opacity: .6;
+}
+.custom-hot-words .hot-words-suggestions{
+ padding:10px 0;
+}
+.custom-hot-words .hot-words-suggestions a{
+    margin-right: 20px;
+    line-height: 32px;
+    height: 32px;
+    display: inline-block;
+color:#222;
+}
+.custom-hot-words .custom-footer {
+border-bottom: solid 1px #ededed;
+    opacity: .6;
+}
+@media only screen and (max-width: 1024px){
+.custom-hot-words.usf-custom-hot-words {
+   margin: 0 16px;
+}
+.custom-hot-words .hot-words-title {
+   text-align:center;
+}
+}

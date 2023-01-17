@@ -1,0 +1,2124 @@
+<style>
+    .sidebar .sidebar_widget, .mobile-nav {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    @media only screen and (min-width: 1025px) {
+        #siteNav div.megamenu li.lvl-1 {
+            margin-bottom: 0;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 30px;
+        }
+
+        #siteNav div.megamenu li.lvl-1 a.lvl-1 {
+            padding: 0;
+        }
+
+        #siteNav div.megamenu li.lvl-1 li a {
+            padding: 0;
+        }
+    }
+
+    .nav-custom-image-wrap {
+        display: flex;
+        margin-top: 7px;
+    }
+
+    .nav-custom-image-wrap li:not(:first-child) {
+        margin-left: 20px;
+    }
+
+    #siteNav .onlyHaveTwo, #siteNav .allHaveThree, #siteNav .bothHaveTwoAndThree {
+        margin-right: 35px;
+    }
+
+    #siteNav .allHaveThree {
+        display: flex;
+    }
+
+    #siteNav .bothHaveTwoAndThree {
+        display: flex;
+    }
+
+    #siteNav .bothHaveTwoAndThree > ul:not(:first-child) {
+        margin-left: 40px;
+    }
+
+    #siteNav .allHaveThree > ul:not(:first-child) {
+        margin-left: 40px;
+    }
+
+    @media only screen and (min-width: 1025px) {
+        #siteNav div.megamenu {
+            padding: 23px 0 36px;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    @media only screen and (max-width: 1024px) {
+        #MobileNav .footer-bottom li a .ad {
+            width: auto;
+            height: auto;
+            position: inherit;
+            font-size: 20px;
+            min-width: 20px;
+            padding: 0;
+        }
+
+        #MobileNav .footer-bottom li a {
+            padding: 0;
+        }
+
+        #MobileNav .clone-footer-wrap {
+            flex: auto;
+            position: relative;
+        }
+
+        #MobileNav .clone-footer-wrap .payment-icon {
+            height: 23px;
+        }
+
+        #MobileNav .clone-footer-wrap .footer-bottom {
+            background: transparent;
+        }
+
+        #MobileNav .clone-footer-wrap .footer-bottom.footer-fixed-bottom {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+        }
+
+        #MobileNav .clone-footer-wrap .footer-bottom .flex > div {
+            font-size: 12px;
+        }
+    }
+</style>
+{%- if section.blocks.size > 0 -%}
+	<ul id="siteNav"
+	    class="siteNavigation text-{{ section.settings.menuAlign }}{% if settings.nav_below_logo %}{% unless settings.main_header_fullwidth %} page-width{% endunless %}{% endif %}"
+	    role="navigation" data-section-id="site-{{ section.id }}" data-section-type="site-navigation">
+		{% for block in section.blocks %}
+			{%- assign label = block.settings.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+			{%- capture linkLevel1 -%}<a
+				href="{% if block.settings.url != blank %}{{ block.settings.url }}{% else %}#{% endif %}" {% if block.settings.newtab %} target="_blank"{% endif %}>{{ block.settings.title | split: '[label' | first }}{% if section.settings.menuarrow %}
+				<i class="ad ad-angle-down-l"></i>{% endif %}{% if block.settings.title contains '[label' %}<span
+				class="lbl {{ label }}">{{ section.settings[label] }}</span>{% endif %}</a>{%- endcapture -%}
+			{%- case block.type -%}
+				{%- when 'homelink' -%}
+					<li class="lvl1 {% render 'navigation-mark', label: label %}"><a
+							href="{{ routes.root_url }}">{{ block.settings.title }}</a></li>
+
+				{%- when 'loginlink' -%}
+					{% if customer %}
+						<li class="lvl1 {% render 'navigation-mark', label: label %}"><a
+								href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a></li>
+						<li class="lvl1 {% render 'navigation-mark', label: label %}"><a
+								href="{{ routes.account_logout_url }}">{{ 'customer.account.logout' | t }}</a></li>
+					{% else %}
+						<li class="lvl1 {% render 'navigation-mark', label: label %}"><a
+								href="{{ routes.account_login_url }}">{{ 'customer.login.form_title' | t }}</a></li>
+					{% endif %}
+
+				{%- when 'single_link' -%}
+					<li class="lvl1 {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 | replace: '<i class="ad ad-angle-down-l"></i>', '' }}</li>
+
+				{%- when 'megamenu1' -%}
+					{%- if block.settings.title != blank -%}
+						<li
+						class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+					<div
+						class="megamenu style1{% if block.settings.imgcall == "right" %} flex{% endif %}{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"
+						{% if block.settings.custom_size %}style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+						{% if block.settings.box_sized %}
+						<div class="mm_layout{% if block.settings.imgcall == "right" %} flex{% endif %}">{% endif %}
+
+							{%- capture imgColumns -%}
+							{%- capture my_variable -%}{{ block.settings.megamenu1_image }} {{ block.settings.megamenu2_image }}{%- endcapture -%}
+							{%- assign products_array = my_variable | split: ' ' -%}
+							{%- if products_array.size > 0 -%}
+							{%- if block.settings.megamenu1_image != blank -%}
+						<li class="grid__item {{ imgcolumns }} imageCol text-center">
+							<a href="{{ block.settings.imageurl }}">
+								<img class="autoHt lazyload" src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+								     data-src="{{ block.settings.megamenu1_image | img_url: 'master' }}" width="228"
+								     height="280" alt="{{ block.settings.megamenu1_image.alt }}">
+								{% if block.settings.imageTtl1 != blank %}<span
+									class="ttl">{{ block.settings.imageTtl1 }}</span>{% endif %}
+							</a>
+						</li>
+					{%- endif -%}
+					{%- if block.settings.megamenu2_image != blank -%}
+						<li class="grid__item {{ imgcolumns }} imageCol text-center">
+							<a href="{{ block.settings.Image2url }}">
+								<img class="autoHt lazyload" src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+								     data-src="{{ block.settings.megamenu2_image | img_url: 'master' }}" width="228"
+								     height="280" alt="{{ block.settings.megamenu2_image.alt }}">
+								{% if block.settings.imageTtl2 != blank %}<span
+									class="ttl">{{ block.settings.imageTtl2 }}</span>{% endif %}
+							</a>
+						</li>
+					{%- endif -%}
+					{%- endif -%}
+					{%- endcapture -%}
+
+						{%- capture oneImgColumns -%}
+							{%- capture my_variable -%}{{ block.settings.megamenu1_image }} {%- endcapture -%}
+							{%- assign products_array = my_variable | split: ' ' -%}
+							{%- if products_array.size > 0 -%}
+								{%- if block.settings.megamenu1_image != blank -%}
+									<li class="grid__item {{ imgcolumns }} imageCol text-center">
+										<a href="{{ block.settings.imageurl }}">
+											<img class="autoHt lazyload"
+											     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+											     data-src="{{ block.settings.megamenu1_image | img_url: 'master' }}"
+											     width="228" height="280"
+											     alt="{{ block.settings.megamenu1_image.alt }}">
+											{% if block.settings.imageTtl1 != blank %}<span
+												class="ttl">{{ block.settings.imageTtl1 }}</span>{% endif %}
+										</a>
+									</li>
+								{%- endif -%}
+							{%- endif -%}
+						{%- endcapture -%}
+
+						{% comment %}导航区域{% endcomment %}
+						{% assign havelevelThreeLen = 0 %}
+						{% assign levelTwoLen = linklists[block.settings.mm_linklist].links | size %}
+						{% comment %}<div>二级导航总个数：{{levelTwoLen}}</div>{% endcomment %}
+						{% for link in linklists[block.settings.mm_linklist].links %}
+							{%- if link.links != blank -%}
+								{% assign havelevelThreeLen = havelevelThreeLen | plus: 1 %}
+							{%- endif -%}
+						{% endfor %}
+						{% comment %}<div>有三级子导航的个数：{{havelevelThreeLen}}</div>{% endcomment %}
+						{% assign onlylevelTwoLen = levelTwoLen | minus: havelevelThreeLen %}
+						{% comment %}<div>没有三级子导航的个数：{{onlylevelTwoLen}}</div>{% endcomment %}
+						{% assign caseStr = "bothHaveTwoAndThree" %}
+						{% if levelTwoLen == onlylevelTwoLen %}
+							{% assign caseStr = "onlyHaveTwo" %}
+						{% endif %}
+						{% if levelTwoLen == havelevelThreeLen %}
+							{% assign caseStr = "allHaveThree" %}
+						{% endif %}
+						{% comment %}<span>{{caseStr}}</span>{% endcomment %}
+
+						{% if block.settings.megamenu1_image != blank or block.settings.megamenu2_image != blank %}
+							{% include 'mm-links-pc', caseStr %}
+							{% comment %}{% for link in linklists[block.settings.mm_linklist].links %}{% include 'mm-links-pc',caseStr %}{% endfor %}{% endcomment %}
+							{% comment %}图片区域{% endcomment %}
+							<ul class="nav-custom-image-wrap">
+								{% if caseStr == "onlyHaveTwo" %}
+									{{ imgColumns }}
+								{% else %}
+									{% if levelTwoLen > 4 %}
+										{{ oneImgColumns }}
+									{% else %}
+										{{ imgColumns }}
+									{% endif %}
+								{% endif %}
+							</ul>
+						{%- else -%}
+							{% include 'mm-links-pc', caseStr %}
+							{% comment %}<ul class="grid flex-item mmWrapper">{% for link in linklists[block.settings.mm_linklist].links %}{% include 'mm-links' %}{% endfor %}</ul>{% endcomment %}
+						{%- endif -%}
+							{% if block.settings.box_sized %}</div>{% endif %}
+						</div>
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu2' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							<div
+								class="megamenu grid--table style2{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"
+								{% if block.settings.custom_size %}style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+							{% if block.settings.box_sized %}
+								<div class=" grid--table mm_layout">{% endif %}
+									<div class="grid__item prColumn">
+										<ul class="grid grid--uniform">
+											{%- case block.settings.mmcolumns -%}
+												{% when 1 %}{%- assign column = 'large-up--one-whole' -%}
+												{% when 2 %}{%- assign column = 'large-up--one-half' -%}
+												{% when 3 %}{%- assign column = 'large-up--one-third' -%}
+												{% when 4 %}{%- assign column = 'large-up--one-quarter' -%}
+												{% when 5 %}{%- assign column = 'large-up--one-fifth' -%}
+												{% when 6 %}{%- assign column = 'large-up--one-sixth' -%}
+											{%- endcase -%}
+											{%- assign collection = collections[block.settings.collection] -%}
+											{% for product in collection.products limit: block.settings.pr_limit %}
+												<li class="grid__item {{ column }} productCol">{% include 'mm-product' %}</li>
+											{% endfor %}
+										</ul>
+										{%- if block.settings.prodall != blank -%}<a href="{{ collection.url }}"
+										                                             class="btn">{{ block.settings.prodall }}</a>{%- endif -%}
+									</div>
+									{%- if block.settings.ftcl -%}
+									<div class="grid__item mmftcolumn text-center"
+									     style="background-color:{{ block.settings.ftcl_bg }};width:{{ block.settings.ftcl_width }}%;">
+									{%- if block.settings.ft_link != blank -%}<a
+											href="{{ block.settings.ft_link }}">{%- endif -%}
+											{%- if block.settings.ftcl_image != blank -%}
+												{%- assign mm2img_url = block.settings.ftcl_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+												<p><img class="imgFl lazyload"
+												        src="{{ block.settings.ftcl_image | img_url: '50x' }}"
+												        width="{{ block.settings.ftcl_image.width }}"
+												        height="{{ block.settings.ftcl_image.height }}"
+												        data-src="{{ mm2img_url }}"
+												        data-widths="[180, 360, 540, 720, 900]"
+												        data-aspectratio="{{ block.settings.ftcl_image.aspect_ratio }}"
+												        data-sizes="auto"
+												        alt="{{ block.settings.ftcl_image.alt | escape }}"></p>
+											{%- endif -%}
+											{%- if block.settings.ftcl_title != blank -%}<h4
+												style="color:{{ block.settings.ftcl_txt }};font-size:{{ block.settings.ftcl_title_size }}px;">{{ block.settings.ftcl_title }}</h4>{%- endif -%}
+											{%- if block.settings.ftcl_title != blank -%}<p
+												style="color:{{ block.settings.ftcl_txt }};font-size:{{ block.settings.ftcl_subtitle_size }}px;">{{ block.settings.ftcl_subtitle }}</p>{%- endif -%}
+											{%- if block.settings.ftcl_title != blank -%}<span class="btn"
+											                                                   style="color:{{ block.settings.ftcl_txt }};background-color:{{ block.settings.ftcl_bg }}; border:2px solid {{ block.settings.ftcl_txt }};">{{ block.settings.ftcl_btn }}</span>{%- endif -%}
+											{%- if block.settings.ft_link != blank -%}</a>{%- endif -%}
+									</div>
+									{% if block.settings.box_sized %}</div>{% endif %}
+							</div>
+							{%- endif %}
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu3' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							<div
+								class="megamenu style3{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"
+								{% if block.settings.custom_size %}style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+							{% if block.settings.box_sized %}
+								<div class="mm_layout">{% endif %}
+									<ul class="grid mmWrapper">
+										{%- capture menucolumns -%}{{ block.settings.ttl1 | remove: " " }} {{ block.settings.ttl2 | remove: " " }} {{ block.settings.ttl3 | remove: " " }} {{ block.settings.ttl4 | remove: " " }} {{ block.settings.ttl5 | remove: " " }}{%- endcapture -%}
+										{%- assign columnitems = menucolumns | split: ' ' -%}
+										{%- assign mmcolumns = 'large-up--one-fifth' -%}
+										{%- assign mm3img = '380x' -%}
+										{%- if columnitems.size == 4 -%}
+											{% assign mmcolumns = 'large-up--one-quarter' %}
+											{% assign mm3img = '475x' %}
+										{% elsif columnitems.size == 3 %}
+											{% assign mmcolumns = 'large-up--one-third' %}
+											{% assign mm3img = '640x' %}
+										{% elsif columnitems.size == 2 %}
+											{% assign mmcolumns = 'large-up--one-half' %}
+											{% assign mm3img = '900x' %}
+										{% elsif columnitems.size == 1 %}
+											{% assign mmcolumns = 'large-up--one-whole' %}
+											{% assign mm3img = '1900x' %}
+										{%- endif -%}
+
+										{%- if block.settings.ttl1 != blank -%}
+											<li class="grid__item {{ mmcolumns }} lvl-1">
+												{%- assign m3label1 = block.settings.ttl1 | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{% if block.settings.ttlurl1 != blank %}{{ block.settings.ttlurl1 }}{% else %}#{% endif %}"
+												   class="lvl-1">
+													{%- assign img_url1 = block.settings.megamenu1_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+													<img class="autoHt lazyload"
+													     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+													     width="{{ block.settings.megamenu1_image.width }}"
+													     height="{{ block.settings.megamenu1_image.height }}"
+													     data-src="{{ img_url1 }}" data-widths="[180, 360, 540, 720]"
+													     data-aspectratio="{{ block.settings.megamenu1_image.aspect_ratio }}"
+													     data-sizes="auto"
+													     alt="{{ block.settings.megamenu1_image.alt | escape }}">
+													<span
+														class="title">{{ block.settings.ttl1 | split: '[label' | first }} {% if block.settings.ttl1 contains '[label' %}
+															<span
+															class="lbl {{ m3label1 }}">{{ section.settings[m3label1] }}</span>{% endif %}</span>
+												</a>
+												<ul>
+													{% for link in linklists[block.settings.mm_linkcol1].links %}
+														<li class="lvl-2{% if link.active %} active{% endif %}">
+															{%- assign label = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+															<a href="{{ link.url }}"
+															   class="site-nav">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+																	<span
+																	class="lbl {{ label1 }}">{{ section.settings[label] }}</span>{% endif %}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{%- endif -%}
+										{%- if block.settings.ttl2 != blank -%}
+											<li class="grid__item {{ mmcolumns }} lvl-1">
+												{%- assign m3label2 = block.settings.ttl2 | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{% if block.settings.ttlurl2 != blank %}{{ block.settings.ttlurl2 }}{% else %}#{% endif %}"
+												   class="lvl-1">
+													{%- assign img_url2 = block.settings.megamenu2_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+													<img class="autoHt lazyload"
+													     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+													     width="{{ block.settings.megamenu2_image.width }}"
+													     height="{{ block.settings.megamenu2_image.height }}"
+													     data-src="{{ img_url2 }}" data-widths="[180, 360, 540, 720]"
+													     data-aspectratio="{{ block.settings.megamenu2_image.aspect_ratio }}"
+													     data-sizes="auto"
+													     alt="{{ block.settings.megamenu2_image.alt | escape }}">
+													<span
+														class="title">{{ block.settings.ttl2 | split: '[label' | first }} {% if block.settings.ttl2 contains '[label' %}
+															<span
+															class="lbl {{ m3label2 }}">{{ section.settings[m3label2] }}</span>{% endif %}</span>
+												</a>
+												<ul>
+													{% for link in linklists[block.settings.mm_linkcol2].links %}
+														<li class="lvl-2{% if link.active %} active{% endif %}">
+															{%- assign label = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+															<a href="{{ link.url }}"
+															   class="site-nav">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+																	<span
+																	class="lbl {{ label1 }}">{{ section.settings[label] }}</span>{% endif %}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{%- endif -%}
+										{%- if block.settings.ttl3 != blank -%}
+											<li class="grid__item {{ mmcolumns }} lvl-1">
+												{%- assign m3label3 = block.settings.ttl3 | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{% if block.settings.ttlurl3 != blank %}{{ block.settings.ttlurl3 }}{% else %}#{% endif %}"
+												   class="lvl-1">
+													{%- assign img_url3 = block.settings.megamenu3_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+													<img class="autoHt lazyload"
+													     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+													     width="{{ block.settings.megamenu3_image.width }}"
+													     height="{{ block.settings.megamenu3_image.height }}"
+													     data-src="{{ img_url3 }}" data-widths="[180, 360, 540, 720]"
+													     data-aspectratio="{{ block.settings.megamenu3_image.aspect_ratio }}"
+													     data-sizes="auto"
+													     alt="{{ block.settings.megamenu3_image.alt | escape }}">
+													<span
+														class="title">{{ block.settings.ttl3 | split: '[label' | first }} {% if block.settings.ttl3 contains '[label' %}
+															<span
+															class="lbl {{ m3label3 }}">{{ section.settings[m3label3] }}</span>{% endif %}</span>
+												</a>
+												<ul>
+													{% for link in linklists[block.settings.mm_linkcol3].links %}
+														<li class="lvl-2{% if link.active %} active{% endif %}">
+															{%- assign label = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+															<a href="{{ link.url }}"
+															   class="site-nav">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+																	<span
+																	class="lbl {{ label1 }}">{{ section.settings[label] }}</span>{% endif %}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{%- endif -%}
+										{%- if block.settings.ttl4 != blank -%}
+											<li class="grid__item {{ mmcolumns }} lvl-1">
+												{%- assign m3label4 = block.settings.ttl4 | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{% if block.settings.ttlurl4 != blank %}{{ block.settings.ttlurl4 }}{% else %}#{% endif %}"
+												   class="lvl-1">
+													{%- assign img_url4 = block.settings.megamenu4_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+													<img class="autoHt lazyload"
+													     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+													     width="{{ block.settings.megamenu4_image.width }}"
+													     height="{{ block.settings.megamenu4_image.height }}"
+													     data-src="{{ img_url4 }}" data-widths="[180, 360, 540, 720]"
+													     data-aspectratio="{{ block.settings.megamenu4_image.aspect_ratio }}"
+													     data-sizes="auto"
+													     alt="{{ block.settings.megamenu4_image.alt | escape }}">
+													<span
+														class="title">{{ block.settings.ttl4 | split: '[label' | first }} {% if block.settings.ttl4 contains '[label' %}
+															<span
+															class="lbl {{ m3label4 }}">{{ section.settings[m3label4] }}</span>{% endif %}</span>
+												</a>
+												<ul>
+													{% for link in linklists[block.settings.mm_linkcol4].links %}
+														<li class="lvl-2{% if link.active %} active{% endif %}">
+															{%- assign label = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+															<a href="{{ link.url }}"
+															   class="site-nav">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+																	<span
+																	class="lbl {{ label1 }}">{{ section.settings[label] }}</span>{% endif %}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{%- endif -%}
+										{%- if block.settings.ttl5 != blank -%}
+											<li class="grid__item {{ mmcolumns }} lvl-1">
+												{%- assign m3label5 = block.settings.ttl5 | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{% if block.settings.ttlurl5 != blank %}{{ block.settings.ttlurl5 }}{% else %}#{% endif %}"
+												   class="lvl-1">
+													{%- assign img_url5 = block.settings.megamenu5_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+													<img class="autoHt lazyload"
+													     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+													     width="{{ block.settings.megamenu5_image.width }}"
+													     height="{{ block.settings.megamenu5_image.height }}"
+													     data-src="{{ img_url5 }}" data-widths="[180, 360, 540, 720]"
+													     data-aspectratio="{{ block.settings.megamenu5_image.aspect_ratio }}"
+													     data-sizes="auto"
+													     alt="{{ block.settings.megamenu5_image.alt | escape }}">
+													<span
+														class="title">{{ block.settings.ttl5 | split: '[label' | first }} {% if block.settings.ttl5 contains '[label' %}
+															<span
+															class="lbl {{ m3label5 }}">{{ section.settings[m3label5] }}</span>{% endif %}</span>
+												</a>
+												<ul>
+													{% for link in linklists[block.settings.mm_linkcol5].links %}
+														<li class="lvl-2{% if link.active %} active{% endif %}">
+															{%- assign label = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+															<a href="{{ link.url }}"
+															   class="site-nav">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+																	<span
+																	class="lbl {{ label1 }}">{{ section.settings[label] }}</span>{% endif %}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{%- endif -%}
+									</ul>
+									{% if block.settings.box_sized %}</div>{% endif %}
+							</div>
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu4' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							{%- if linklists[block.settings.mm_linklist].links != blank -%}
+								<div
+									class="megamenu style4{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"
+									style="{% if block.settings.custom_size %}width:{{block.settings.mm_size}}px;{% endif %}{% if block.settings.mm4_bg != blank %}background-image:url({{block.settings.mm4_bg | img_url: "master"}});background-position:top {{ block.settings.mm4_img_position }};{% endif %}">
+								{% if block.settings.box_sized %}
+									<div class="mm_layout">{% endif %}
+										<ul class="grid grid--uniform mmWrapper"
+										    {% if block.settings.mm4_bg != blank %}style="padding-{{ block.settings.mm4_img_position }}:{{ block.settings.mm4_space }};"{% endif %}>
+											{% for link in linklists[block.settings.mm_linklist].links %}{%- include 'mm-links' -%}{% endfor %}
+										</ul>
+										{% if block.settings.box_sized %}</div>{% endif %}
+								</div>
+							{%- endif -%}
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu5' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							{%- case block.settings.mmcolumns -%}
+								{% when 1 %}{%- assign column = 'large-up--one-whole' -%}
+								{% when 2 %}{%- assign column = 'large-up--one-half' -%}
+								{% when 3 %}{%- assign column = 'large-up--one-third' -%}
+								{% when 4 %}{%- assign column = 'large-up--one-quarter' -%}
+								{% when 5 %}{%- assign column = 'large-up--one-fifth' -%}
+								{% when 6 %}{%- assign column = 'large-up--one-sixth' -%}
+							{%- endcase -%}
+							<div
+								class="megamenu style5{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"{% if block.settings.custom_size %} style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+							{% if block.settings.box_sized %}
+								<div class="mm_layout">{% endif %}
+									<ul class="grid grid--uniform mmWrapper {{ block.settings.mm_linkStyle }}">
+										{%- for link in linklists[block.settings.mm_linklist].links -%}
+											<li class="grid__item {{ column }} lvl-1">
+												{%- assign navImg = link.title | handleize -%}
+												<a href="{{ link.url }}" class="site-nav lvl-1">
+													{%- if block.settings.mm_linkStyle == "above" -%}<span
+														class="imgOver">{{ link.title }}</span>{%- endif -%}
+													<img class="lazyload"
+													     data-src="{{ navImg | append: '.jpg' | file_img_url: '400x' }}"
+													     alt="{{ link.title }}"/>
+													{%- if block.settings.mm_linkStyle != "above" -%}<span
+														class="imgOver">{{ link.title }}</span>{%- endif -%}
+												</a>
+											</li>
+										{%- endfor -%}
+									</ul>
+									{% if block.settings.box_sized %}</div>{% endif %}
+							</div>
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu7' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %} {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							<div
+								class="megamenu style5{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"{% if block.settings.custom_size %} style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+							{% if block.settings.box_sized %}
+								<div class="mm_layout">{% endif %}
+									{{ block.settings.mm_html }}
+									<div>&nbsp;</div>
+									{% if block.settings.box_sized %}</div>{% endif %}
+							</div>
+						</li>
+					{%- endif -%}
+
+				{%- when 'megamenu6' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu{% if block.settings.custom_size %} ctsize{% endif %}  {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+							<div
+								class="megamenu style6{% if block.settings.imgcall == "right" %} flex{% endif %}{% if block.settings.custom_size %} {{ block.settings.mm_align }}{% else %} mmfull{% endif %}"
+								{% if block.settings.custom_size %}style="width:{{ block.settings.mm_size }}px;"{% endif %}>
+							{% if block.settings.box_sized %}
+								<div
+									class="mm_layout{% if block.settings.imgcall == "right" %} flex{% endif %}">{% endif %}
+									<ul class="fl w_100 mmWrapper">
+										<li class="mm6main">
+											{% for link in linklists[block.settings.mm_linklist].links %}
+												{%- assign label1 = link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+												<a href="{{ link.url }}"
+												   class="site-nav lvl-1{% if link.links != blank %} hasSub{% endif %}"
+												   data-link="#nv{{ link.title | handleize }}">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}
+														<span
+														class="lbl {{ label1 }}">{{ section.settings[label1] }}</span>{% endif %}
+												</a>
+											{% endfor %}
+										</li>
+										<li class="lvl-1 fl1">
+											{% for link in linklists[block.settings.mm_linklist].links %}
+												{% assign nindex = forloop.index %}
+												<div id="nv{{ link.title | handleize }}"
+												     class="fl admmsub{% if forloop.first %} active{% endif %}">
+													{%- if link.links != blank -%}
+														<ul class="subLinks fl1">
+															<li class="fl1 lvl-2{% if childlink.active or childlink.child_active %} active{% endif %}"
+															    style="column-count:{{ block.settings.mmcolumns }};">
+																{%- for childlink in link.links -%}
+																	{%- assign label2 = childlink.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+																	<a href="{{ childlink.url }}"
+																	   class="site-nav lvl-2">{{ childlink.title | split: '[label' | first }}{% if childlink.title contains '[label' %}
+																			<span
+																			class="lbl {{ label2 }}">{{ section.settings[label2] }}</span>{% endif %}
+																	</a>
+																	{%- if childlink.links != blank -%}
+																		<ul class="subLinks">
+																			{%- for lvl3link in childlink.links -%}
+																				<li class="lvl-3 {% if lvl3link.active %}active{% endif %}">
+																					{%- assign label3 = lvl3link.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+																					<a href="{{ lvl3link.url }}"
+																					   class="site-nav lvl-3">{{ lvl3link.title | split: '[label' | first }}{% if lvl3link.title contains '[label' %}
+																							<span
+																							class="lbl {{ label3 }}">{{ section.settings[label3] }}</span>{% endif %}
+																					</a>
+																				</li>
+																			{%- endfor -%}
+																		</ul>
+																	{%- endif -%}
+																{%- endfor -%}
+															</li>
+														</ul>
+													{%- endif -%}
+													{%- assign assign clindex = 'collection' | append: nindex -%}
+													{%- assign assign lkclect = block.settings[clindex] -%}
+													{%- assign collection = collections[lkclect] -%}
+													{%- if collection.products.size > 0 -%}
+														<div class="lvl-1 mm6bx grid grid--uniform"
+														     style="width:{{ block.settings.columnWidth }}%">
+															{%- liquid
+																case block.settings.grid
+																	when 1
+																		assign grid_ds = ''
+																		assign image_size = '80,150,350,550'
+																	when 2
+																		assign grid_ds = 'large-up--one-half'
+																		assign image_size = '80,150,350'
+																	when 3
+																		assign grid_ds = 'large-up--one-third'
+																		assign image_size = '80,150,350'
+																	when 4
+																		assign grid_ds = 'large-up--one-quarter'
+																		assign image_size = '80,150,350'
+																endcase
+															-%}
+															{% for product in collection.products limit: block.settings.prlimit %}
+																<div
+																	class="grid__item {{ grid_ds }}">{% include 'product-card-grid-columns', grid_image_width: image_size %}</div>
+															{% endfor %}
+														</div>
+													{% endif %}
+												</div>
+											{% endfor %}
+										</li>
+									</ul>
+									{% if block.settings.box_sized %}</div>{% endif %}
+							</div>
+						</li>
+					{%- endif -%}
+
+				{%- when 'dropdown' -%}
+					{%- if block.settings.title != blank -%}
+						<li
+						class="lvl1 parent dropdown {% render 'navigation-mark', label: label %}" {{ block.shopify_attributes }}>{{ linkLevel1 }}
+						<ul class="dropdown">{% for link in linklists[block.settings.mm_linklist].links %}{% include 'mm-dropdown' %}{% endfor %}</ul>
+						</li>{%- endif -%}
+
+			{%- endcase -%}
+		{%- endfor -%}
+	</ul>
+	<!--mmobile-->
+	<div class="mobile-nav-wrapper large-up--hide" role="navigation">
+		{%- if settings.announcement -%}
+			<div class="notification-bar{% if settings.announcement_mb %} small--hide{% endif %}">
+				{%- if settings.announcement_link != blank -%}
+					<a href="{{ settings.announcement_link }}"
+					   class="notification-bar__message">{{ settings.announcement_txt }}</a>
+				{%- else -%}
+					<span class="notification-bar__message">{{ settings.announcement_txt }}</span>
+				{%- endif -%}
+				{% comment %}<span class="close-announcement"><i class="ad ad-times-l" aria-hidden="true"></i></span>{% endcomment %}
+			</div>
+		{%- endif -%}
+		<div class="mobile-nav-header">
+			{{ settings.logosvg | replace: '<svg', '<svg class="stlogo"' }}
+			<div class="mobile-nav-header__right">
+				{% if customer %}
+
+					<a href="{{ routes.account_url }}"><i>
+							<svg t="1661236126961" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							     xmlns="http://www.w3.org/2000/svg" p-id="1221" width="32" height="32">
+								<path
+									d="M512 517.632c-117.76 0-213.504-95.744-213.504-213.504 0-117.76 95.744-213.504 213.504-213.504 117.76 0 213.504 95.744 213.504 213.504 0 117.76-95.744 213.504-213.504 213.504z m0-363.52c-82.944 0-150.016 67.072-150.016 150.016S429.056 454.144 512 454.144c82.944 0 150.016-67.072 150.016-150.016S594.944 154.112 512 154.112z"
+									fill="#040000" p-id="1222"></path>
+								<path
+									d="M946.176 933.376H77.824v-31.744c0-239.616 194.56-434.176 434.176-434.176s434.176 194.56 434.176 434.176v31.744zM142.848 869.888h738.816c-16.384-189.44-175.616-338.944-369.152-338.944S158.72 680.448 142.848 869.888z"
+									fill="#040000" p-id="1223"></path>
+							</svg>
+						</i></a>
+					<a href="{{ routes.account_logout_url }}"><i class="ad ad-power-off-r"></i></a>
+
+				{% else %}
+
+					<a href="{{ routes.account_login_url }}"><i>
+							<svg t="1661236126961" class="icon" viewBox="0 0 1024 1024" version="1.1"
+							     xmlns="http://www.w3.org/2000/svg" p-id="1221" width="32" height="32">
+								<path
+									d="M512 517.632c-117.76 0-213.504-95.744-213.504-213.504 0-117.76 95.744-213.504 213.504-213.504 117.76 0 213.504 95.744 213.504 213.504 0 117.76-95.744 213.504-213.504 213.504z m0-363.52c-82.944 0-150.016 67.072-150.016 150.016S429.056 454.144 512 454.144c82.944 0 150.016-67.072 150.016-150.016S594.944 154.112 512 154.112z"
+									fill="#040000" p-id="1222"></path>
+								<path
+									d="M946.176 933.376H77.824v-31.744c0-239.616 194.56-434.176 434.176-434.176s434.176 194.56 434.176 434.176v31.744zM142.848 869.888h738.816c-16.384-189.44-175.616-338.944-369.152-338.944S158.72 680.448 142.848 869.888z"
+									fill="#040000" p-id="1223"></path>
+							</svg>
+						</i></a>
+				{% endif %}
+				<div class="closemobileMenu"><i class="ad ad-times-l pull-right" aria-hidden="true"></i></div>
+			</div>
+		</div>
+		<ul id="MobileNav" class="mobile-nav siteNavigation">
+			{%- for block in section.blocks -%}
+				{%- assign label = block.settings.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+				{%- capture linkLevel1 -%}
+					<a href="{% if block.settings.url != blank %}{{ block.settings.url }}{% else %}#{% endif %}"
+					   class="solado-menu-back-link">
+						<i class="ad ad-angle-left-l solado-menu-back"></i>
+						<span class="mobile-nav__title">{{ block.settings.title | split: '[label' | first }}</span>
+						{% if block.settings.title contains '[label' %}
+							<span class="lbl {{ label }}">{{ section.settings[label] }}</span>
+						{% endif %}
+						<i class="ad ad-angle-right-l"></i>
+					</a>
+				{%- endcapture -%}
+				{%- if block.type == 'homelink' -%}
+					<li class="lvl1"><a href="{{ routes.root_url }}">{{ block.settings.title }}</a></li>
+				{%- endif -%}
+				{%- if block.type == 'single_link' -%}
+					{%- assign singlelabel = block.settings.title | split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+					<li a="{{ block.type }}" class="lvl1">{{ linkLevel1 | replace: '<i class="ad ad-plus-l"></i>', '' | replace: '<i class="ad ad-angle-right-l"></i>', ''}}</li>
+				{%- endif -%}
+				{%- if block.type == 'megamenu1' or block.type == 'megamenu4' or block.type == 'megamenu5' or block.type == 'dropdown' -%}
+					{%- if block.settings.title != blank -%}
+						<li class="lvl1 parent megamenu {% render 'navigation-mark', label: label %}">
+							{{ linkLevel1 }}
+							<ul>
+								{% for link in linklists[block.settings.mm_linklist].links %}{% include 'mm-mobile-links' %}{% endfor %}
+								{%- if block.settings.megamenu1_image != blank -%}
+									<li class="grid__item imageCol text-center" style="pading:10px 0;">
+										<a href="{{ block.settings.imageurl }}">
+											<img class="autoHt lazyload"
+											     src="{{ 'spacer.png' | asset_img_url: 'master' }}"
+											     data-src="{{ block.settings.megamenu1_image | img_url: 'master' }}"
+											     width="260" height="339"
+											     alt="{{ block.settings.megamenu1_image.alt }}">
+											{% if block.settings.imageTtl1 != blank %}<span
+												class="ttl">{{ block.settings.imageTtl1 }}</span>{% endif %}
+										</a>
+									</li>
+								{%- endif -%}
+							</ul>
+						</li>
+					{%- endif -%}
+				{%- endif -%}
+			{%- endfor -%}
+			{% render 's-transformation' %}
+		</ul>
+		<script>
+            /**var addChangeCurrency = function**/
+            window.addEventListener('DOMContentLoaded', (event) => {
+                /** 只有当屏幕宽度小于1024的时候才会展示在菜单中**/
+                if ($(window).width() < 1024) {
+                    cloneSiteAndNav();
+                }
+            });
+
+            function addOtherMobileNavLink(sideNav) {
+                var $footer = $("#shopify-section-footer .site-footer").clone(true);
+                $footer.find(".newsletter").remove();
+                $footer.find(".footer-bottom").remove();
+                $footer.find(".socials").remove();
+                $footer.find(".paymentCall").remove();
+                var $footerBottom = $("#shopify-section-footer .site-footer .footer-bottom").clone(true);
+                $(sideNav).append("<div class='clone-footer-wrap'></div>").find(".clone-footer-wrap").append($footer).append($footerBottom);
+                if ($(".clone-footer-wrap").height() > ($(".clone-footer-wrap .site-footer").height() + $(".clone-footer-wrap .footer-bottom").height())) {
+                    $(".clone-footer-wrap .footer-bottom").addClass("footer-fixed-bottom")
+                }
+
+            };
+
+            function cloneSiteAndNav() {
+                const changeSiteBox = document.querySelector('#changeSiteBox');
+                const sideNav = document.querySelector('#MobileNav');
+                if (sideNav) {
+                    const li = document.createElement('li');
+                    li.appendChild(changeSiteBox);
+                    li.classList.add('change-site-box-list-item');
+                    sideNav.appendChild(li);
+                    changeSiteBox.style.display = 'block';
+                    addOtherMobileNavLink(sideNav);
+                }
+            };
+		</script>
+
+		<style>
+            #MobileNav .solado-menu-item__parent > a {
+                padding-left: 0px;
+            }
+
+            #MobileNav .doubly-nice-select:after {
+                content: "\eb68";
+                font-size: 22px;
+                font-family: "adorn-icons";
+                float: right;
+                border-bottom: none;
+                border-right: none;
+                height: auto;
+                width: auto;
+                transform: none;
+                box-sizing: initial;
+                position: initial;
+            }
+
+            .mobile-nav-header__right {
+                position: absolute;
+                right: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+            }
+
+            .mobile-nav-header__right .closemobileMenu {
+                background-color: transparent;
+            }
+
+            .mobile-nav-header__right a:not(:last-child) {
+                margin-right: 16px;
+                line-height: 22px;
+            }
+
+            .mobile-nav-header__right a i {
+                font-size: 18px;
+            }
+
+            .mobile-nav-header {
+                display: flex;
+                position: relative;
+                align-items: center;
+                padding: 16px;
+            }
+
+            .mobile-nav-header svg {
+                height: 20px;
+            }
+
+            #MobileNav {
+                display: flex;
+                flex-direction: column;
+                background: #F5F5F5;
+            }
+
+            #MobileNav li {
+                border: none;
+            }
+
+            #MobileNav li.lvl1 {
+                background: #fff;
+            }
+
+            #MobileNav .footer-fw {
+                padding-bottom: 0;
+            }
+
+            @media only screen and (max-width: 1024px) {
+                #MobileNav li a .solado-menu-back {
+                    position: unset;
+                    display: none;
+                }
+
+                .mobile-nav.siteNavigation .lbl.nm_label1 {
+                    margin-bottom: 4px;
+                }
+
+                #MobileNav li a .solado-menu-back.ad-angle-left-l:before {
+                    line-height: 34px;
+                    vertical-align: top;
+                }
+
+                .mobile-nav-wrapper li.parent ul {
+                    background-color: transparent !important;
+                }
+
+                #MobileNav li a {
+                    display: flex;
+                    align-items: center;
+                    padding: 0 45px 0 16px;
+                    line-height: 45px;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 15px;
+                    color: #000000;
+                }
+
+                #MobileNav .clone-footer-wrap .footer-fw li a {
+                    display: flex;
+                    align-items: center;
+                    padding: 0;
+                    line-height: 31px;
+                    color: #000000;
+                }
+
+                #MobileNav .clone-footer-wrap .site-footer .footer-fw {
+                    padding: 0 16px;
+                }
+
+                .mobile-nav-wrapper li.solado-menu-item__parent span.mobile-nav__title {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 15px;
+                    line-height: 45px;
+	                margin: auto;
+                }
+
+                #MobileNav .change-site-box-list-item {
+                    background: #fff;
+                    height: 45px;
+                }
+
+                #MobileNav .siteNavigation .lbl {
+                    margin-bottom: 4px;
+                }
+
+                #MobileNav #changeSiteBox {
+	                display: block!important;
+                    position: static;
+                    line-height: 45px;
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 13px;
+                    color: #000000;
+                    width: auto;
+	                max-width: unset;
+                    border-top: 1px solid;
+                    margin: 0 16px;
+                }
+
+                #MobileNav .change-site-box .site-switcher {
+                    width: 250px;
+                    top: -110px;
+                }
+
+                #MobileNav .change-site-box .ad {
+                    left: unset;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -8px;
+                    right: 16px;
+                    font-size: 23px;
+                    transform: rotate(0deg);
+                }
+
+                #MobileNav .change-site-box span {
+                    line-height: 45px;
+                    margin-top: 4px;
+                }
+            }
+
+            @media only screen and (max-width: 766px) {
+                #MobileNav .clone-footer-wrap .footer-block__item + .footer-block__item {
+                    border-top: 1px #000 solid;
+                }
+
+                #MobileNav .clone-footer-wrap .footer-bottom .flex {
+                    margin-bottom: 0;
+                }
+            }
+
+            .mobile-nav-wrapper {
+                width: 100%;
+                /**padding: 0 8px;**/
+            }
+
+            .doubly-float {
+                display: none;
+            }
+
+            .doubly-float.doubly-float__show {
+                display: block;
+            }
+
+            #MobileNav .doubly-float {
+                position: unset;
+                margin: 12px 16px 0 16px;
+                border-top: 1px #000 solid;
+            }
+
+            #MobileNav .doubly-nice-select.right {
+                float: unset;
+                border-top: none;
+                border-left: none;
+                border-radius: 0;
+                border-right: none;
+                padding: 0;
+            }
+
+            #MobileNav .doubly-float .open .list {
+                display: block !important;
+            }
+
+            #MobileNav li.mobile-nav-other-link {
+                border-top: none;
+            }
+
+            #MobileNav .change-site-box {
+                display: none;
+            }
+
+            #MobileNav .site-footer {
+                background: #F5F5F5;
+                margin-top: 0;
+                max-height: calc(100% - 58px);
+                overflow: auto;
+            }
+
+            #MobileNav .site-footer .social-icons li {
+                padding: 0;
+            }
+
+            #MobileNav .site-footer .social-icons a {
+                padding: 0;
+            }
+		</style>
+	</div>
+	<!--mmobileend -->
+{%- endif -%}
+
+{% schema %}
+{
+"name": "Main Navigation",
+"class": "small--hide medium--hide",
+"settings": [
+{
+"type": "paragraph",
+"content":"[chekout all styles and how to set](https://www.adornthemes.com/knowledge-base/how-to-use-megamenu-navigation/)."
+},
+{
+"type": "paragraph",
+"content":"Change fonts size and colors from Theme Settings --> Fonts, Colors and Styles --> Navigation"
+},
+{
+"type": "checkbox",
+"id": "menuarrow",
+"label": "Show Arrow",
+"default": true
+},
+{
+"type": "select",
+"id": "menuAlign",
+"label": "Menu Alignment",
+"default": "left",
+"options": [
+{
+"value": "left",
+"label": "Left"
+},
+{
+"value": "center",
+"label": "Center"
+},
+{
+"value": "right",
+"label": "Right"
+}
+]
+},
+{
+"type": "paragraph",
+"content": "Menu Labels"
+},
+{
+"type": "text",
+"id": "nm_label1",
+"label":"Menu Label 1",
+"default": "New"
+},
+{
+"type": "text",
+"id": "nm_label2",
+"label":"Menu Label 2",
+"default": "Sale"
+},
+{
+"type": "text",
+"id": "nm_label3",
+"label":"Menu Label 3",
+"default": "Hot"
+},
+{
+"type": "text",
+"id": "nm_label4",
+"label":"Menu Label 4",
+"default": "Populer"
+},
+{
+"type": "text",
+"id": "nm_label5",
+"label":"Menu Label 5",
+"default": "New"
+}
+],
+"blocks": [
+{
+"type": "homelink",
+"name": "Home Link",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name",
+"default": "Home"
+}
+]
+},
+{
+"type": "loginlink",
+"name": "Login Link",
+"settings": [
+{
+"type": "text",
+"id": "loginlink",
+"label": "Link Name (Optional)",
+"default": "Login",
+"info":"You can add store login  here Or you can display store login with top right icon"
+},
+{
+"type": "paragraph",
+"content":"You need to select 'Accounts are optional' from Store Settings --> Checkout "
+}
+]
+},
+{
+"type": "single_link",
+"name": "Single Link",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+}
+]
+},
+{
+"type": "megamenu1",
+"name": "MM Simple",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "link_list",
+"id": "mm_linklist",
+"label": "Select Menu",
+"default": "main-menu"
+},
+{
+"type": "range",
+"id": "mmcolumns",
+"min": 1,
+"max": 6,
+"step": 1,
+"label": "Select Columns",
+"default": 2
+},
+{
+"type": "header",
+"content": "=== Image Columns ==="
+},
+{
+"type": "select",
+"id": "imgcall",
+"label": "Right or Bottom",
+"default": "right",
+"info": "You can show images at right or bottom of links",
+"options": [
+{
+"value": "right",
+"label": "Right"
+},
+{
+"value": "bottom",
+"label": "Bottom"
+}
+]
+},
+{
+"type": "range",
+"id": "columnWidth",
+"min": 20,
+"max": 100,
+"step": 1,
+"label": "Column Width",
+"default": 50,
+"unit": "%",
+"info": "Option work when images show right of links"
+},
+{
+"type": "range",
+"id": "mmimgcolumns",
+"min": 1,
+"max": 4,
+"step": 1,
+"label": "Columns per row",
+"default": 2
+},
+{
+"type": "paragraph",
+"content": "Image 1 ==="
+},
+{
+"type": "image_picker",
+"id": "megamenu1_image",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "imageTtl1",
+"label": "Title Text"
+},
+{
+"type": "url",
+"id": "imageurl",
+"label": "Link on Image"
+},
+{
+"type": "paragraph",
+"content": "Image 2 ==="
+},
+{
+"type": "image_picker",
+"id": "megamenu2_image",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "imageTtl2",
+"label": "Title Text"
+},
+{
+"type": "url",
+"id": "Image2url",
+"label": "Image 2 Link"
+},
+{
+"type": "paragraph",
+"content": "Image 3 ==="
+},
+{
+"type": "image_picker",
+"id": "megamenu3_image",
+"label": "Image 3"
+},
+{
+"type": "text",
+"id": "imageTtl3",
+"label": "Title Text"
+},
+{
+"type": "url",
+"id": "Image3url",
+"label": "Image 3 Link"
+},
+{
+"type": "paragraph",
+"content": "Image 4 ==="
+},
+{
+"type": "image_picker",
+"id": "megamenu4_image",
+"label": "Image 4",
+"info": "Image to show in Megamenu"
+},
+{
+"type": "text",
+"id": "imageTtl4",
+"label": "Title Text"
+},
+{
+"type": "url",
+"id": "Image4url",
+"label": "Image 4 Link"
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+
+]
+},
+{
+"type": "megamenu2",
+"name": "MM Products",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "collection",
+"id": "collection",
+"label": "Sellect Collection"
+},
+{
+"type": "range",
+"id": "pr_limit",
+"min": 2,
+"max": 20,
+"step": 1,
+"label": "Products Limit",
+"default": 6
+},
+{
+"type": "range",
+"id": "mmcolumns",
+"min": 1,
+"max": 6,
+"step": 1,
+"label": "Select Columns",
+"default": 2
+},
+{
+"type": "text",
+"id": "prodall",
+"label": "Button Text",
+"default": "View All Products"
+},
+{
+"type": "header",
+"content": "=== Featured Column ==="
+},
+{
+"type": "checkbox",
+"id": "ftcl",
+"label": "Enable ?",
+"default": true
+},
+{
+"type": "range",
+"id": "ftcl_width",
+"min": 20,
+"max": 80,
+"step": 1,
+"label": "Columns Width",
+"unit": "%",
+"default": 50
+},
+{
+"type": "image_picker",
+"id": "ftcl_image",
+"label": "Image"
+},
+{
+"type": "text",
+"id": "ftcl_title",
+"label": "Title"
+},
+{
+"type": "range",
+"id": "ftcl_title_size",
+"min": 13,
+"max": 100,
+"step": 1,
+"label": "Title Size",
+"default": 30
+},
+{
+"type": "text",
+"id": "ftcl_subtitle",
+"label": "Sub Title"
+},
+{
+"type": "range",
+"id": "ftcl_subtitle_size",
+"min": 10,
+"max": 40,
+"step": 1,
+"label": "Sub Title Size",
+"default": 15
+},
+{
+"type": "text",
+"id": "ftcl_btn",
+"label": "Button Text"
+},
+{
+"type": "url",
+"id": "ft_link",
+"label": "Link"
+},
+{
+"type": "color",
+"id": "ftcl_bg",
+"label": "Background",
+"default": "#333"
+},
+{
+"type": "color",
+"id": "ftcl_txt",
+"label": "Text",
+"default": "#fff"
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+]
+},
+{
+"type": "megamenu3",
+"name": "MM Top Image Columns",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type":"header",
+"content": "Column 1"
+},
+{
+"type": "text",
+"id": "ttl1",
+"label": "Title text"
+},
+{
+"type": "image_picker",
+"id": "megamenu1_image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "ttlurl1",
+"label": "Image Link"
+},
+{
+"type": "link_list",
+"id": "mm_linkcol1",
+"label": "Select Menu"
+},
+{
+"type":"header",
+"content": "Column 2"
+},
+{
+"type": "text",
+"id": "ttl2",
+"label": "Title text"
+},
+{
+"type": "image_picker",
+"id": "megamenu2_image",
+"label": "Image"
+},
+{
+"type": "url",
+"id": "ttlurl2",
+"label": "Image Link"
+},
+{
+"type": "link_list",
+"id": "mm_linkcol2",
+"label": "Select Menu"
+},
+{
+"type":"header",
+"content": "Column 3"
+},
+{
+"type": "text",
+"id": "ttl3",
+"label": "Title text"
+},
+{
+"type": "image_picker",
+"id": "megamenu3_image",
+"label": "Image",
+"info": "Image to show in Megamenu"
+},
+{
+"type": "url",
+"id": "ttlurl3",
+"label": "Image Link"
+},
+{
+"type": "link_list",
+"id": "mm_linkcol3",
+"label": "Select Menu"
+},
+{
+"type":"header",
+"content": "Column 4"
+},
+{
+"type": "text",
+"id": "ttl4",
+"label": "Title text"
+},
+{
+"type": "image_picker",
+"id": "megamenu4_image",
+"label": "Image",
+"info": "Image to show in Megamenu"
+},
+{
+"type": "url",
+"id": "ttlurl4",
+"label": "Menu Link"
+},
+{
+"type": "link_list",
+"id": "mm_linkcol4",
+"label": "Select Menu"
+},
+{
+"type":"header",
+"content": "Column 5"
+},
+{
+"type": "text",
+"id": "ttl5",
+"label": "Title text"
+},
+{
+"type": "image_picker",
+"id": "megamenu5_image",
+"label": "Image",
+"info": "Image to show in Megamenu"
+},
+{
+"type": "url",
+"id": "ttlurl5",
+"label": "Menu Link"
+},
+{
+"type": "link_list",
+"id": "mm_linkcol5",
+"label": "Select Menu"
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+]
+},
+{
+"type": "megamenu4",
+"name": "MM Background Image",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "link_list",
+"id": "mm_linklist",
+"label": "Select Menu",
+"default": "main-menu"
+},
+{
+"type": "range",
+"id": "mmcolumns",
+"min": 1,
+"max": 6,
+"step": 1,
+"label": "Select Columns",
+"default": 3
+},
+{
+"type": "image_picker",
+"id": "mm4_bg",
+"label": "Background Image"
+},
+{
+"type": "select",
+"id": "mm4_img_position",
+"label": "Image Position",
+"default": "right",
+"options": [
+{ "value": "left","label": "Left" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "select",
+"id": "mm4_space",
+"label": "Space for Image",
+"default": "30%",
+"options": [
+{ "value": "20%","label": "20%" },
+{ "value": "30%", "label": "30%" },
+{ "value": "40%", "label": "40%" },
+{ "value": "50%", "label": "50%" },
+{ "value": "60%", "label": "60%" },
+{ "value": "70%", "label": "70%" }
+]
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+]
+},
+{
+"type": "megamenu5",
+"name": "MM Links with Image",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "link_list",
+"id": "mm_linklist",
+"label": "Select Menu",
+"default": "main-menu",
+"info": "You need upload images for each menu links. Image name must be same as link name and use '-' instead of space. Example(Women Clothing = women-clothing.jpg) Upload images at 'Store admin > settings > files'"
+},
+{
+"type": "select",
+"id": "mm_linkStyle",
+"label": "Title Possition",
+"default": "over",
+"options": [
+{ "value": "above", "label": "Above Image" },
+{ "value": "over", "label": "Over Image" },
+{ "value": "below", "label": "Below Image" }
+]
+},
+{
+"type": "range",
+"id": "mmcolumns",
+"min": 1,
+"max": 6,
+"step": 1,
+"label": "Select Columns",
+"default": 5
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+]
+},
+{
+"type": "megamenu7",
+"name": "MM Custom HTML",
+"settings": [
+{
+"type": "paragraph",
+"content": "This link block show in desktop only. It will not come in mobiles."
+},
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "textarea",
+"id": "mm_html",
+"label": "HTMl Code",
+"info": "Enter your Custom HTML code here."
+},
+{
+"type": "header",
+"content": "=== Custom Box size ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+]
+},
+{
+"type": "megamenu6",
+"name": "MM Advanced",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "checkbox",
+"id": "newtab",
+"label": "Open Link in New Window?"
+},
+{
+"type": "link_list",
+"id": "mm_linklist",
+"label": "Select Menu",
+"default": "main-menu"
+},
+{
+"type": "range",
+"id": "mmcolumns",
+"min": 1,
+"max": 5,
+"step": 1,
+"label": "Select Columns",
+"default": 2
+},
+{
+"type": "header",
+"content": "=== Products Block ==="
+},
+{
+"type": "collection",
+"id": "collection1",
+"label": "Link 1 Collection"
+},
+{
+"type": "collection",
+"id": "collection2",
+"label": "Link 2 Collection"
+},
+{
+"type": "collection",
+"id": "collection3",
+"label": "Link 3 Collection"
+},
+{
+"type": "collection",
+"id": "collection4",
+"label": "Link 4 Collection"
+},
+{
+"type": "collection",
+"id": "collection5",
+"label": "Link 5 Collection"
+},
+{
+"type": "collection",
+"id": "collection6",
+"label": "Link 6 Collection"
+},
+{
+"type": "collection",
+"id": "collection7",
+"label": "Link 7 Collection"
+},
+{
+"type": "collection",
+"id": "collection8",
+"label": "Link 8 Collection"
+},
+{
+"type": "collection",
+"id": "collection9",
+"label": "Link 9 Collection"
+},
+{
+"type": "collection",
+"id": "collection10",
+"label": "Link 10 Collection"
+},
+{
+"type": "range",
+"id": "grid",
+"label": "Products Per Row",
+"default": 2,
+"min": 1,
+"max": 4,
+"step": 1
+},
+{
+"type": "range",
+"id": "prlimit",
+"min": 1,
+"max": 20,
+"step": 1,
+"label": "Number of Product to show",
+"default": 6
+},
+{
+"type": "range",
+"id": "columnWidth",
+"min": 20,
+"max": 70,
+"step": 1,
+"label": "Products Column Width",
+"default": 40,
+"unit": "%"
+},
+{
+"type": "header",
+"content": "=== Custom size & Align ==="
+},
+{
+"type": "checkbox",
+"id": "custom_size",
+"label": "Custom Width?",
+"default": false
+},
+{
+"type": "text",
+"id": "mm_size",
+"label": "Box Width",
+"default": "600"
+},
+{
+"type": "select",
+"id": "mm_align",
+"label": "Box Align",
+"default": "center",
+"options": [
+{ "value": "left", "label": "Left" },
+{ "value": "center", "label": "Center" },
+{ "value": "right", "label": "Right" }
+]
+},
+{
+"type": "header",
+"content":"When Navigation is below logo ==="
+},
+{
+"type": "checkbox",
+"id": "box_sized",
+"label": "Enable container width?",
+"default": false,
+"info":"Set inner content width max to layout width"
+}
+
+]
+},
+{
+"type": "dropdown",
+"name": "Dropdown Menu",
+"settings": [
+{
+"type": "text",
+"id": "title",
+"label": "Link Name"
+},
+{
+"type": "url",
+"id": "url",
+"label": "Menu Link"
+},
+{
+"type": "link_list",
+"id": "mm_linklist",
+"label": "Select Menu",
+"default": "main-menu"
+}
+]
+}
+]
+}
+{% endschema %}

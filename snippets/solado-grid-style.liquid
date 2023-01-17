@@ -1,0 +1,45 @@
+<style>
+  {% comment %} PC {% endcomment %}
+  {%- assign colCount = section.settings.tablet-grid | times: 1.0 -%}
+  {%- assign colWidth = 100 | divided_by: colCount -%}
+  {%- assign cardinalNum = colCount | minus: 1 -%}
+  {%- assign spaceWidth = 10 -%}
+  {%- assign everyMargin = spaceWidth | times: cardinalNum -%}
+  {% comment %} mobile {% endcomment %}
+  {%- assign mobileColCount = section.settings.mobile-grid | times: 1.0 -%}
+  {%- assign mobileColWidth = 100 | divided_by: mobileColCount -%}
+  {%- assign mobileColWidth = 100 | divided_by: mobileColCount -%}
+  {%- assign mobileCardinalNum = mobileColCount | minus: 1 -%}
+  {%- assign mobileSpaceWidth = 10 -%}
+  {%- assign mobileEveryMargin = mobileSpaceWidth | times: mobileCardinalNum -%}
+  
+  .grid-products {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .grid-products .grid__item {
+  	padding-left: 0;
+    padding-right: 0
+  }
+  .grid-products .grid__item {
+    float: unset;
+    width: calc({{colWidth}}% - {{everyMargin | divided_by: colCount }}px);
+  }
+  
+  .grid-products .grid__item:not(:nth-child({{section.settings.tablet-grid}}n)) {
+    margin-right: {{spaceWidth}}px;
+  }
+  
+  @media only screen and (max-width: 766px) {
+    .grid-products .grid__item:not(:nth-child(2n)) {
+      margin-right: {{spaceWidth}}px;
+    }
+    .grid-products .grid__item:nth-child(2n) {
+      margin-right: 0;
+    }
+    .grid-products .grid__item {
+      width: calc({{mobileColWidth}}% - {{mobileEveryMargin | divided_by: mobileColCount }}px);
+    }
+  }
+</style>

@@ -1,0 +1,297 @@
+{%- capture navigation -%}{% section 'navigation' %}{%- endcapture -%}
+{%- if navigation contains '<!--mmobile-->' -%}{% assign endiv = '</div>'  %}{%- endif -%}
+{%- assign desktopnav = navigation | split: '<!--mmobile-->' | first | append: endiv  -%}
+{%- assign mobilenav = navigation | split: '<!--mmobile-->' | last | split: '<!--mmobileend -->' | first   -%}
+{%- capture siteHeader -%}
+{% if settings.snow_effect %}<div class="snow-wrap falling-snow{% if settings.snow_style == "style2" %} style2{% else %} style1{% endif %}">{% endif %}
+
+{%- comment -%}*** Top Announcement ***{%- endcomment -%}
+{%- if settings.announcement -%}
+<div class="notification-bar{% if settings.announcement_mb %} small--hide{% endif %}">
+	{%- if settings.announcement_link != blank -%}
+		<a href="{{ settings.announcement_link }}" class="notification-bar__message">{{ settings.announcement_txt }}</a>
+	{%- else -%}
+		<span class="notification-bar__message">{{ settings.announcement_txt }}</span>
+	{%- endif -%}
+	{% comment %}<span class="close-announcement"><i class="ad ad-times-l" aria-hidden="true"></i></span>{% endcomment %}
+</div>
+{%- endif -%}
+
+{% comment %}*** Top Bar ***{% endcomment %}
+{% assign topheaderMb = '' %}
+{%- if settings.leftTxt-mobile and settings.centerTxt-mobile and settings.rightTxt-mobile -%}
+	{% assign topheaderMb = 'small--hide medium--hide' %}
+{%- endif -%}
+{%- if settings.topbar -%}
+<div class="top-header-wrapper">
+	<div class="top-header{% unless settings.topbar_fullwidth %} page-width{% endunless %} {{topheaderMb}}">
+		{%- if settings.leftTxt != blank -%}
+			<div class="header-txt left-hdr{% if settings.leftTxt-mobile %} small--hide medium--hide{% else %} small--text-center{% endif %}">
+				{%- if settings.leftTxt contains "[social-icons]"-%}
+					{%- assign topLeftTxt = settings.leftTxt | split: "[social-icons]" -%}
+					{{topLeftTxt[0]}} {% render 'social-media' %} {{topLeftTxt[1]}}
+				{%- else -%}
+					{{ settings.leftTxt }}
+				{%- endif -%}
+			</div>
+		{%- endif -%}
+		{%- if settings.centerTxt != blank -%}
+			<div class="header-txt middle-hdr text-center{% if settings.centerTxt-mobile %} small--hide medium--hide{% endif %}">{{ settings.centerTxt }}</div>
+		{%- endif -%}
+		{%- if settings.rightTxt != blank -%}
+			<div class="header-social right-hdr text-right{% if settings.rightTxt-mobile %} small--hide medium--hide{% else %} small--text-center{% endif %}">
+				{%- if settings.rightTxt contains "[social-icons]"-%}
+					{% assign topRightTxt = settings.rightTxt | split: "[social-icons]" %}
+					{{topRightTxt[0]}} {% render 'social-media' %} {{topRightTxt[1]}}
+				{%- else -%}
+					{{settings.rightTxt}}
+				{%- endif -%}
+			</div>
+		{%- endif -%}
+	</div>
+</div>
+{%- endif -%}
+
+{% comment %}*** Main Header ***{% endcomment %}
+{%- capture logo -%}
+  	{%- capture logoWidth -%}{{ settings.logo_width | escape }}x{%- endcapture -%}
+	<div class="header-logo">
+		<a href="{{ routes.root_url }}" class="header-logo-link">
+			{%- if settings.home_classic and template == 'index' and settings.logo_cl != blank -%}
+				<img src="{{ settings.logo_cl | img_url: logoWidth }}" class="cllogo" alt="{{ settings.logo_cl.alt | default: shop.name }}" srcset="{{ settings.logo_cl | img_url: logoWidth, scale: 2 }} 1x, {{ settings.logo_cl | img_url: logoWidth, scale: 4 }} 1.1x">
+                {%- if settings.logosvg != blank -%}
+              		{{settings.logosvg | replace: '<svg', '<svg class="stlogo"' }}
+          		{%- else settings.logo != blank -%}
+                    <img src="{{ settings.logo | img_url: logoWidth }}" class="stlogo" alt="{{ settings.logo.alt | default: shop.name }}" srcset="{{ settings.logo | img_url: logoWidth, scale: 2 }} 1x, {{ settings.logo | img_url: logoWidth, scale: 4 }} 1.1x">
+                {%- endif -%}
+			{%- elsif settings.logosvg != blank -%}
+				{{settings.logosvg }}
+          	{%- elsif settings.logo != blank -%}
+				<img src="{{ settings.logo | img_url: logoWidth }}" alt="{{ settings.logo.alt | default: shop.name }}" srcset="{{ settings.logo | img_url: logoWidth, scale: 1 }} 1x, {{ settings.logo | img_url: logoWidth, scale: 2 }} 2x">
+			{%- else -%}
+				{{ shop.name }}
+			{%- endif -%}
+			<span class="visually-hidden">{{ shop.name }}</span>
+		</a>
+	</div>
+{%- endcapture -%}
+{%- capture textblock -%}
+	{%- if settings.hdTxt-block contains "[social-icons]"-%}
+		{%- assign headerTxt = settings.hdTxt-block | split: "[social-icons]" -%}
+		{{headerTxt[0]}} {% render 'social-media' %} {{headerTxt[1]}}
+	{%- else -%}
+		{{ settings.hdTxt-block }}
+	{%- endif -%}
+{%- endcapture -%}
+<div id="header" data-section-id="header" data-section-type="header-section" {% if settings.home_classic and template == "index" %}class="classic-style"{% endif %}>
+  <header class="site-header {{settings.align_logo}}{% if settings.nav_below_logo %} nav-below{% endif %}{% unless settings.main_header_fullwidth %} page-width{% endunless %}">
+    {% comment %} 添加货币到header {% endcomment %}
+    {% comment %}<div style="display: none" class="currency-options" id="solado-currency-options"></div>{% endcomment %}
+    <div class="change-site-box phone-hide" id="changeSiteBox">
+      <i class="ad ad-angle-right-l"></i>
+        <div class="currency-site">
+          {% comment %}<img style="width: 20px;height: 20px" src="https://cdn.shopify.com/s/files/1/0784/0207/files/www_a99bc204-b871-4f69-8f95-104119f20380.png?v=1635834218">
+          {% comment %}<span> United States</span>{% endcomment %}
+          <span >USD $</span>{% endcomment %}
+        </div>
+        <div style="display: none;" class="site-switcher" >
+          <div class="site-switcher-item" data-index="0">
+            <a  href="https://www.solado.com/">
+              <img style="width: 20px;height: 20px"  class="me-05" src="https://cdn.shopify.com/s/files/1/0784/0207/files/www_a99bc204-b871-4f69-8f95-104119f20380.png?v=1635834218">
+              {% comment %}<span>United States</span>{% endcomment %}
+              <span> USD $</span>
+            </a>
+          </div>
+          <div class="site-switcher-item" data-index="5">
+            <a  href="https://eu.solado.com/" >
+              <img style="width: 20px;height: 20px" src="https://cdn.shopify.com/s/files/1/0586/6455/0568/files/oumengguoqi.png?v=1663230051">
+              {% comment %}<span >Euro</span>{% endcomment %}
+              <span> EUR €</span>
+            </a>
+          </div>
+          <div class="site-switcher-item" data-index="5">
+	        <a  href="https://uk.solado.com/" >
+		        <img style="width: 20px;height: 20px" src="https://cdn.shopify.com/s/files/1/0784/0207/files/uk.png?v=1628558575">
+		        {% comment %}<span >United Kingdom</span>{% endcomment %}
+		        <span> GBP £</span>
+	        </a>
+          </div>
+         {% comment %} <div class="site-switcher-item" data-index="1">
+            <a  data-href="https://eu.solado.com/" >
+              <img src="https://cdn.shopify.com/s/files/1/0784/0207/files/de_8fab6544-818a-431b-b02d-72ef53388c15.png?v=1628557551">
+              <span>Germany</span>
+              <span> - € EUR</span>
+            </a>
+          </div>
+          <div class="site-switcher-item" data-index="2">
+            <a  data-href="https://eu.solado.com/" >
+              <img src="https://cdn.shopify.com/s/files/1/0784/0207/files/fr_2fa7f902-cf69-44fb-b257-c23b548d06d9.png?v=1628557576">
+              <span >France</span>
+              <span> - € EUR</span>
+            </a>
+          </div>
+          <div class="site-switcher-item" data-index="4">
+            <a  data-href="https://eu.solado.com/" >
+              <img src="https://cdn.shopify.com/s/files/1/0080/7914/7088/files/ESP.png?v=1641799456">
+              <span >Spain</span>
+              <span> - € EUR</span>
+            </a>
+          </div>
+          <div class="site-switcher-item" data-index="3">
+            <a  data-href="https://eu.solado.com/" >
+              <img src="https://cdn.shopify.com/s/files/1/0586/6455/0568/files/yidaliguoqi.png?v=1663230017">
+              <span >Italy</span>
+              <span> - € EUR</span>
+            </a>
+          </div>{% endcomment %}
+        </div>
+    </div>
+    {%- if settings.align_logo == "left" -%}{{logo}}{%- endif -%}
+    {%- if settings.nav_below_logo -%}
+      {% comment %}<div class="txtBlock small--hide medium--hide{% if settings.align_logo == "left" %} text-center{% endif %}">{{textblock}}</div>{% endcomment %}
+    {%- else -%}
+    {{desktopnav}}
+    {%- endif -%}
+    {% if settings.align_logo == "center" %}{{logo}}{% endif %}
+    <div class="icons-col flex">
+      {% if settings.enable_search %}
+      <a href="#" class="hdicon searchIco" title="{{ 'general.search.tool_tip' | t }}"><i><svg t="1661235003494" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2527" width="32" height="32"><path d="M429.056 792.064c-198.144 0-359.424-161.28-359.424-359.424s161.28-359.424 359.424-359.424S788.48 234.496 788.48 432.64s-161.28 359.424-359.424 359.424z m0-655.36C265.728 136.704 133.12 269.312 133.12 432.64s132.608 295.936 295.936 295.936 295.936-132.608 295.936-295.936-132.608-295.936-295.936-295.936z" fill="#040000" p-id="2528"></path><path d="M922.624 950.784c-8.192 0-16.384-3.072-22.528-9.216l-253.952-253.952c-12.288-12.288-12.288-32.256 0-45.056 12.288-12.288 32.256-12.288 45.056 0l253.952 253.952c12.288 12.288 12.288 32.256 0 45.056-6.144 6.144-14.336 9.216-22.528 9.216z" fill="#040000" p-id="2529"></path></svg></i></a>
+      {% endif %}
+
+      {% unless settings.hide_login %}
+      {% if shop.customer_accounts_enabled or settings.show_multiple_currencies or settings.show_language %}
+      <a href="#" class="hdicon site-settings small--hide" title="{{ 'layout.header_settingbox.icon_tooltip' | t }}">
+        {% if settings.my_account_icn == 'cog' %}
+        <i class="ad ad-cog-l"></i>
+        {% else %}
+        <i><svg t="1661235040952" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2663" width="32" height="32"><path d="M512 517.632c-117.76 0-213.504-95.744-213.504-213.504 0-117.76 95.744-213.504 213.504-213.504 117.76 0 213.504 95.744 213.504 213.504 0 117.76-95.744 213.504-213.504 213.504z m0-363.52c-82.944 0-150.016 67.072-150.016 150.016S429.056 454.144 512 454.144c82.944 0 150.016-67.072 150.016-150.016S594.944 154.112 512 154.112z" fill="#040000" p-id="2664"></path><path d="M946.176 933.376H77.824v-31.744c0-239.616 194.56-434.176 434.176-434.176s434.176 194.56 434.176 434.176v31.744zM142.848 869.888h738.816c-16.384-189.44-175.616-338.944-369.152-338.944S158.72 680.448 142.848 869.888z" fill="#040000" p-id="2665"></path></svg></i>{% endif %}
+      </a>
+      {% endif %}
+      {% comment %}{% render 'customer-links' %}{% endcomment %}
+      {% endunless %}
+
+      {% if settings.enable_wishlist %}
+      {% comment %}
+      <a href="{{pages[settings.wishlist_page].url}}" class="hdicon wishlist small--hide medium--hide" title="{{ 'products.wishlist.title' | t }}"><i class="iconfont icon-zan"></i><span class="favCount hide">0</span></a>
+      {% endcomment %}
+      <a href="{{pages[settings.wishlist_page].url}}" class="hdicon wishlist" title="{{ 'products.wishlist.title' | t }}">
+        <i><svg t="1661235079915" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2799" width="32" height="32"><path d="M514.048 942.08c-8.704 0-16.896-3.584-23.04-10.24-11.776-12.8-11.264-32.768 1.536-45.056 2.56-2.56 281.6-262.656 339.968-328.192C906.24 475.648 919.04 428.032 919.04 353.28c0.512-57.856-20.992-111.616-60.416-151.552-36.352-36.352-83.968-56.32-133.632-56.32-72.704 0-150.528 84.992-182.272 138.752-9.216 14.848-28.672 19.968-43.52 10.752-14.848-9.216-19.968-28.672-10.752-43.52 37.376-62.976 129.536-169.472 237.056-169.472 67.072 0 130.56 26.624 178.688 75.264 51.712 51.712 79.36 121.344 79.36 196.608 0 87.552-15.872 150.016-102.4 247.296-60.416 67.584-332.8 321.536-344.064 332.288-7.68 5.632-15.36 8.704-23.04 8.704z" fill="#040000" p-id="2800"></path><path d="M509.952 942.08c-7.68 0-15.36-3.072-21.504-8.704-11.776-10.752-283.648-264.704-344.064-332.288-86.528-97.28-102.4-159.744-102.4-247.296-1.024-74.752 27.136-144.384 78.848-196.096C168.96 109.056 232.448 81.92 299.52 81.92c107.008 0 199.168 106.496 237.056 169.472 9.216 14.848 4.096 34.304-10.752 43.52-14.848 9.216-34.304 4.096-43.52-10.752C450.048 230.4 372.224 145.408 299.52 145.408c-50.176 0-97.792 19.968-133.632 56.32-39.424 39.936-60.928 93.696-60.928 151.552 0 74.752 12.288 122.368 86.528 205.312 58.88 65.536 337.408 325.632 339.968 328.192 12.8 11.776 13.312 32.256 1.536 45.056-6.144 6.656-14.336 10.24-23.04 10.24z" fill="#040000" p-id="2801"></path></svg></i>
+        <span class="swym-wishlist-header-counter solado-wishlist-icon">0</span>
+      </a>
+      {% endif %}
+      {%- unless settings.catalogmode -%}<a href="{{ routes.cart_url }}" class="hdicon{% if settings.ajax_cart %} header-cart{% endif %}" title="{{ 'layout.cart.title' | t }}">{% if settings.icon_style == "trolly" %}<i >
+        <svg t="1662018507301" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1309" width="200" height="200"><path d="M685.048062 288.942636c-17.463566 0-31.751938-14.288372-31.751938-31.751938 0-74.617054-63.503876-134.945736-141.296124-134.945737s-141.296124 60.328682-141.296124 134.945737c0 17.463566-14.288372 31.751938-31.751938 31.751938s-31.751938-14.288372-31.751938-31.751938c0-109.544186 92.08062-198.449612 204.8-198.449613 113.513178 0 204.8 88.905426 204.8 198.449613 0 17.463566-13.494574 31.751938-31.751938 31.751938z" fill="#040000" p-id="1310"></path><path d="M847.776744 965.258915H176.223256c-25.40155 0-49.215504-10.31938-65.885272-29.370543-16.669767-19.051163-24.607752-43.658915-22.226356-68.266667l63.503876-563.596899c4.762791-44.452713 42.865116-78.586047 87.317829-78.586046h544.545737c45.246512 0 82.555039 33.339535 87.317829 78.586046l63.503876 563.596899c3.175194 24.607752-5.556589 50.009302-22.226356 68.266667-15.875969 19.051163-39.689922 29.370543-64.297675 29.370543zM239.727132 288.942636c-12.700775 0-23.020155 9.525581-24.607752 22.226356l-63.503876 563.596899c-0.793798 9.525581 3.175194 15.875969 6.350387 19.051163 2.381395 3.175194 8.731783 7.937984 18.257365 7.937985h670.75969c9.525581 0 15.875969-4.762791 18.257364-7.937985 2.381395-3.175194 7.144186-9.525581 6.350388-19.051163l-63.503876-563.596899c-1.587597-12.700775-11.906977-22.226357-24.607752-22.226356H239.727132z" fill="#040000" p-id="1311"></path></svg></i>{% elsif settings.icon_style == "bag" %}<i class="ad ad-sq-bag"></i>{% else %}<i class="ad ad-basket-l"></i>{% endif %}<span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">{{ cart.item_count }}</span></a>{%- endunless -%}
+        <a href="#" class="large-up--hide hdicon js-mobile-nav-toggle open"><i class="ad ad-bars-l" style="line-height:28px" aria-hidden="true"></i></a>
+    </div>
+  </header>
+  {%- if settings.nav_below_logo -%}{{desktopnav}}{%- endif -%}
+</div>
+<script>
+    function handleCurrency() {
+      let target = document.querySelector('.locale-selectors__content')
+      let changeSiteBox = document.querySelector('#changeSiteBox')
+      target ? changeSiteBox.innerHTML = target.innerHTML : ''
+      console.log(target)
+    }
+    window.addEventListener('DOMContentLoaded', (event) => {
+        handleChangeSite();
+        // setTimeout(handleCurrency,1000)
+        function handleChangeSite(){
+            // let curCountryIndex = localStorage.getItem('curCountryIndex') | 0
+            let target = document.querySelector('#header #changeSiteBox')
+            let currencySite = target.querySelector('.currency-site');
+            let siteSwitcher = target.querySelector('.site-switcher');
+            let siteSwitcherItems = target.querySelectorAll('.site-switcher-item')
+            if(location.href.indexOf('eu') > -1){
+                currencySite.innerHTML = siteSwitcherItems[1].querySelector('a').innerHTML
+            } else if(location.href.indexOf('uk') > -1) {
+                currencySite.innerHTML = siteSwitcherItems[2].querySelector('a').innerHTML
+            } else {
+                currencySite.innerHTML = siteSwitcherItems[0].querySelector('a').innerHTML
+            }
+            target.addEventListener('click',() => {
+                if($(siteSwitcher).css('display') === 'none'){
+                    $(siteSwitcher).fadeIn(100);
+                };
+            });
+            // siteSwitcher.addEventListener('click',(e) => {
+            //     let siteSwitcherItem = e.target.closest('.site-switcher-item')
+            //     if(siteSwitcherItem){
+            //         // localStorage.setItem('curCountryIndex',siteSwitcherItem.getAttribute('data-index'))
+            //         // currencySite.innerHTML = siteSwitcherItems[siteSwitcherItem.getAttribute('data-index')].querySelector('a').innerHTML
+            //         location.href = siteSwitcherItem.querySelector('a').getAttribute('data-href')+'#'+siteSwitcherItem.getAttribute('data-index')
+            //     }
+            // })
+            $(document).mouseup(function(e){
+                if(!$(siteSwitcher).is(e.target) && $(siteSwitcher).has(e.target).length === 0){
+                    $(siteSwitcher).fadeOut(100);
+                };
+            });
+        };
+    });
+    document.onreadystatechange = () => {
+      let target = document.querySelector('#changeSiteBox .locale-selectors__selector')
+      if (document.readyState === 'complete' && !target) {
+        // handleCurrency()
+      }
+    };
+</script>
+<style>
+  .change-site-box {
+      display: flex;
+      align-items: center;
+      position: relative;
+	  width: 20%;
+	  max-width: 170px;
+  }
+  .change-site-box img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+  }
+  .change-site-box .currency-site {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+  }
+  .change-site-box .site-switcher {
+      position: absolute;
+      top: 40px;
+      padding: 10px;
+      z-index: 9998;
+      background: #FFFFFF;
+      border-radius: 5px;
+      box-shadow: 0 0 0 1px rgb(68 68 68 / 11%);
+      width: 150px;
+  }
+  .change-site-box .site-switcher-item a{
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+  }
+  .change-site-box span {
+      line-height: 30px;
+  }
+  .change-site-box .ad{
+      position: absolute;
+      left: 80px;
+      top: 50%;
+      margin-top: -10px;
+      font-size: 20px;
+      cursor: pointer;
+      transform: rotate(90deg);
+  }
+  /*.locale-selectors__container{*/
+  /*  display: none !important;*/
+  /*}*/
+  .change-site-box .locale-selectors__selector {
+    width: 200px!important;
+    background-color:unset!important;
+  }
+</style>
+
+{%- if settings.snow_effect -%}</div>{%- endif -%}
+{{mobilenav}}
+{%- endcapture -%}
+{{siteHeader }}

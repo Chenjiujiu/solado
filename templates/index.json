@@ -1,0 +1,346 @@
+{
+  "sections": {
+    "16602039049f667f82": {
+      "type": "silde-text-only-mobie",
+      "settings": {
+      }
+    },
+    "164975561467214e3f": {
+      "type": "image-slideshow",
+      "blocks": {
+        "1649755614f421157a-1": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/20221128-151702banner1.jpg",
+            "mb_image": "shopify:\/\/shop_images\/20221128-151718banner2.jpg",
+            "link": "shopify:\/\/collections\/best-selling",
+            "newTab": false
+          }
+        },
+        "1649755614f421157a-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Banner1_ec75a802-d5bb-4465-99f6-cd77c036485a.jpg",
+            "mb_image": "shopify:\/\/shop_images\/Banner1-m.jpg",
+            "link": "shopify:\/\/collections\/new-in",
+            "newTab": false
+          }
+        },
+        "0a68baff-1262-4ace-be1a-6d774ce2e2d0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Banner2.gif",
+            "mb_image": "shopify:\/\/shop_images\/Banner2-m.gif",
+            "link": "shopify:\/\/collections\/summer",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "1649755614f421157a-1",
+        "1649755614f421157a-0",
+        "0a68baff-1262-4ace-be1a-6d774ce2e2d0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "none",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": false,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "1658371288f933b9c3": {
+      "type": "product-slider202207",
+      "settings": {
+        "title": "F & W OUTFITS",
+        "label-width": 320,
+        "collection": "autumn-outfits",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_view_all": "",
+        "show_color_swatch": true,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "rows": "5",
+        "autoplay": false,
+        "autoplay_speed": 5
+      }
+    },
+    "16583854189ab5d32e": {
+      "type": "collection-list-percentage",
+      "blocks": {
+        "1658385418c0df00e2-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "width": "66.666%",
+            "img_ratio": "60",
+            "url": "https:\/\/uk.solado.com\/collections\/two-pieces-sets",
+            "collection_image": "shopify:\/\/shop_images\/Banner3_0087f3f7-072b-4ef8-9044-db94722cfd91.jpg",
+            "collection_name": "",
+            "collection_btn": ""
+          }
+        },
+        "1658385418c0df00e2-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "width": "33.333%",
+            "img_ratio": "120",
+            "url": "https:\/\/www.solado.com\/collections\/dresses",
+            "collection_image": "shopify:\/\/shop_images\/Banner4_8d15f223-2827-44e0-bdc2-6631633d5f08.jpg",
+            "collection_name": "",
+            "collection_btn": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "1658385418c0df00e2-0",
+        "1658385418c0df00e2-1"
+      ],
+      "settings": {
+        "title": "Collection list",
+        "subtitle": "Describe your products, collection, content etc...",
+        "top-offeset": "default",
+        "section_width": true,
+        "pad-desk": 0,
+        "pad-ipad": 0,
+        "pad-mbl": 16,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "hide_mobile": false,
+        "enable_carousel": true,
+        "grid-spacing": 8,
+        "grid-spacing-mbl": 5,
+        "style": "style1",
+        "textalign": "text-center",
+        "leftpadzero": false,
+        "product_count": false,
+        "show_buttons": false,
+        "btn-style": "btn",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "grid": 2,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#ffffff",
+        "collection_ttl_bg_hm": "#000000",
+        "collection_ttl_bg_hm_responsive": "#000000",
+        "collection_ttl_opt_hm": 0.9,
+        "collection_ttl_rad": 0,
+        "disable_zoom": false
+      }
+    },
+    "16497559575a7e56da": {
+      "type": "image-slideshow",
+      "blocks": {
+        "164975595712b720c1-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/favourite_2048x_de98018a-af75-4c3f-9f93-3e0038a139d7.jpg",
+            "mb_image": "shopify:\/\/shop_images\/favourite_2048x_de98018a-af75-4c3f-9f93-3e0038a139d7.jpg",
+            "link": "shopify:\/\/collections\/shop-by-trend",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "164975595712b720c1-0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "default",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": true,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "1649756363c9893dc8": {
+      "type": "product-slider",
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "collection": "shop-by-trend",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": true,
+        "btn_mobiles": false,
+        "show_view_all": "",
+        "show_color_swatch": false,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "none",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "prbox_style": "style1",
+        "grid": 6,
+        "tablet-grid": 5,
+        "mobile-grid": 3,
+        "rows": "30",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "164983422421e7b4ac": {
+      "type": "image-slideshow",
+      "blocks": {
+        "16498342242feadca5-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Banner5.gif",
+            "mb_image": "shopify:\/\/shop_images\/Banner5-m.gif",
+            "link": "shopify:\/\/collections\/shop-by-trend",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "16498342242feadca5-0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "none",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": true,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "165027368872a2f223": {
+      "type": "collection-list",
+      "blocks": {
+        "165027368882f3ec4c-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "vegan-leather",
+            "url": "shopify:\/\/collections\/vegan-leather",
+            "collection_image": "shopify:\/\/shop_images\/Banner6_cef8c4a1-aae1-4b42-bb5b-ec57446651e3.jpg",
+            "collection_name": "",
+            "collection_btn": ""
+          }
+        },
+        "165027368882f3ec4c-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "shop-now",
+            "url": "shopify:\/\/blogs\/news",
+            "collection_image": "shopify:\/\/shop_images\/Banner7_fff4f8ea-e2a7-4422-8e84-56b5a97ead62.jpg",
+            "collection_name": "",
+            "collection_btn": ""
+          }
+        }
+      },
+      "block_order": [
+        "165027368882f3ec4c-0",
+        "165027368882f3ec4c-2"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "small",
+        "section_width": true,
+        "pad-desk": 0,
+        "pad-ipad": 0,
+        "pad-mbl": 16,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "hide_mobile": false,
+        "enable_carousel": true,
+        "grid-spacing": 1,
+        "grid-spacing-mbl": 1,
+        "style": "style2",
+        "textalign": "text-center",
+        "leftpadzero": false,
+        "product_count": false,
+        "show_buttons": false,
+        "btn-style": "btn",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "grid": 2,
+        "tablet-grid": 2,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#ffffff",
+        "collection_ttl_bg_hm": "#000000",
+        "collection_ttl_bg_hm_responsive": "#000000",
+        "collection_ttl_opt_hm": 0.9,
+        "collection_ttl_rad": 0,
+        "disable_zoom": true
+      }
+    },
+    "165046375193531745": {
+      "type": "image-gallery-scroll",
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "title": "SHOP @SHOP_SOLADO",
+        "subtitle": "Your favorite looks from the @shop_solado",
+        "viewalllink": "shopify:\/\/pages\/i-love-the-gram",
+        "likeshop_code": "<script src=\"https:\/\/cdn.dashhudson.com\/web\/js\/board-embed.js\" type=\"text\/javascript\" data-name=\"dhboard\" data-gallery-id=\"1388916\" data-row-size=\"5\" data-gap-size=\"11\" data-row-limit=\"2\" data-mobile-row-size=\"2\" data-mobile-gap-size=\"8\" data-page-size=\"10\" data-call-to-action=\"shop_now\"><\/script>",
+        "heading_font_size_pc": "2.78vw",
+        "heading_font_size_mb": "6vw",
+        "subheading_font_size_pc": "1.56vw",
+        "subheading_font_size_mb": "4vw"
+      }
+    },
+    "16339484529adbb489": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "<b>BLOG<\/b>",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "blog": "news",
+        "img_ratio": "50",
+        "post_limit": 3,
+        "grid": 3,
+        "tablet-grid": 2,
+        "mobile-grid": 1,
+        "blog_align": "text-left",
+        "blog_show_author": false,
+        "blog_show_date": true,
+        "show_comment": true,
+        "show_mini_des": true,
+        "show_read_more": true,
+        "show_view_all": false,
+        "btn-style": "btn",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    }
+  },
+  "order": [
+    "16602039049f667f82",
+    "164975561467214e3f",
+    "1658371288f933b9c3",
+    "16583854189ab5d32e",
+    "16497559575a7e56da",
+    "1649756363c9893dc8",
+    "164983422421e7b4ac",
+    "165027368872a2f223",
+    "165046375193531745",
+    "16339484529adbb489"
+  ]
+}

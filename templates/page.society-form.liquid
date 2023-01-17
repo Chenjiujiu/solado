@@ -1,0 +1,45 @@
+<div id="society-form-Page" class="pageCnt page-width text-center">
+  <div class="society-form-container">
+    <div class="klaviyo-form-YAuq5D"></div>
+    <div class="klaviyo-form-VqF4iG"></div>
+  </div>
+</div>
+<style>
+  #society-form-Page {
+    text-transform: uppercase;
+    background: url({{ 'society-form-pcbg.png' | asset_url}}) no-repeat center/cover;
+    min-height: 500px;
+  }
+  #society-form-Page .society-form-container{
+      padding: 40px 0;
+      max-width: 750px;
+      margin: auto;
+  }
+  body[id = 'society-form'] .site-footer {
+      margin-top: 0px !important;
+  }
+  @media Screen and (max-width: 1024px) {
+      #society-form-Page {
+          background: url({{ 'society-form-mobiebg.png' | asset_url}}) no-repeat 50% 50%/cover;
+      }
+      #society-form-Page .society-form-container{
+          padding: 20px 0;
+      }
+      /*#society-form-Page .ql-font-poppins:nth-child(1) {*/
+      /*    font-size: 20px !important;*/
+      /*}*/
+      /*#society-form-Page .ql-font-poppins:nth-child(2) {*/
+      /*    font-size: 16px !important;*/
+      /*}*/
+      /*#society-form-Page input::-webkit-input-placeholder{*/
+      /*    !* placeholder字体大小 *!*/
+      /*    font-size:10px!important;*/
+      /*}*/
+      /*#society-form-Page input[placeholder = "PRIMARY SOCIAL PLATFORM E.G IG/TIKTOK"]::-webkit-input-placeholder{*/
+      /*    transform: scale(.8);*/
+      /*    position: absolute;*/
+      /*    left: -16px;*/
+      /*    top: 20px;*/
+      /*}*/
+  }
+</style>

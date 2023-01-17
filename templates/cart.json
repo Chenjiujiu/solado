@@ -1,0 +1,132 @@
+{
+  "sections": {
+    "cart": {
+      "type": "cart-template",
+      "settings": {
+        "layout": "style2",
+        "cart_notes_enable": true,
+        "display_saving": false,
+        "shippingTax": false,
+        "additionalCheckout": true,
+        "currency_notes": "We processes all orders in [shop.currency]. While the content of your cart is currently displayed in [selected.currency], the checkout will use [shop.currency] at the most current exchange rate.",
+        "payment": "shopify:\/\/shop_images\/origin_img_v2_c6754ac5-eba5-4d4a-b428-6a3e4af6b2dg.jpg",
+        "shipping_calculator": false,
+        "shipping_calculator_heading": "Get shipping estimates",
+        "shipping_calculator_default_country": "United States",
+        "shipping_calculator_submit_button_label": "Calculate shipping",
+        "shipping_calculator_submit_button_label_disabled": "Calculating...",
+        "enable_giftcard": false,
+        "gift_product": "gift-wrapping",
+        "gift_wrap_optin": "diffrent-rate",
+        "gift-wrap-text": "Add a Gift Wrap to your order, For $",
+        "gift-wrap-msg": "Gift Message Note:"
+      }
+    },
+    "16546898891190cf69": {
+      "type": "collection-tab-cart",
+      "disabled": true,
+      "blocks": {
+        "165468988924977034-0": {
+          "type": "featured_collection_tabs",
+          "settings": {
+            "title": "TOP PICKS FOR YOU",
+            "collection": "back-in-stock"
+          }
+        }
+      },
+      "block_order": [
+        "165468988924977034-0"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_color_swatch": true,
+        "color_type": "color",
+        "v_f_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "tab-style": "style1",
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "rows": "6"
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "show_product_recommendations": true,
+        "recommanded_products_autoplay": true,
+        "autoplay_speed": "3000",
+        "recommanded_title": "Recommended Products",
+        "recommanded_sub_title": "",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "recommanded_total_product_to_show": "6",
+        "color_type": "color",
+        "color_style": "rounded",
+        "color_size": "small"
+      }
+    },
+    "166000552077248716": {
+      "type": "product-rows-more",
+      "settings": {
+        "title": "TOP PICKS FOR YOU",
+        "subtitle": "",
+        "collection": "back-in-stock",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_color_swatch": true,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "rows": "4"
+      }
+    },
+    "cart-recommendations": {
+      "type": "product-recommendations-cart",
+      "settings": {
+        "show_product_recommendations": true,
+        "recommanded_title": "Recommended Products",
+        "recommanded_sub_title": "",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "recommanded_total_product_to_show": "4",
+        "total_product_to_loadmore": "12",
+        "prbox_style": "style1",
+        "show_color_swatch": true,
+        "color_type": "color",
+        "color_style": "rounded",
+        "color_size": "small"
+      }
+    }
+  },
+  "order": [
+    "cart",
+    "16546898891190cf69",
+    "recommendations",
+    "166000552077248716",
+    "cart-recommendations"
+  ]
+}

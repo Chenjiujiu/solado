@@ -1,0 +1,98 @@
+{% assign codeInfoList = settings.code_info | strip_html | split: ',' %}
+{%- capture silde-text-only-mobie -%}
+	<div class="desk-hide silde-text-only-mobie-content"
+	     data-code_autoplay_time="{{ settings.code_autoplay_time }}">
+		{% if codeInfoList.size > 0 %}
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					{%- for codeItemAll in codeInfoList -%}
+						{% assign codeItem = codeItemAll | split: '=' %}
+						<div class="text-center swiper-slide py-05">
+							<div class="fs-07 lh-13">EXTRA</div>
+							<div class="fs-3 pt-025 ls-06 fw-bold">{{ codeItem[1] }}</div>
+							<div class="fs-07">ON ORDERS OVER {{ codeItem[0] }}</div>
+							<span class="fs-07 fw-bold py-025 px-05 pt-0375 mt-025 d-inline-block"
+							      style=" color: {{ settings.code_title_color }};background: {{ settings.code_title_bgc }}">CODE:{{ codeItem[2] }}</span>
+						</div>
+					{%- endfor -%}
+				</div>
+			</div>
+		{% endif %}
+	</div>
+	<div class="d-flex phone-hide justify-content-around silde-text-only-mobie-content">
+		{%- for codeItemAll in codeInfoList -%}
+			{% assign codeItem = codeItemAll | split: '=' %}
+			<div class="text-center w-100 py-1"
+					{%- if forloop.index == 2 -%}
+                 style="background: {{ settings.code_info_special_color }}
+                 {%- endif -%}"
+			>
+				<div class="fs-6 lh-13">EXTRA</div>
+				<div class="fs-1 ls-06 fw-bold">{{ codeItem[1] }}</div>
+				<div class="fs-6 lh-13" >ON ORDERS OVER {{ codeItem[0] }}</div>
+				<span class="fs-5 fw-bold py-05 px-1 mt-025 pt-075 d-inline-block"
+				      style=" color: {{ settings.code_title_color }};background: {{ settings.code_title_bgc }}">CODE:{{ codeItem[2] }}</span>
+			</div>
+		{%- endfor -%}
+	</div>
+{%- endcapture -%}
+<div class="text-center fs-6 lh-22 silde-text-only-mobie-title phone-hide desk-title">{{ settings.code_title }}</div>
+<div class="text-center fs-07 lh-18 silde-text-only-mobie-title desk-hide phone-title">{{ settings.code_title }}</div>
+<a
+	{% if settings.code_link != blank %}
+		href="{{ settings.code_link }}"
+	{% endif %}
+>{{ silde-text-only-mobie | strip_newlines | remove: "  " | remove: "    " }}</a>
+<div id="silde-text-only-mobie-dom" style="display: none" data-code_autoplay_time="{{ settings.code_autoplay_time }}">
+	<a
+		{% if settings.code_link != blank %}
+		 	href="{{ settings.code_link }}"
+		{% endif %}
+	>
+		<div class="silde-text-only-mobie py-05">
+			<div class="text-center fs-07 lh-20 silde-text-only-mobie-title phone-title">{{ settings.code_title | strip_html }}</div>
+			<div class="silde-text-only-mobie-content">
+				{% if codeInfoList.size > 0 %}
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							{%- for codeItemAll in codeInfoList -%}
+								{% assign codeItem = codeItemAll | split: '=' %}
+								<div class="text-center swiper-slide py-05">
+									<div class="fs-07 lh-13">EXTRA</div>
+									<div class="fs-3 pt-025 ls-06 fw-bold">{{ codeItem[1] }}</div>
+									<div class="fs-07">ON ORDERS OVER {{ codeItem[0] }}</div>
+									<span class="fs-07 fw-bold py-025 px-05 pt-0375 mt-025 d-inline-block"
+									      style=" color: {{ settings.code_title_color }};background: {{ settings.code_title_bgc }}">CODE:{{ codeItem[2] }}</span>
+								</div>
+							{%- endfor -%}
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</a>
+</div>
+<script>
+    !function () {
+        let swiperContainers = document.querySelector('#shopify-section-{{ section.id }} .swiper-container')
+        let sildeTextOnlyMobie = new Swiper(swiperContainers, {
+            autoplay: {
+                delay: ({{ settings.code_autoplay_time }}) * 1000,
+            },
+            loop: true,
+        })
+    }()
+</script>
+{% schema %}
+{
+"name": "Discount Code Slide",
+"class": "index-section index-section--flush silde-text-only-mobie",
+"settings": [
+],
+"presets": [
+{
+"name":"Discount Code Slide"
+}
+]
+}
+{% endschema %}

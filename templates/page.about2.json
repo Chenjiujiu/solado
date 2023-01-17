@@ -1,0 +1,115 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": true,
+        "width": 1200,
+        "hide_ttl": true,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    },
+    "16337695579db422ae": {
+      "type": "richtext",
+      "settings": {
+        "fullwidth": true,
+        "top-offeset": "default",
+        "title": "<b>ABOUT US<\/b>",
+        "ttl-text-size": 20,
+        "richtxt": "<p>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\/p>",
+        "text-size": 14,
+        "btntxt": "",
+        "btnurl": "",
+        "btn-style": "btn",
+        "btntxt1": "",
+        "btnurl1": "",
+        "btn-style2": "btn",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "max-width": 65,
+        "txt_align": "tc",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "text_clr": "#111111"
+      }
+    },
+    "1633769564023b4dfb": {
+      "type": "feature-row",
+      "blocks": {
+        "1633769564023b4dfb-0": {
+          "type": "image_with_text",
+          "settings": {
+            "layout": "left",
+            "title": "Our Mission",
+            "text": "<p>Pair large text with an image to give focus to your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "button_label": "",
+            "button_link": "",
+            "btn-size-desk": "btn-sm",
+            "btn-size-mob": "mob-btn-sm",
+            "text_align": "text-left",
+            "text_clr": "#000000",
+            "text_bg_clr": "#ffffff",
+            "button_bg_clr": "#000000",
+            "button_bdr_clr": "#000000",
+            "button_text_clr": "#ffffff"
+          }
+        },
+        "3a7419a4-8a61-43ec-b2d7-43113cc5cbdc": {
+          "type": "image_with_text",
+          "settings": {
+            "layout": "right",
+            "title": "Our Vision",
+            "text": "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\/p>",
+            "button_label": "",
+            "button_link": "",
+            "btn-size-desk": "btn-sm",
+            "btn-size-mob": "mob-btn-sm",
+            "text_align": "text-left",
+            "text_clr": "#000000",
+            "text_bg_clr": "#ffffff",
+            "button_bg_clr": "#000000",
+            "button_bdr_clr": "#000000",
+            "button_text_clr": "#ffffff"
+          }
+        },
+        "679037ac-fdf7-4af6-9a62-df6890f32c60": {
+          "type": "image_with_text",
+          "settings": {
+            "layout": "left",
+            "title": "The Founder",
+            "text": "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\/p>",
+            "button_label": "Read More",
+            "button_link": "\/",
+            "btn-size-desk": "btn-sm",
+            "btn-size-mob": "mob-btn-sm",
+            "text_align": "text-left",
+            "text_clr": "#000000",
+            "text_bg_clr": "#ffffff",
+            "button_bg_clr": "#000000",
+            "button_bdr_clr": "#000000",
+            "button_text_clr": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "1633769564023b4dfb-0",
+        "3a7419a4-8a61-43ec-b2d7-43113cc5cbdc",
+        "679037ac-fdf7-4af6-9a62-df6890f32c60"
+      ],
+      "settings": {
+        "top-offeset": "default",
+        "section_width": true,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "16337695579db422ae",
+    "1633769564023b4dfb"
+  ]
+}

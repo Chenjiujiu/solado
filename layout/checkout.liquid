@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+<head>
+  {%- if shop.currency == 'EUR' -%}
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-M5KPQ9V');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5KPQ9V"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  {%- else -%}
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5M6GX2F');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5M6GX2F"
+              height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+  {%- endif -%}
+
+  <!-- start Omniconvert.com code -->
+  <link rel="dns-prefetch" href="//app.omniconvert.com"/>
+  <script type="text/javascript">window._mktz = window._mktz || [];</script>
+  <script src="//cdn.omniconvert.com/js/v6e9e76.js"></script>
+  <!-- end Omniconvert.com code -->
+
+  {% include 'limespot' %}
+  <meta charset="utf-8"/>
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0"
+        name="viewport"/>
+  <meta content="origin" name="referrer"/>
+  <style>
+      .pay-clone-info .custom-total-line__price {
+          text-align: right;
+      }
+
+      .pay-clone-info .custom-total-line__price .change-message {
+          color: #323232;
+          font-size: 1.1428571429em;
+      }
+
+      .silde-text-only-mobie {
+          line-height: 1;
+      }
+
+      .silde-text-only-mobie .silde-text-only-mobie-title {
+          font-weight: 500;
+          background-color: {{ settings.code_title_bgc }};
+          color: {{ settings.code_title_color }};
+      }
+
+      .silde-text-only-mobie .silde-text-only-mobie-content {
+          background-color: {{ settings.code_info_bgc }};
+          color: {{ settings.code_info_color }};
+      }
+  </style>
+  <script src="{{ 'jquery.min.js' | asset_url }}"></script>
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+  {{ 'swiper.min.js' | asset_url | script_tag }}
+  <title>{{ page_title }}</title>
+  {{
+  content_for_header
+  }}
+
+  {{
+  checkout_stylesheets
+  }}
+  {{
+  checkout_scripts
+  }}
+
+  {% render 'shogun-head' %}
+</head>
+<body>
+{{ skip_to_content_link }}
+
+<header class="banner" data-header role="banner">
+  <div class="wrap">
+    {{ content_for_logo }}
+  </div>
+</header>
+
+{{ order_summary_toggle }}
+<div class="content" data-content>
+  <div class="wrap">
+    <div class="main">
+      <header class="main__header" role="banner">
+        {{ content_for_logo }}
+        {{ breadcrumb }}
+        {{ alternative_payment_methods }}
+      </header>
+      <main class="main__content" role="main">
+        {{ content_for_layout }}
+      </main>
+      <footer class="main__footer" role="contentinfo">
+        {{ content_for_footer }}
+      </footer>
+    </div>
+    <aside class="sidebar" role="complementary">
+      <div class="sidebar__header">
+        {{ content_for_logo }}
+      </div>
+      <div class="sidebar__content">
+        <limespot></limespot>
+        {{ content_for_order_summary }}
+      </div>
+    </aside>
+  </div>
+</div>
+
+{{ tracking_code }}
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+            /** 默认展开购物项目**/
+            $(".order-summary-toggle").removeClass("order-summary-toggle--show").addClass("order-summary-toggle--hide");
+            $(".order-summary-toggle").attr("aria-expanded", false);
+            $("#order-summary").removeClass("order-summary--is-collapsed").addClass("order-summary--is-expanded");
+        /** 折扣码轮播 **/
+            var wrapper = document.querySelector('.field__input-btn-wrapper');
+        if (wrapper) {
+                function handleResponse() {
+                    let res = JSON.parse(this.responseText);
+                    let tarDom = new DOMParser().parseFromString(res['silde-text-only-mobie'], 'text/html').querySelector('#silde-text-only-mobie-dom');
+                    let fps = tarDom.dataset.code_autoplay_time * 1000;
+                    $(wrapper).after(tarDom.innerHTML)
+                    let swiperContainers = wrapper.parentElement.querySelector('.swiper-container')
+                    let sildeTextOnlyMobie = new Swiper(swiperContainers, {
+                        autoplay: {
+                            delay: fps
+                        },
+                        loop: true
+                    })
+                }
+
+                const request = new XMLHttpRequest();
+                request.addEventListener('load', handleResponse);
+                request.open('GET', '/?sections=silde-text-only-mobie', true);
+                request.send();
+            }
+
+            /** 默认能看到折扣卷 **/
+            var checkoutDistimer = setTimeout(function () {
+                var discountWrap = $(".field__input-btn-wrapper");
+                if (discountWrap.length > 0) {
+                    var top = discountWrap.offset().top;
+                    var discountH = discountWrap.outerHeight(true);
+                    var windowsH = $(window).height();
+                    if (top + discountH > windowsH) {
+                        $("body").scrollTop(top - windowsH + 100);
+                    }
+                }
+                clearTimeout(checkoutDistimer);
+            }, 1000);
+    });
+</script>
+
+<!-- loyalty Dev -->
+<script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/P-kF5ubPaBfXjVbKC-efHg" async></script>
+<div class="yotpo-widget-instance" data-yotpo-instance-id="163101"></div>
+<!-- End Loyalty Dev -->
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<style>
+  {% comment %}#PageContainer .page-width { max-width:{{section.settings.width}}px }{% endcomment %}
+  {%- if section.settings.hide_hdft -%}#header,.top-header-wrapper,#shopify-section-footer { display:none; }{%- endif -%}
+</style>
+{% unless section.settings.breadcrumb %}{%- if settings.breadcrumb_pg -%}{%- include 'breadcrumb' -%}{%- else -%}<div class="topSpace"></div>{%- endif -%}{% endunless %}
+<div class="pageCnt{% unless section.settings.section_width %} page-width{% else %} fullwidth{% endunless %}">
+  {% unless section.settings.hide_ttl %}<h1 class="page-title">{{page.title}}</h1>{% endunless %}
+  {% unless page.content == blank %}<div class="rte">{{ page.content }}</div>{% endunless %}
+</div>
+{% schema %}
+  {
+    "name": "Page",
+    "settings": [
+	  {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": false
+	  },
+      {
+        "type": "range",
+        "id": "width",
+        "label": "Container Width",
+        "default":1200,
+        "min": 800,
+        "max": 1800,
+        "step": 10,
+        "unit": "px"
+      },
+	  {
+      	"type": "checkbox",
+        "id": "hide_ttl",
+        "label": "Hide Page Title?",
+        "default": false
+      },
+	  {
+      	"type": "checkbox",
+        "id": "hide_hdft",
+        "label": "Hide Header and Footer?",
+        "default": false,
+		"info": "You can use this option when create landing page without header footer."
+      },
+	  {
+      	"type": "checkbox",
+        "id": "breadcrumb",
+        "label": "Hide breadcrumb?",
+        "default": false
+      }
+	]
+  }
+{% endschema %}

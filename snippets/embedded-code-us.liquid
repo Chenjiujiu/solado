@@ -1,0 +1,285 @@
+<!--start bing code -->
+  <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"52009605"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+  <script>window.uetq = window.uetq || [];window.uetq.push('event', '', {"revenue_value":"{{ total_price | times: 0.01 }}","currency":"USD"});</script>
+  <!--end bing code -->
+   <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5M6GX2F');</script>
+<!-- End Google Tag Manager -->
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5M6GX2F"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VP4G3K8LC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1VP4G3K8LC');
+</script>
+<!-- end Global site tag (gtag.js) - Google Analytics -->
+    
+  <!-- START Google Analytics dynamic remarketing by DigitalDarts.com.au v1.5 -->
+{% assign UA-ID = "UA-207916161-1" -%}{%- comment -%}Google Analytics tracking ID.{%- endcomment -%}
+{%- assign product-id = "variant-id" -%}{%- comment -%}The format of the product IDs in the feed. 3 accepted values "sku" (SKU of the variant e.g. aga-012), "variant-id" (variant ID e.g. 21283160948841), or "product-id_variant-id" (product ID underscore then variant ID e.g. 28541777444969_21283160948841).{%- endcomment -%}
+{%- assign product-id-prefix = "" -%}{%- comment -%}Prefix to product-id. Leave blank if there's no prefix. This is likely needed if product-id_variant-id is selected so 123456_789012 becomes shopify_AU_28541777444969_21283160948841.{%- endcomment -%}
+{%- assign price-decimal-fs = true -%}{%- comment -%}If the decimal separator is a full stop like in USD and AUD currencies, set to true. If it is a comma like in some European countries, set to false.{%- endcomment -%}
+{%- comment -%}Change dimension1, dimension2, and dimension3 on line 16 to match your custom dimension number in Google Analytics.{%- endcomment -%}
+
+{%- if template contains 'collection' or template contains 'search' or template contains 'product' or template contains 'cart' -%}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ UA-ID }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ UA-ID }}', { 'send_page_view': false, 'custom_map': {'dimension1': 'ecomm_prodid', 'dimension2': 'ecomm_pagetype', 'dimension3': 'ecomm_totalvalue'} });
+</script>
+
+<script>
+  gtag('event', 'Dynamic Remarketing', { 'ecomm_pagetype': '{% if template contains 'collection' %}category{% elsif template contains 'search' %}searchresults{% elsif template contains 'product' %}product{% elsif template contains 'cart' %}cart{% endif %}'
+  {%- if product-id == "product-id_variant-id" -%}
+  , 'ecomm_prodid': {% if template contains 'product' -%}
+    '{{ product-id-prefix }}{{ product.id }}_{{ product.selected_or_first_available_variant.id }}'
+    {%- elsif template contains 'collection' -%}
+    [{% for item in collection.products limit:3 %}'{{ product-id-prefix }}{{ item.id }}_{{ item.selected_or_first_available_variant.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'search' -%}
+    [{% for item in search.results limit:3 %}'{{ product-id-prefix }}{{ item.id }}_{{ item.selected_or_first_available_variant.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'cart' -%}
+    [{%- for item in cart.items limit:3 -%}'{{ product-id-prefix }}{{ item.product_id }}_{{ item.variant_id }}'
+      {%- unless forloop.last -%}, {%- endunless -%}
+    {%- endfor -%}]
+  {%- endif -%}
+  {%- elsif product-id == 'variant-id' -%}
+  , 'ecomm_prodid': {% if template contains 'product' -%}
+    '{{ product-id-prefix }}{{ product.selected_or_first_available_variant.id }}'
+    {%- elsif template contains 'collection' -%}
+    [{% for item in collection.products limit:4 %}'{{ product-id-prefix }}{{ item.variants.first.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'search' -%}
+    [{% for item in search.results limit:4 %}'{{ product-id-prefix }}{{ item.variants.first.id }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'cart' -%}
+    [{%- for item in cart.items limit:4 -%}'{{ product-id-prefix }}{{ item.variant_id }}'
+      {%- unless forloop.last -%}, {%- endunless -%}
+    {%- endfor -%}]
+  {%- endif -%}
+  {%- elsif product-id == 'sku' -%}
+  , 'ecomm_prodid': {% if template contains 'product' -%}
+    '{{ product-id-prefix }}{{ product.selected_or_first_available_variant.sku }}'
+    {%- elsif template contains 'collection' -%}
+    [{% for item in collection.products limit:4 %}'{{ product-id-prefix }}{{ item.selected_or_first_available_variant.sku }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'search' -%}
+    [{% for item in search.results limit:4 %}'{{ product-id-prefix }}{{ item.selected_or_first_available_variant.sku }}'{% unless forloop.last %}, {% endunless %}{% endfor %}]
+    {%- elsif template contains 'cart' -%}
+    [{%- for item in cart.items limit:4 -%}'{{ product-id-prefix }}{{ item.sku }}'
+      {%- unless forloop.last -%}, {%- endunless -%}
+    {%- endfor -%}]
+  {%- endif -%}
+  {%- endif -%}
+  {%- if price-decimal-fs == true -%}
+    {%- if template contains 'product' -%}
+      {%- assign product-price = product.price_min | money_without_currency | remove: ',' -%}
+    {%- elsif template contains 'cart' -%}
+      {%- assign product-price = cart.total_price | money_without_currency | remove: ',' -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- if template contains 'product' -%}
+      {%- assign product-price = product.price_min | money_without_currency | remove: '.' | replace: ',', '.' -%}
+    {%- elsif template contains 'cart' -%}
+      {%- assign product-price = cart.total_price | money_without_currency | remove: '.' | replace: ',', '.' -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- if template contains 'product' or template contains 'cart' -%}
+  , 'ecomm_totalvalue': {% if template contains 'product' -%}
+    {{ product-price -}}
+  {%- elsif template contains 'cart' -%}
+    {{ product-price -}}
+  {%- endif -%}
+  {%- endif -%}, 'non_interaction': true });
+</script>
+{%- endif %}
+<!-- END Google Analytics dynamic remarketing by DigitalDarts.com.au -->
+  
+  
+  
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4797175203655663');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4797175203655663&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+      <!-- Snap Pixel Code -->
+    <script type='text/javascript'>
+    (function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+    {a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+    a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+    r.src=n;var u=t.getElementsByTagName(s)[0];
+    u.parentNode.insertBefore(r,u);})(window,document,
+    'https://sc-static.net/scevent.min.js');
+
+    snaptr('init', '6aa440a4-e627-433a-9304-1f8fe4b50409', {
+    'user_email': '__INSERT_USER_EMAIL__'
+    });
+
+    snaptr('track', 'PAGE_VIEW');
+
+  </script>
+  <!-- End Snap Pixel Code -->
+
+  <!-- Pinterest Tag -->
+  <script>
+  !function(e){if(!window.pintrk){window.pintrk = function () {
+  window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+    n=window.pintrk;n.queue=[],n.version="3.0";var
+    t=document.createElement("script");t.async=!0,t.src=e;var
+    r=document.getElementsByTagName("script")[0];
+    r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+  pintrk('load', '2612492401142', {em: '<user_email_address>'});
+  pintrk('page');
+  pintrk('track', 'pagevisit');
+  pintrk('track', 'addtocart');
+  </script>
+  <noscript>
+  <img height="1" width="1" style="display:none;" alt=""
+    src="https://ct.pinterest.com/v3/?event=init&tid=2612492401142&pd[em]=<hashed_email_address>&noscript=1" />
+  </noscript>
+  <!-- end Pinterest Tag -->
+  
+  <!-- Taboola Pixel Code -->
+<script type='text/javascript'>
+  window._tfa = window._tfa || [];
+  window._tfa.push({notify: 'event', name: 'page_view', id: 1461029});
+  !function (t, f, a, x) {
+         if (!document.getElementById(x)) {
+            t.async = 1;t.src = a;t.id=x;f.parentNode.insertBefore(t, f);
+         }
+  }(document.createElement('script'),
+  document.getElementsByTagName('script')[0],
+  '//cdn.taboola.com/libtrc/unip/1461029/tfa.js',
+  'tb_tfa_script');
+</script>
+<!-- End of Taboola Pixel Code -->
+
+  <!-- tiktok Tag -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++
+  )ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script");n.type="text/javascript",n.async=!0,n.src=i+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+      ttq.load('C8RU8U4APN6UQQNNFBEG');
+      ttq.page();
+    }(window, document, 'ttq');
+  </script>
+  
+  <!--google optimize -->
+  <!--script src="https://www.googleoptimize.com/optimize.js?id=GTM-5M6GX2F"></script-->
+  
+  <!-- tiktok Tag -->
+  
+<!-- start Omniconvert.com code -->
+<link rel="dns-prefetch" href="//app.omniconvert.com" />
+<script type="text/javascript">window._mktz=window._mktz||[];</script>
+<script src="//cdn.omniconvert.com/js/v6e9e76.js"></script>
+<!-- end Omniconvert.com code -->
+  
+<!-- start yotpo's review code --> 
+<script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/seVC6mFULwZ3QETg5rMFB7RzbWkecrcbvVZh1U1A/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+<!--end  yotpo's review code --> 
+
+  {%- capture metaTags -%}
+	<meta charset="utf-8">
+  	<meta name="p:domain_verify" content="ad5c4c396931d5a2c9562ad4ea8ca530"/>
+    <!--Pinterest Shop-->
+    <meta name="p:domain_verify" content="e1d5387e789cf2b0eafc027e3f22b131"/>
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="theme-color" content="{{ settings.mob_browser }}">
+	<meta name="format-detection" content="telephone=no">
+  	<meta name="google-site-verification" content="djvMUvd2AcJ8GnbIF9UPT_9eO4idhmU3DKWrqJKF4VE" />
+    <meta name="facebook-domain-verification" content="5kpq1zka0062kt9vf5v9ojsio001sa" />
+    <script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SuLgUi"></script>
+	<link rel="canonical" href="{{ canonical_url }}">
+	<link rel="dns-prefetch" href="https://{{shop.domain}}" crossorigin>
+	<link rel="dns-prefetch" href="https://{{shop.permanent_domain}}" crossorigin>
+	<link rel="dns-prefetch" href="https://cdn.shopify.com" crossorigin>
+	<link rel="dns-prefetch" href="https://fonts.shopifycdn.com" crossorigin>
+	<link rel="preconnect" href="https//fonts.shopifycdn.com/" crossorigin>
+	<link rel="preconnect" href="https//cdn.shopify.com" crossorigin>
+	<link rel="preconnect" href="https//ajax.googleapis.com">
+  
+	<link rel="preload" as="style" href="{%- if settings.rtl -%}{{ 'themeRtl.css' | asset_url }}{%- else -%}{{ 'theme.css' | asset_url }}{%- endif -%}" />
+
+    {%- if settings.favicon != blank -%}<link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">{%- endif -%}
+    {%- if settings.favicon_retina != blank -%}<link rel="apple-touch-icon-precomposed" type="image/png" sizes="152x152" href="{{ settings.favicon_retina | img_url: '152x' }}">{%- endif -%}
+
+  	{%- capture seo_title -%}
+      {%- if request.page_type == 'search' and search.performed == true -%}
+        {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+      {%- else -%}
+        {{ page_title }}
+      {%- endif -%}
+      {%- if current_tags -%}{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}{%- endif -%}
+      {%- if current_page != 1 -%} &ndash; {{ 'general.meta.page' | t: page: current_page }}{%- endif -%}
+      {%- assign escaped_page_title = page_title | escape -%}
+      {%- unless escaped_page_title contains shop.name -%}&ndash; {{ shop.name }}{%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+  	{%- if page_description -%}<meta name="description" content="{{ page_description | escape }}">{%- endif -%}
+  	{%- render 'social-meta-tags' -%}
+  {%- endcapture -%}
+  {{metaTags  | strip_newlines | remove: "	" }}
+
+  {%- capture mainjs -%}
+
+	<link rel="preload" href="{{ 'AVENIRNEXTROUNDEDPRO-REG1.woff2' | asset_url }}" as="font" crossorigin>
+	<link rel="preload" href="{{ '4_DEMI.woff2' | asset_url }}" as="font" crossorigin>
+
+  	{%- render 'head-css' -%}
+  	{% if settings.rtl %}
+    	<link rel="stylesheet" href="{{ 'themeRtl.css' | asset_url }}" type="text/css" media="all">
+  	{% else %}
+  		<link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css" media="all">
+  	{% endif %}
+    <link rel="preload" as="style" href="{{ 'iconfont.css' | asset_url }}" />
+    <link rel="stylesheet" href="{{ 'iconfont.css' | asset_url }}" type="text/css" media="all">  
+  	<link rel="preload" href="{{ 'jquery.min.js' | asset_url }}" as="script">
+  	<link rel="preload" href="{{ 'vendor.min.js' | asset_url }}" as="script">
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+  	<script src="{{ 'jquery.min.js' | asset_url }}" defer="defer"></script>
+  	<script src="{{ 'mobile-detect.min.js' | asset_url }} defer="defer" ></script>
+	<script>
+		var theme = {
+			strings:{
+				addToCart:{{ 'products.product.add_to_cart' | t | json }},soldOut:{{ 'products.product.sold_out' | t | json }},unavailable:{{ 'products.product.unavailable' | t | json }},showMore:{{ 'general.filters.show_more' | t | json }},showLess:{{ 'general.filters.show_less' | t | json }}
+			},
+			mlcurrency:{%- if settings.show_multiple_currencies and settings.currency_opt == 'script' -%}true{%- else -%}false{% endif %},moneyFormat:{{ shop.money_format | json }},currencyFormat:{{ settings.currency_format | json }},shopCurrency:{{ shop.currency | json }},autoCurrencies:{{ settings.auto_currencies }},money_currency_format:{{ shop.money_with_currency_format | strip_html | json }},money_format:{{ shop.money_format | strip_html | json }},
+			ajax_cart:{{settings.ajax_cart }},fixedHeader:{{settings.show_sticky_header }},animation:{{settings.enable_site_animation }},animationMobile:{{settings.site_animation_mobile }},searchresult:{{ 'general.search.all' | t | json }},wlAvailable:{{ 'products.wishlist.available' | t | json }},rtl:{{ settings.rtl }},days:{{ 'date_formats.short_names.days' | t | json }},hours:{{ 'date_formats.short_names.hours' | t | json }},minuts:{{ 'date_formats.short_names.minuts' | t | json }},seconds:{{ 'date_formats.short_names.seconds' | t | json }},
+		};
+		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		var Metatheme = {{shop.metafields.mytheme.Avone |json}},thm = 'Avone', shpeml = '{{shop.email}}', dmn = window.location.hostname;
+        window.lazySizesConfig = window.lazySizesConfig || {};
+		window.lazySizesConfig.loadMode = 1;
+		window.lazySizesConfig.expand = 10;
+		window.lazySizesConfig.expFactor = 1.5;
+      	window.lazySizesConfig.loadHidden = false;
+	</script>
+	<script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+  {%- endcapture -%}

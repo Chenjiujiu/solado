@@ -1,0 +1,128 @@
+{%- liquid
+  assign cart_total = cart.total_price | money_without_currency
+  assign shop_currency = shop.currency
+  if shop_currency == 'usd' or shop_currency == 'USD'
+    assign currencySymbol = '$'
+  elsif shop_currency == 'eur' or shop_currency == 'EUR'
+    assign currencySymbol = '€'
+  else
+	  assign currencySymbol = '£'
+  endif
+
+  if settings.free_shipping_threshold contains '.'
+    assign free_shipping_threshold = settings.free_shipping_threshold | split: '.' | first
+    assign free_shipping_threshold = free_shipping_threshold | append: '00'
+    assign free_shipping_threshold = free_shipping_threshold | plus: 0
+    assign free_shipping_threshold_cents = free_shipping_threshold | plus: 0
+    assign free_shipping_threshold = free_shipping_threshold | money_without_currency
+  else
+    assign free_shipping_threshold = settings.free_shipping_threshold | append: '00'
+    assign free_shipping_threshold = free_shipping_threshold | plus: 0
+    assign free_shipping_threshold_cents = free_shipping_threshold | plus: 0
+    assign free_shipping_threshold = free_shipping_threshold | money_without_currency
+  endif
+
+  assign codeInfoList = settings.code_info | strip_html | split: ','
+
+  assign current_step = 0
+  if cart.total_price > free_shipping_threshold_cents
+    assign current_step = 1
+  endif
+
+  assign codeInfoList_last = codeInfoList | last
+  assign codeInfoList_last_item = codeInfoList_last | split: '='
+  assign  code_threshold_last = codeInfoList_last_item[0] | remove_first: currencySymbol
+  assign code_threshold_last = code_threshold_last | split: '.' | first
+  assign code_threshold_last = code_threshold_last | append: '00'
+  assign code_threshold_last = code_threshold_last | plus: 0
+  assign code_threshold_last_cents = code_threshold_last | plus: 0
+  assign code_threshold_last = code_threshold_last | money_without_currency
+  if cart.total_price >  code_threshold_last_cents
+    assign current_step = 2
+  endif
+
+    for codeItemAll in codeInfoList
+    assign codeItem = codeItemAll | split: '='
+    assign code_threshold = codeItem[0] | remove_first: currencySymbol
+    assign code_threshold = code_threshold | split: '.' | first
+    assign code_threshold = code_threshold | append: '00'
+    assign code_threshold = code_threshold | plus: 0
+    assign code_threshold_cents = code_threshold | plus: 0
+    assign code_threshold = code_threshold | money_without_currency
+    assign code_discount = codeItem[1]
+    if cart.total_price < code_threshold_cents
+      break
+    endif
+  endfor
+
+-%}
+<div class="cart-shipping-fortunately {%if inCartPage %} inCartPage {% endif%}" data-cart_total="{{ cart_total }}" data-free_shipping="{{settings.free_shipping_threshold}}" data-current_step="{{current_step}}" data-code_info="{{ settings.code_info | strip_html }}">
+{% comment %}  cart.total_price:{{ cart.total_price }}
+  free_shipping_threshold_cents:{{ free_shipping_threshold_cents }}
+  code_threshold_cents:{{ code_threshold_cents }}
+  current_step:{{ current_step }}
+  code_threshold_last:{{ code_threshold_last }}
+  cart_total:{{ cart_total }}{% endcomment %}
+  <div class="cart-custom-shopping-link">
+            {% assign cart_total = cart.total_price | split: '.' | first %}
+            {% assign cart_total = cart_total | plus: 0 %}
+            {% assign amount_remaining = free_shipping_threshold_cents | minus: cart_total %}
+            {% assign cents = amount_remaining | split: "." | last %}
+            {% if cents.size == 1 %}
+                {% assign amount_remaining = amount_remaining | append: "0" %}
+            {% endif %}
+            {% assign amount_remaining = amount_remaining | replace: ".","" | money %}
+          {% assign percent =  cart.total_price | times : 100| divided_by: free_shipping_threshold_cents %}
+          <!--<div>{{cart.total_price}}  | {{free_shipping_threshold_cents}} | {{percent}} </div>-->
+        <div class="step-wrap" {%if current_step == 0%} style="display:flex;" {% else%} style="display:none;" {% endif%}>
+	       <div class="percent-wrap">
+	        <svg class="progress-ring" width="36" height="36">
+	            <circle stroke="#d0d0d0" stroke-width="8" fill="transparent" r="13" cx="18" cy="18"/>
+	            <circle class="progress-ring__circle" data-percent="{{ percent }}" stroke="#0a957a" stroke-width="8" fill="transparent" r="13" cx="18" cy="18"/>
+	        </svg>
+	       </div>
+	        <div class="need-to-add">
+	            <div class="need-to-price">
+	              <span>Buy</span>
+	              <span class="amount_remaining">{{ amount_remaining }}</span>
+	              <span>more to enjoy</span>
+	            </div>
+	            <div><span class="mark-font">Free Standard Shipping!</span></div>
+	        </div>
+	        <div class="add-btn">+</div>
+        </div>
+        <div class="step-wrap" {%if current_step == 1%} style="display:flex;" {% else%} style="display:none;"  {% endif%}>
+            {% assign code_percent =  cart.total_price | divided_by: code_threshold %}
+            <div class="percent-wrap" percent="{{code_percent}}">
+              <svg class="progress-ring" width="36" height="36">
+                <circle stroke="#d0d0d0" stroke-width="8" fill="transparent" r="13" cx="18" cy="18"/>
+                <circle class="progress-ring__circle" data-percent="{{ code_percent }}" stroke="#0a957a" stroke-width="8" fill="transparent" r="13" cx="18" cy="18" style="stroke-dasharray: 81.6814, 81.6814; stroke-dashoffset: -0.816814;"/>
+              </svg>
+            </div>
+            <div class="need-to-add">
+              <div class="need-to-price">
+                <span>Buy</span>
+                <span class="amount_remaining">{{ code_threshold | times : 100 | minus: cart.total_price  | money}}</span>
+                <span>more to enjoy</span>
+              </div>
+              <div><span class="mark-font">{{ code_discount }}!</span></div>
+            </div>
+	        <div class="add-btn">+</div>
+        </div>
+        <div class="step-wrap" {%if current_step == 2 %} style="display:flex;" {% else%} style="display:none;"  {% endif%}>
+	        <span class="status-icon-wrap"><i class="ad ad-check-circle"></i></span>
+	        <span class="status-label-wrap">You've qualified for <span class="mark-font">{{ code_discount }}!</span> </span>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+window.addEventListener('DOMContentLoaded',function(){
+	{%- if inCartPage -%}
+        initCartProgress('#cart-template-form');
+	{%- else -%}
+        initCartProgress('#cart-drawer');
+	{%- endif -%}
+});
+</script>

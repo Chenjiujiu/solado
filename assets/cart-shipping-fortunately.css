@@ -1,0 +1,74 @@
+.cart-shipping-fortunately {
+    cursor: pointer;
+    background: #F5F5F5;
+    border-radius: 5px;
+    margin-bottom: 18px;
+    padding: 14px 8px;
+  }
+  .cart-shipping-fortunately .cart-custom-shopping-link{
+    display:flex;
+    position: relative;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  .cart-shipping-fortunately .percent-wrap{
+      margin-right: 8px;
+  }
+  .cart-shipping-fortunately .percent-wrap .progress-ring__circle {
+      transition: 0.35s stroke-dashoffset;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+
+  .cart-shipping-fortunately .add-btn{
+    position: absolute;
+    right: 0;
+    top: 6px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #DFDFDF;
+    border-radius: 3px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .cart-shipping-fortunately .status-icon-wrap{
+    color:#0A957A;
+    margin-right:17px;
+  }
+  .cart-shipping-fortunately .status-icon-wrap i{
+    font-size: 32px;
+  }
+  .cart-shipping-fortunately .mark-font{
+    font-weight: 600;
+    color:#0A957A;
+  }
+ .cart-shipping-fortunately .need-to-price span + span{
+    margin-left:2px;
+  }
+  .cart-shipping-fortunately .status-label-wrap{
+    line-height: 32px;
+  }
+  .cart-shipping-fortunately .need-to-add{
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-shipping-fortunately .need-to-price{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+ 
+  @media only screen and (max-width: 767px) {
+    .cart-shipping-fortunately .to-freeshipping-wrap{
+      max-width: calc(100% - 38px);
+    }
+    .cart-shipping-fortunately .need-to-add{
+      max-width: calc(100% - 44px);
+    }
+  }

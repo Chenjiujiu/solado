@@ -1,0 +1,374 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-about202207",
+      "settings": {
+        "section_width": true,
+        "width": 1200,
+        "hide_ttl": false,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    },
+    "16593542243dcec3e2": {
+      "type": "image-slideshow",
+      "blocks": {
+        "16593542243760239a-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/1_814472ed-2b8b-48de-a7b4-c3735d3118be.jpg",
+            "mb_image": "shopify:\/\/shop_images\/2_b93264ef-03c8-4552-815b-4e914ee76511.jpg",
+            "link": "",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "16593542243760239a-0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "default",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": true,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "1659574865cdb28ea4": {
+      "type": "custom-content",
+      "blocks": {
+        "ef8a1865-e911-4631-88dc-998f6e077a19": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"floor-2-left\">\n    <div>WTF IS<\/div>\n    <div>SOLADO YOU ASK?<\/div>\n<\/div>",
+            "width": "50%"
+          }
+        },
+        "96e3f1c6-ccbb-40b7-a967-19bdc70d6798": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"floor-2-right\">\n    <div class=\"content\">\n    SOLADO is a fashion and social driven brand, inspired by you. At SOLADO we want to build a community that offers a space for everyone. \n    <br>\n    You don't have to change yourself to fit us, because we're constantly moulding ourselves to fit you.\n    <\/div>\n    <div class=\"icon-block-wrap\">\n        <div class=\"icon-block\">\n            <div class=\"i-title\">INCLUSIVE<\/div>\n            <div class=\"icon-wrap\"><i class=\"iconfont icon-INCLUSIVE-01\"><\/i><\/div>\n        <\/div>\n        <div class=\"icon-block\">\n            <div class=\"i-title\">POWERFUL<\/div>\n            <div class=\"icon-wrap\"><i class=\"iconfont icon-POWERFUL-01\"><\/i><\/div>\n        <\/div>\n        <div class=\"icon-block\">\n            <div class=\"i-title\">BOLD<\/div>\n            <div class=\"icon-wrap\"><i class=\"iconfont icon-BOLD-01\"><\/i><\/div>\n        <\/div>\n        <div class=\"icon-block\">\n            <div class=\"i-title\">COLLABORATIVE<\/div>\n            <div class=\"icon-wrap\"><i class=\"iconfont icon-COLLABORATIVE\"><\/i><\/div>\n        <\/div>\n<\/div>\n<\/div>",
+            "width": "50%"
+          }
+        }
+      },
+      "block_order": [
+        "ef8a1865-e911-4631-88dc-998f6e077a19",
+        "96e3f1c6-ccbb-40b7-a967-19bdc70d6798"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 0,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1659606653821d9a4e": {
+      "type": "custom-content",
+      "blocks": {
+        "1659606653cfcaae44-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/2_5506c92b-721a-47f5-a734-38b45e2996a6.jpg",
+            "imgurl": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "1659606653cfcaae44-0": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p>From our first ever brand campaign with a focus on genderinclusivity, to our ambition to revolutionise fast fashionthrough sustainable practises, We and our team fuelled bythis purpose to do things a little differently.<\/p><p><\/p><p>We strive to be a collaborative brand; learning, sharing andgrowing together with our customer and the creatorsaround us, putting them and their feedback at the core ofeverything we do, to design and curate products that weare proud of, and that our customers can feel comfortableenough to express themselves in.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "btn-style": "btn",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "left",
+            "eblock_bg": false,
+            "block_bg": "#f5f5f5",
+            "block_txt": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "1659606653cfcaae44-1",
+        "1659606653cfcaae44-0"
+      ],
+      "settings": {
+        "title": "We are for you, we are for them, \nwe are for everyone",
+        "subtitle": "“We\n’\nre on a mission to \ninfluence the future of\nfashion, empowering\npeople to wear whatever \nTF they want without fear\nof stereotype or\njudgement.\n”",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 66,
+        "pad-ipad": 15,
+        "pad-mbl": 16,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1659606443c8e63d5e": {
+      "type": "custom-content",
+      "blocks": {
+        "16596064424d07c927-0": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p>Community is important to us, and we want to build a SOLADO community that offers a space for everyone, where nobody feels alienated.<br\/><br\/>Whether it’s through social issues, well-being or just inspiring imagery and content, we’re proud to amplify everyones’ voices through our collaborative fashion platform.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "btn-style": "btn",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "left",
+            "eblock_bg": false,
+            "block_bg": "#f5f5f5",
+            "block_txt": "#000000"
+          }
+        },
+        "16596064424d07c927-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/3_ad4825c9-6c13-4dbf-80b1-e00611d0bb3b.jpg",
+            "imgurl": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "16596064424d07c927-0",
+        "16596064424d07c927-1"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 66,
+        "pad-ipad": 15,
+        "pad-mbl": 16,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "16596070719308ba92": {
+      "type": "custom-content",
+      "blocks": {
+        "16596070711df1d447-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/4_f7ef7a0a-0cf9-43f7-9bf8-0437046a021d.jpg",
+            "imgurl": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "16596070711df1d447-0": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p>Yes we sell clothes; but we recognise there’s a way to do this that includes everyone, and makes it a little easier on the environment.<br\/><br\/>So shop wisely, aim to wear something more than once, swap your Solado with your friends and come back and see us when you want something new.<br\/><br\/>With your support, we’ll influence the future of fashion. Our team are dedicated to doing it differently, and want to put you at the heart of everything we do.<br\/><\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "btn-style": "btn",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "left",
+            "eblock_bg": false,
+            "block_bg": "#f5f5f5",
+            "block_txt": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "16596070711df1d447-1",
+        "16596070711df1d447-0"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 66,
+        "pad-ipad": 15,
+        "pad-mbl": 16,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1659702522cc9fb9cb": {
+      "type": "news-list-202208",
+      "blocks": {
+        "1659702522215ea206-0": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"one-news\">\n                <div class=\"header-line\"><\/div>\n                <li class=\"news-title\">AUGUST 2021<\/li>\n                <div class=\"news-content\">With the ambition to influence the future of fast fashion and do things a little differently, Solado was born.<\/div>\n            <\/div>",
+            "width": "33.3333%"
+          }
+        },
+        "1659702522215ea206-1": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"one-news\">\n                <div class=\"header-line\"><\/div>\n                <li class=\"news-title\">SEPTEMBER 2021<\/li>\n                <div class=\"news-content\">We officially welcomed our U.K team to the Solado family.<\/div>\n            <\/div>",
+            "width": "33.3333%"
+          }
+        },
+        "f07bbd57-54c8-4829-ab69-14a831d856d2": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"one-news\">\n                <div class=\"header-line\"><\/div>\n                <li class=\"news-title\">NOVEMBER 2021<\/li>\n                <div class=\"news-content\">Our first ever influencer collaboration and brand campaign \"Wear WTF You Want\" went live.<\/div>\n            <\/div>",
+            "width": "33.3333%"
+          }
+        },
+        "d0350159-3c5d-46cc-95ca-f149ee092b57": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"one-news\">\n                <div class=\"header-line\"><\/div>\n                <li class=\"news-title\">JANUARY 2022<\/li>\n                <div class=\"news-content\">We launched our biodegradable packaging for all of our influencer parcel send outs.\n                    We Partnered with TRACE and gained carbon neutral status by supporting certified carbon credits and planting more than 2,270 trees all around the world. Click here to see how we are taking climate action <a href=\"https:\/\/www.our-trace.com\/brand\/solado\">https:\/\/www.our-trace.com\/brand\/solado<\/a>\n<\/div>\n            <\/div>",
+            "width": "50%"
+          }
+        },
+        "d46ede44-9f96-4b5e-8576-d801909f79c7": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"one-news\">\n                <div class=\"header-line\"><\/div>\n                <li class=\"news-title\">FEBRUARY 2022<\/li>\n                <div class=\"news-content\">We launched our second brand campaign, \"We're Taking Sexy Back,\" with the aim to inspire our customer to reclaim what looking and feeling sexy feels like on your own terms.<\/div>\n            <\/div>",
+            "width": "50%"
+          }
+        }
+      },
+      "block_order": [
+        "1659702522215ea206-0",
+        "1659702522215ea206-1",
+        "f07bbd57-54c8-4829-ab69-14a831d856d2",
+        "d0350159-3c5d-46cc-95ca-f149ee092b57",
+        "d46ede44-9f96-4b5e-8576-d801909f79c7"
+      ],
+      "settings": {
+        "title": "Our Story So Far",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 66,
+        "pad-ipad": 15,
+        "pad-mbl": 16,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1659607171542c31f8": {
+      "type": "custom-content",
+      "blocks": {
+        "1659607170345bab9f-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/5_96fbb921-ebd4-4ac9-8c04-d70fba933633.jpg",
+            "imgurl": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        },
+        "0a427010-91e3-4893-b534-edd386f1545c": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/6_55e3eaf2-0034-4e93-ab06-0cbeaac92745.jpg",
+            "imgurl": "",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1659607170345bab9f-1",
+        "0a427010-91e3-4893-b534-edd386f1545c"
+      ],
+      "settings": {
+        "title": "Our Recent Pop-up & Panel Event",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 66,
+        "pad-ipad": 15,
+        "pad-mbl": 16,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "165960739983c3f9f2": {
+      "type": "custom-content",
+      "blocks": {
+        "ce2252c8-1bc1-42f4-b5fa-e1b4ae40492e": {
+          "type": "html",
+          "settings": {
+            "code": "<div class=\"typical-font-1 \n contact-wrap\">\n<div>PR ：<a href=\"mailto:outreach@solado.com\">outreach@solado.com<\/a> <\/div>\n<div>Customer Support：<a href=\"mailto:support@solado.com\">support@solado.com<\/a>\n <\/div>\n<\/div>",
+            "width": "100%"
+          }
+        }
+      },
+      "block_order": [
+        "ce2252c8-1bc1-42f4-b5fa-e1b4ae40492e"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "16593542243dcec3e2",
+    "1659574865cdb28ea4",
+    "1659606653821d9a4e",
+    "1659606443c8e63d5e",
+    "16596070719308ba92",
+    "1659702522cc9fb9cb",
+    "1659607171542c31f8",
+    "165960739983c3f9f2"
+  ]
+}

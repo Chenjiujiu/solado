@@ -1,0 +1,35 @@
+{
+  "sections": {
+    "blog": {
+      "type": "blog-template",
+      "settings": {
+        "layout": "grid",
+        "img_ratio": "60",
+        "sidebar_position": "left",
+        "blog_align": "text-left",
+        "grid": 3,
+        "tablet-grid": 2,
+        "mobile-grid": 1,
+        "blog_show_author": true,
+        "blog_show_date": true,
+        "show_comment": true,
+        "show_mini_des": true,
+        "show_tags": true,
+        "number_of_post_to_show": "12",
+        "show_category": true,
+        "category_box_title": "Category",
+        "show_recent_posts": true,
+        "recent_posts_title": "Recent Posts",
+        "show_banner_ad": true,
+        "banner_link": "",
+        "show_products": true,
+        "collection_title": "Trending Now",
+        "sidebar_collection": "",
+        "number_of_prodcut": "4"
+      }
+    }
+  },
+  "order": [
+    "blog"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": false,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    }
+  },
+  "order": [
+    "page"
+  ]
+}

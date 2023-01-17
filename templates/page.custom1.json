@@ -1,0 +1,314 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": true,
+        "hide_hdft": true,
+        "breadcrumb": true
+      }
+    },
+    "163385203540fa4f75": {
+      "type": "hero",
+      "settings": {
+        "top-offeset": "none",
+        "section_width": true,
+        "pad-desk": 0,
+        "pad-ipad": 0,
+        "pad-mbl": 0,
+        "ds_height": 500,
+        "tb_height": 350,
+        "mb_height": 250,
+        "parallax_scroll": true,
+        "image": "shopify:\/\/shop_images\/banner-3_4fc2c36d-0765-4af0-958b-c70743743121.jpg",
+        "alignment": "center",
+        "textalign": "rightcenter",
+        "pretext": "ARE YOU READY?",
+        "title": "<b> Start Selling Online Successfully<\/b>",
+        "text": "<p>Creative, Flexible and High Performance shopify theme!<\/p>",
+        "txt_clr": "#ffffff",
+        "bg_clr": "rgba(0,0,0,0)",
+        "bg_opacity": 1,
+        "button_label": "Purchase Now",
+        "button_link": "#",
+        "link_image": false,
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "snow_effect": false,
+        "snow_style": "style1",
+        "hero_dealtimer": false,
+        "cnt_date": "12\/03\/2021",
+        "cnt_bg": "#000000",
+        "cnt_text": "#eeeeee",
+        "cnt_bdr": "#000000"
+      }
+    },
+    "1633852075a85afa26": {
+      "type": "featured-product",
+      "settings": {
+        "top-offeset": "default",
+        "title": "",
+        "featured_product": "mi-10-108mp-quad-camera-sd-865-processor-5g",
+        "image_size": "large",
+        "enable_zoom": true,
+        "show_vendor": false,
+        "spr_availability": true,
+        "spr_sku": true,
+        "countdown": false,
+        "countdown_lbl": "Hurry up! Sales End In",
+        "show_share_buttons": true,
+        "show_variant_swatches": true,
+        "fake_orders": false,
+        "orders": 20,
+        "orders_time": 24,
+        "orders_msg": "[orders] sold in last [hours] hours"
+      }
+    },
+    "16338531592ab33c32": {
+      "type": "custom-content",
+      "blocks": {
+        "16338531592ab33c32-0": {
+          "type": "text",
+          "settings": {
+            "title": "108MP + 13MP + 2MP + 2MP",
+            "font-size": "h3",
+            "text": "<p>Introducing the <strong>highest resolution camera<\/strong> on a smartphone ever. Capture the unseen in every scene with the 108MP sensor. <br\/>Get more control over each image with the RAW mode built into the camera app. Shoot incredible ultra-wide landscapes. <br\/>Try out macro photography or get the perfect bokeh effect for all your portraits. A mighty quad camera setup loaded with professional camera.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "100%",
+            "alignment": "center",
+            "align_text": "center"
+          }
+        },
+        "15a25f0a-0dea-410e-965d-66da30bd635f": {
+          "type": "text",
+          "settings": {
+            "title": "LOG Mode",
+            "font-size": "h3",
+            "text": "<p>Add a splash of colour to your photos at the edit table. Add a splash of colour to your photos at the edit table.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "be2adfb1-35bf-47b9-939a-0efb09a540e3": {
+          "type": "text",
+          "settings": {
+            "title": "RAW Mode",
+            "font-size": "h3",
+            "text": "<p>Create the perfect shot even under the toughest lighting conditions. <br\/>Create the perfect shot even under the toughest lighting conditions.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        }
+      },
+      "block_order": [
+        "16338531592ab33c32-0",
+        "15a25f0a-0dea-410e-965d-66da30bd635f",
+        "be2adfb1-35bf-47b9-939a-0efb09a540e3"
+      ],
+      "settings": {
+        "title": "Capture the Unseen in the Everyday",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1633853165f703d1c5": {
+      "type": "image-slideshow",
+      "blocks": {
+        "1633853165f703d1c5-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/banner-3.jpg",
+            "link": "",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "1633853165f703d1c5-0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "default",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": true,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "163385345035d4ded6": {
+      "type": "product-slider",
+      "settings": {
+        "title": "ACCESSORIES",
+        "subtitle": "",
+        "collection": "furniture",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_view_all": "",
+        "show_color_swatch": false,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "rows": "5",
+        "autoplay": false,
+        "autoplay_speed": 5
+      }
+    },
+    "163385362109be0311": {
+      "type": "video",
+      "settings": {
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "snow_effect": false,
+        "snow_style": "style1",
+        "pad-desk": 0,
+        "pad-ipad": 0,
+        "pad-mbl": 0,
+        "video_url": "",
+        "mp4url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0036\/7306\/3491\/files\/miview.mp4?v=1609674779",
+        "title": "A Lens for Every Style",
+        "hide_text": false,
+        "btntxt": "",
+        "btnurl": "",
+        "hide_btn": false,
+        "text_align": "bottomcenter",
+        "color_ttl": "#ffffff"
+      }
+    },
+    "1633853708f804b4d2": {
+      "type": "custom-content",
+      "blocks": {
+        "1633853708f804b4d2-0": {
+          "type": "text",
+          "settings": {
+            "title": "7P Lens",
+            "font-size": "h3",
+            "text": "<p>Impressive light gathering unlocks the full potential of the 108MP camera setup. Try out macro photography or get the perfect bokeh effect for all your portraits.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "33%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "82603cc6-1348-47ee-8373-6640f7017aed": {
+          "type": "text",
+          "settings": {
+            "title": "HEIF",
+            "font-size": "h3",
+            "text": "<p>A JPEG equivalent which takes approximately 50% lesser storage space without losing out on image quality. Try something new every day!<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "33%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "cec54831-214e-49a2-b8f6-b307a32aac19": {
+          "type": "text",
+          "settings": {
+            "title": "AI Pixel",
+            "font-size": "h3",
+            "text": "<p>Comprehensive pixel optimization for vibrant pictures. All of this made possible with one mighty quad camera setup<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "33%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "463bc802-9a09-4c34-a7ca-9f2f31074da2": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/3E10CADA-AA5C-5C9D-F4B9-864028375CC6.jpg",
+            "title": "Before AI Pixel Optimization",
+            "font-size": "h3",
+            "text": "",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "71bfeaab-f413-43a8-ab66-83557458bceb": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/682E99CA-3A10-AEFC-5981-46E76C224511.jpg",
+            "title": "After AI Pixel Optimization",
+            "font-size": "h3",
+            "text": "",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1633853708f804b4d2-0",
+        "82603cc6-1348-47ee-8373-6640f7017aed",
+        "cec54831-214e-49a2-b8f6-b307a32aac19",
+        "463bc802-9a09-4c34-a7ca-9f2f31074da2",
+        "71bfeaab-f413-43a8-ab66-83557458bceb"
+      ],
+      "settings": {
+        "title": "All-New Camera Setup",
+        "subtitle": "A mighty quad camera setup loaded with professional camera features like RAW mode\nthat elevate the smartphone camera experience.",
+        "top-offeset": "default",
+        "section_width": true,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "163385203540fa4f75",
+    "1633852075a85afa26",
+    "16338531592ab33c32",
+    "1633853165f703d1c5",
+    "163385345035d4ded6",
+    "163385362109be0311",
+    "1633853708f804b4d2"
+  ]
+}

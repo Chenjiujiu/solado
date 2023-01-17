@@ -1,0 +1,295 @@
+{% capture colorSwatches %}
+	
+	{% assign found_option = false %}
+	{% assign is_color = false %}
+	{% assign is_size = false %}
+	{% assign option_index = 0 %}
+	
+	{% for option in product.options %}
+		{% if option == swatch %}
+			{% assign found_option = true %}
+			{% assign option_index = forloop.index0 %}
+			{% assign downcased_option = swatch | downcase %}
+			{% if downcased_option contains 'color' or downcased_option contains 'colour' or downcased_option contains 'couleur' or downcased_option contains 'farbe' %}
+				{% assign is_color = true %}
+			{% endif %}
+			{% if downcased_option contains 'size' or downcased_option contains 'rozmiar' or downcased_option contains 'talla' or downcased_option contains 'taille' or downcased_option contains 'tamaño' or downcased_option contains 'größe' %}
+				{% assign is_size = true %}
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+	
+	<div class="swatch clearfix option{{option_index |plus: 1}}" data-option-index="{{ option_index }}">
+		<label class="header" style="display: flex; align-items: center; justify-content: space-between;">
+			<span>{{ swatch }}: <span class="slVariant"></span></span>
+			{% if settings.sizechart_link %}
+				{% if is_size %}
+					<a href="#sizechart" class="mfp sizelink" data-effect="mfp-zoom-in" >
+						<i><svg t="1661235193424" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3072" width="32" height="32"><path d="M988.16 714.752H37.888V309.76h950.784l-0.512 404.992z m-909.312-40.96h868.864V350.72H78.848v323.072z" fill="#040000" p-id="3073"></path><path d="M246.784 553.984c-11.264 0-20.48-9.216-20.48-20.48V330.24c0-11.264 9.216-20.48 20.48-20.48s20.48 9.216 20.48 20.48v203.264c0 11.264-9.216 20.48-20.48 20.48zM424.448 511.488c-11.264 0-20.48-9.216-20.48-20.48V335.872c0-11.264 9.216-20.48 20.48-20.48s20.48 9.216 20.48 20.48v155.136c0 11.264-9.216 20.48-20.48 20.48zM779.264 511.488c-11.264 0-20.48-9.216-20.48-20.48V335.872c0-11.264 9.216-20.48 20.48-20.48s20.48 9.216 20.48 20.48v155.136c0 11.264-9.216 20.48-20.48 20.48zM601.6 559.616c-11.264 0-20.48-9.216-20.48-20.48V335.872c0-11.264 9.216-20.48 20.48-20.48s20.48 9.216 20.48 20.48v203.264c0 11.264-9.216 20.48-20.48 20.48z" fill="#040000" p-id="3074"></path></svg></i>
+						</svg> <span>{{ 'products.product.size_chart' | t}}</span>
+					</a>
+				{% endif %}
+			{% endif %}
+		</label>
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% if is_color %}
+					<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}" data-variantimgsrc="{{ variant.featured_media.preview_image.src }}" >
+						<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+						{% if settings.sw_color_type == "color" %}
+							<label class="swatchLbl color {{settings.sw_color_size}} {{settings.sw_color_style}} swt{{value | handle}}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}" style="background-color:{{ value | handle }};"></label>
+							<span class="tooltip-label">{{ value }}</span>
+						{% else %}
+							<label class="swatchLbl lazyload color {{settings.sw_color_size}} {{settings.sw_color_style}}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}"
+							       data-bgset="{% include 'swatch-bg', image: variant.image %}" data-sizes="auto" data-parent-fit="contain"
+							       style="background-image:url({{ 'spacer.png' | asset_img_url: 'master' }});"></label>
+							<span class="tooltip-label">{{ value }}</span>
+						{% endif %}
+					</div>
+				{% endif %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'XSS' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'XXS' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'XS' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'S' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'M' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'L' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == 'XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == '2XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == '3XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == '4XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == '5XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+		
+		{% assign values = '' %}
+		{% for variant in product.variants %}
+			{% assign value = variant.options[option_index] %}
+			{% unless values contains value %}
+				{% assign values = values | join: ',' %}
+				{% assign values = values | append: ',' | append: value %}
+				{% assign values = values | split: ',' %}
+				{% assign colorname = value | handleize %}
+				{% unless is_color %}
+					{% if value == '6XL' %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% elsif value != 'XSS' and value != 'XS' and value != 'S' and value != 'M' and value != 'L' and value != 'XL' and value != '2XL' and value != '3XL' and value != '4XL' and value != '5XL'  %}
+						<div data-value="{{ value | escape }}" class="swatch-element{% unless variant.available %} soldout{% endunless %}">
+							<input class="swatchInput hide" id="{{product.id}}-{{ option_index }}-{{ value | handle }}" data-var="{{ value | handle }}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if option.selected_value == value %} checked{% endif %} />
+							<label class="swatchLbl {{settings.sw_color_style}}{% if settings.var_style %} square-only{% endif %}" for="{{product.id}}-{{ option_index }}-{{ value | handle }}">{{ value }}</label>
+						</div>
+					{% endif %}
+				{% endunless %}
+			{% endunless %}
+		{% endfor %}
+	</div>
+
+{% endcapture %}
+{{colorSwatches | strip_newlines | remove: "  " | remove: "	" }}

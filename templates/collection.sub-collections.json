@@ -1,0 +1,92 @@
+{
+  "sections": {
+    "collection": {
+      "type": "sub-collections",
+      "settings": {
+        "section_width": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "show_collection_image": true,
+        "bheight": 200,
+        "bheightipad": 200,
+        "bheightmob": 100,
+        "clr_text": "#000000",
+        "clr_bg": "#eeeeee",
+        "style": "style4",
+        "product_count": true,
+        "masonary_grid": false,
+        "grid-spacing": 10,
+        "grid-spacing-mbl": 4,
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#000",
+        "collection_ttl_bg_hm": "#fff",
+        "collection_ttl_opt_hm": 1
+      }
+    },
+    "164327853945698945": {
+      "type": "collection-list",
+      "blocks": {
+        "16432785387097847b-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women",
+            "collection_image": "shopify:\/\/shop_images\/WOMXN.jpg",
+            "collection_name": "<b>WOMEN<\/b>",
+            "collection_btn": "Shop Now"
+          }
+        },
+        "16432785387097847b-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/MECV.jpg",
+            "collection_name": "<b>MEN<b><\/b><\/b>",
+            "collection_btn": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "16432785387097847b-1",
+        "16432785387097847b-0"
+      ],
+      "settings": {
+        "title": "<br>SHOP BEST SELLER",
+        "subtitle": "Shop from last month best seller",
+        "top-offeset": "default",
+        "section_width": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "hide_mobile": false,
+        "enable_carousel": true,
+        "grid-spacing": 15,
+        "grid-spacing-mbl": 5,
+        "style": "style6",
+        "textalign": "text-center",
+        "leftpadzero": false,
+        "product_count": false,
+        "show_buttons": false,
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "grid": 2,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#000",
+        "collection_ttl_bg_hm": "#f9f9f9",
+        "collection_ttl_bg_hm_responsive": "#ffffff",
+        "collection_ttl_opt_hm": 1,
+        "collection_ttl_rad": 0,
+        "disable_zoom": false
+      }
+    }
+  },
+  "order": [
+    "collection",
+    "164327853945698945"
+  ]
+}

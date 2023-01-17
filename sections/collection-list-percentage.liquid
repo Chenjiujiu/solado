@@ -1,0 +1,564 @@
+{%- capture collectionList -%}
+<div class="collection-list-percentage content-indent {{ section.settings.top-offeset}}{% if section.settings.section_cov %} section-cover{% endif%}" {% if section.settings.section_cov %}style="background-color:{{section.settings.sec_bg_clr}};"{% endif%}>
+  <div class="collection-box cl{{ section.id }} {{section.settings.style}} {% unless section.settings.section_width %}page-width {% else %}fullwidth-{{section.id}} fullwidth{% endunless %}{% if section.settings.hide_mobile %} small--hide{% endif %}" id="sliderbox-{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="carousel">   	
+    {% comment %}{%- if section.settings.title != blank  or section.settings.subtitle != blank -%}
+    <div class="sec-ttl {{ settings.title_align}} wow fadeIn">
+      <h3 class="h3">{{ section.settings.title }}</h3>
+      {% comment %}{%- if section.settings.subtitle != blank -%}<span>{{section.settings.subtitle}}</span>{%- endif -%}{% endcomment %}                 
+    </div>
+    {% endif %}
+    {% endcomment %}  
+
+    {% case section.settings.grid %}
+    {% when 2 %}{%- assign grid_ds = 'large-up--one-half' -%}
+    {% when 3 %}{%- assign grid_ds = 'large-up--one-third' -%}
+    {% when 4 %}{%- assign grid_ds = 'large-up--one-quarter' -%}
+    {% when 5 %}{%- assign grid_ds = 'large--one-quarter widescreen--one-fifth' -%}
+    {% when 6 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-sixth' -%}
+    {% when 7 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-seventh' -%}
+    {% endcase %}
+    
+    {% case section.settings.tablet-grid %}
+    {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+    {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+    {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+    {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+    {% endcase %}
+    
+    {% case section.settings.mobile-grid %}
+    {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+    {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+    {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+    {% endcase %}
+
+      <div class="collection-wrap">
+        {% for block in section.blocks limit: section.blocks.size %}
+          {% assign product_box = forloop.index | minus:1 %}
+          {% assign delay_time = 50 | times : product_box %}
+          <div class="collection-item-wrap wow fadeIn" {{ block.shopify_attributes }} data-wow-delay="{{delay_time}}ms" {% if block.settings.width %} style="width:calc({{block.settings.width}} - {{section.settings.grid-spacing}}px);"{% endif%}>
+            {%- assign collection = collections[block.settings.collection] -%}
+       		 {% include 'collection-grid-item-radio', collection_image_size: image_size, text_align:{{section.settings.txt-align}} %}
+          </div>
+        {% endfor %}
+      </div>    
+    {% if section.blocks.size == 0 %}{% include 'no-blocks' %}{% endif %}
+  </div>
+</div>
+
+<style>
+  .collection-list-percentage .collection-wrap{
+  	display:flex;
+  }
+  .collection-list-percentage .collection-item-wrap{
+    margin-right:{{ section.settings.grid-spacing | times: 2 }}px;
+  }
+  .collection-list-percentage .collection-item-wrap:last-of-type{
+    margin-right:0px;
+  }
+  .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing}}px; }
+  .pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing  }}px {{ section.settings.grid-spacing}}px;}
+  .collection-box .box-{{section.id}} .collection-grid-item .collection-grid-item__title,
+  .collection-box .box-{{section.id}} .collection-grid-item .counts { color:{{ section.settings.collection_ttl_hm}}; }  
+  .collection-box .box-{{section.id}} .collection-grid-item .details {  background:{{section.settings.collection_ttl_bg_hm | color_modify: 'alpha', section.settings.collection_ttl_opt_hm}}; }
+  
+  {% if section.settings.collection_ttl_rad != '0' %}
+  .collection-box.style3 .box-{{section.id}} .collection-grid-item__link { border-radius:{{section.settings.collection_ttl_rad}}px; display:block; overflow:hidden;}
+  .collection-box.style4 .box-{{section.id}} .details,
+  .collection-box.style5 .box-{{section.id}} .details,
+  .collection-box.style6 .box-{{section.id}} .details {  border-radius:{{section.settings.collection_ttl_rad}}px;}
+   {% endif %}
+  
+  {% if section.settings.show_buttons %}
+  .collection-box .box-{{section.id}} .collection-grid-item .details { padding:20px; }
+  {% endif %}
+  
+  @media only screen and (max-width: 767px) {
+      .collection-box .box-{{section.id}} .collection-grid-item .details { background:{{section.settings.collection_ttl_bg_hm_responsive}}; }
+  }
+  {% if section.settings.section_width %}
+  @media only screen and (min-width: 1025px) {
+    /**.fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-desk}}px; padding-right:{{ section.settings.pad-desk}}px; }**/
+  } 
+  @media only screen and (max-width: 1024px) {
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-ipad}}px; padding-right:{{ section.settings.pad-ipad}}px; }
+    .collection-list-percentage .collection-wrap{
+    	flex-direction: column;
+    }
+    .collection-list-percentage .collection-item-wrap{
+      margin-right:0px;
+      width: 100% !important;
+    }
+    .collection-list-percentage .collection-item-wrap + .collection-item-wrap{
+      margin-top:16px;
+    }
+  } 
+  {% endif %}
+  @media only screen and (max-width: 767px) {
+    {% if section.settings.section_width %}
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-mbl}}px; padding-right:{{ section.settings.pad-mbl}}px; }
+    {% endif %}
+    .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing-mbl}}px; }
+  	.pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing-mbl}}px {{ section.settings.grid-spacing-mbl}}px;}
+  }
+
+
+</style>
+<script type="text/javascript">
+  window.addEventListener("DOMContentLoaded", function () {
+    var md = new MobileDetect(window.navigator.userAgent);
+     /**不是移动端,多个图片PC端要平齐,以第一个高度计算为最大高度**/
+     if(!md.mobile()){
+       var justHeight = function(){
+           var selectionQ =  'cl{{ section.id }}'; 
+           var itemH  = $(".collection-list-percentage ."+selectionQ+" .collection-grid-item:first .imgWrap").height();
+           $(".collection-list-percentage ."+selectionQ+" .collection-grid-item").css({"maxHeight":itemH+'px'});
+       };
+       justHeight();
+       $(window).resize(function(){
+          justHeight();
+       });
+     }
+  });
+</script>
+{%- endcapture -%}
+{{collectionList | strip_newlines | remove: "  " | remove: "	" }}
+
+{% schema %}
+  {
+    "name": "Collection List Percent",
+    "class": "index-section",
+    "max_blocks": 15,
+    "settings": [	 	 
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Collection list",
+		"info":"Use <strong>text here</strong> to make headings bold"
+      },
+      {
+        "type": "textarea",
+        "id": "subtitle",
+        "label": "Sub Heading",
+        "default": "Describe your products, collection, content etc..."
+      },	  	 
+	  {
+        "type": "header",
+        "content": "Appearance"
+      },
+      {
+		 "type": "paragraph",
+		 "content":"[checkout different possible style for this section](https://www.adornthemes.com/different-style-for-collection-list/)"
+      }, 	
+	  {
+		 "type": "paragraph",
+		 "content":"Section==="
+      },	  
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        }, 
+	  {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": true
+	   },
+	  {
+        "type": "paragraph",
+        "content": "Left/Right Padding : Fullwidth Section Only==="
+      }, 	
+      {
+        "type": "range",
+        "id": "pad-desk",
+        "label": "Desktop",
+        "default": 55,
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-ipad",
+        "label": "Tablet",
+        "default": 16,
+        "min": 0,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-mbl",
+        "label": "Mobile",
+        "default": 10,
+        "min": 0,
+        "max": 20,
+        "step": 1
+      },
+	   {
+        "type": "checkbox",
+        "id": "section_cov",
+        "label": "Use Background?",
+        "default": false
+      },	
+	  {
+        "type": "color",
+        "id": "sec_bg_clr",
+        "label": "Background",
+		"default":"#fafafa"	
+	  },		  
+	  {
+           "type": "checkbox",
+           "id": "hide_mobile",
+           "label": "Hide Section in Mobile?",
+           "default": false
+        },
+	  {
+        "type": "paragraph",
+        "content": "Grid==="
+      },
+ 	 {
+		"type":"checkbox",
+		"id":"enable_carousel",
+		"label":"Enable Carousel",
+		"default": true
+	  },
+	  {
+        "type": "range",
+        "id": "grid-spacing",
+        "label": "half Spacing : Desktop",
+        "default": 8,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+		"unit":"px",
+		"info":"space between two grid/box."
+      },
+     {
+        "type": "range",
+        "id": "grid-spacing-mbl",
+        "label": "Spacing : Mobile",
+        "default": 5,
+        "min": 0,
+        "max": 30,
+        "step": 1,
+		"unit":"px"		
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Style",
+        "default": "style1",
+        "options": [
+			{ "value": "style1", "label": "Style 1" },
+			{ "value": "style2", "label": "Style 2" },
+			{ "value": "style3", "label": "Style 3" },
+			{ "value": "style4", "label": "Style 4" },
+			{ "value": "style5", "label": "Style 5" },
+			{ "value": "style6", "label": "Style 6" }
+        ]
+      }, 	
+		{
+        "type": "select",
+        "id": "textalign",
+        "label": "Text Aligment",
+        "default": "text-center",
+        "options": [
+			{ "value": "text-left", "label": "Left" },	
+			{ "value": "text-center", "label": "Center" }
+        ]
+      }, 
+	  {
+		"type":"checkbox",
+		"id":"leftpadzero",
+		"label":"Text Left Padding Zero",
+		"default": false,
+		"info":"Enable this if you want to display text on left and transparent background as displayed in Jewellery demo"
+	  }, 
+ 	  {
+		"type":"checkbox",
+		"id":"product_count",
+		"label":"Show Products Count?",
+		"default": false
+	  }, 
+		{
+		"type":"checkbox",
+		"id":"show_buttons",
+		"label":"Show Buttons?",
+		"default": false
+	  },
+	{
+            "type": "select",
+            "id": "btn-style",
+            "label": "Select Button",
+            "default": "btn",
+            "options": [
+              {
+              "label": "Solid Button 1",
+              "value": "btn"
+              },
+              {
+              "label": "Solid Button 2",
+              "value": "btn--secondary"
+              },
+              {
+              "label": "Solid Button 3",
+              "value": "btn3"
+              },
+              {
+              "label": "Border Button 1",
+              "value": "bdr-btn1"
+              },
+              {
+              "label": "Border Button 2",
+              "value": "bdr-btn2"
+              } 
+            ]
+        },
+		{
+          "type": "select",
+          "id": "btn-size-desk",
+          "label": "Button Size: Desktop",
+          "default": "btn-sm",
+          "options": [
+          {
+          "label": "Small",
+          "value": "btn-sm"
+          },
+          {
+          "label": "Medium",
+          "value": "btn-md"
+          },
+          {
+          "label": "Large",
+          "value": "btn-lg"
+          }	
+          ]
+          }, 
+          {
+          "type": "select",
+          "id": "btn-size-mob",
+          "label": "Button Size : Mobile",
+          "default": "mob-btn-sm",
+          "options": [
+          {
+          "label": "Small",
+          "value": "mob-btn-sm"
+          },
+          {
+          "label": "Medium",
+          "value": "mob-btn-md"
+          },
+          {
+          "label": "Large",
+          "value": "mob-btn-lg"
+          }	
+          ]
+          },      
+	  {
+        "type": "paragraph",
+        "content": "Items per row ==="
+      }, 	
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": 3,
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": 2,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+	 {
+        "type": "color",
+        "id": "collection_ttl_hm",
+        "label": "Title",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "collection_ttl_bg_hm",
+        "label": "Title Background",
+        "default": "#000"
+      },
+ 		{
+        "type": "color",
+        "id": "collection_ttl_bg_hm_responsive",
+        "label": "Title Background Responsive View",
+        "default": "#000",
+		"info":"When you transparent background for title but you need set background color for mobile view"
+      },
+      {
+        "type": "range",
+        "id": "collection_ttl_opt_hm",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "label": "Background Opacity",
+        "unit": "%",
+        "default": 0.9
+      },
+	 {
+        "type": "range",
+        "id": "collection_ttl_rad",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "label": "Background Border Radious",
+        "unit": "px",
+        "default": 0
+      },
+		{
+		"type":"checkbox",
+		"id":"disable_zoom",
+		"label":"Disable Image Hover Zoom Effect?",
+		"default": false
+	  },
+	   {
+        "type": "paragraph",      
+        "content": "Set font size from --> Theme Settings --> Fonts, Colors and Styles --> Collection List"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "featured_collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          },
+		 {
+            "type": "select",
+            "id": "width",
+            "label": "Column width",
+            "default": "50%",
+            "options": [
+              {
+                "value": "25%",
+                "label": "25%"
+              },
+              {
+                "value": "33.333%",
+                "label": "33%"
+              },
+              {
+                "value": "50%",
+                "label": "50%"
+              },
+              {
+                "value": "66.666%",
+                "label": "66%"
+              },
+              {
+                "value": "75%",
+                "label": "75%"
+              },
+              {
+                "value": "100%",
+                "label": "100%"
+              }
+            ]
+          },
+            {
+          "type": "select",
+          "id": "img_ratio",
+          "label": "Image Aspect Ratio",
+          "default": "100",
+  		"info": "Used to grid style only",
+          "options": [
+  		  { "group": "Landscape", "value": "30", "label": "0:3" },
+  		  { "group": "Landscape", "value": "40", "label": "0:4" },
+            { "group": "Landscape", "value": "50", "label": "0:5" },
+            { "group": "Landscape", "value": "60", "label": "0:6" },
+            { "group": "Landscape", "value": "70", "label": "0:7" },
+            { "group": "Landscape", "value": "80", "label": "0:8" },
+            { "group": "Landscape", "value": "90", "label": "0:9" },
+            { "group": "Squared", "value": "100", "label": "1:1" },
+            { "group": "Portrait", "value": "110", "label": "1:1" },
+            { "group": "Portrait", "value": "120", "label": "1:2" },
+            { "group": "Portrait", "value": "125", "label": "1:2.5" },
+            { "group": "Portrait", "value": "130", "label": "1:3" },
+            { "group": "Portrait", "value": "140", "label": "1:4" },
+            { "group": "Portrait", "value": "150", "label": "1:5" }
+          ]
+        },
+		  {
+          "type": "url",
+          "id": "url",
+          "label": "Link (optional)",
+          "info": "Keep it empty to use 'collection url'."
+          },
+		  {
+			"type":"image_picker",
+			"id":"collection_image",
+			"label":"Upload Image"			
+		  },
+		  {
+ 			"type":"textarea",
+			"id":"collection_name",
+			"label":"Custom Name",
+			"info":"use <strong>your text here</strong> to make your text bold"
+		  },
+          {
+            "type": "text",
+            "id": "collection_btn",
+            "label": "Collection Button",
+            "default": "Shop Now"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection List Percent",
+        "category": "2. Collection",
+        "settings": {
+          "grid": 4
+        },
+        "blocks": [
+          {
+            "type": "featured_collection"
+          },
+          {
+            "type": "featured_collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

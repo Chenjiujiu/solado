@@ -1,0 +1,340 @@
+<style>
+  .collection .sidebar_widget .subLinks.hide {
+    display:none;
+  }
+  .collection .sidebar_widget .grid__item.lvl-1{
+  	cursor: pointer;
+  }
+  .collection .sidebar_widget .subLinks .active{
+  	font-weight: 600;
+  }
+</style>
+<script type="text/javascript">
+window.addEventListener('DOMContentLoaded',function(){
+  $(".collection .sidebar_widget .sidebar_cate").on("click",".site-nav.lvl-1",function(){
+  	 $(this).siblings('.subLinks').toggleClass("hide");
+  });
+});
+</script>  
+<div class="closeFilter {% unless section.settings.sidebar_position == 'popup' %}large-up--hide{% endunless %}"><i class="ad ad-times-r" aria-hidden="true"></i></div>
+<div class="sidebar_tags" data-url="{{shop.url}}{{collection.url | split: "?" | first}}">
+{% for block in section.blocks %}
+	{% if block.type == 'categories' %}
+        <div class="sidebar_widget categories">
+          <div class="widget-title">{{block.settings.title}}</div>
+          <div class="widget-content">
+            {% assign hideFirtLevel = true %}
+            <ul class="sidebar_cate">{% for link in linklists[block.settings.side_categories].links %}{% include 'mm-links',collection,hideFirtLevel %}{% endfor %}</ul>
+          </div>
+        </div>
+    {% endif %}
+	{% if forloop.first %}
+      <div class="sidebar_widget crFilters">
+        <div class="widget-title">{{'collections.filters.by' | t}}</div>
+        <div class="widget-content">
+          <!--{% for tag in current_tags %}<span class="actFilter" data-value="{{ tag | handleize}}">{{tag}}<i class="ad ad-times-l"></i></span>{% endfor %}--!>
+		{% assign clear_all_url = "" %}
+		{%if collection.url %}
+			{% assign clear_all_url = collection.url %}
+		{%else %}
+			{% assign qs = search.terms | escape %}
+			{% assign clear_all_url = routes.search_url | append: '?q=' | append: qs %}
+		{%endif%}
+          <p><a href="{{clear_all_url}}" class="btn-link">{{'collections.filters.clear' | t}}</a></p>
+        </div>
+      </div>
+    {% endif %}
+  	  
+  	  {% if block.type == 'filtertag' %}
+      <div class="sidebar_widget filterBox">
+        <div class="widget-title">{{block.settings.title}}</div>
+          {% assign tags = block.settings.filter_tags | split: ',' %}
+          <ul class="widget-content flOpt{% if isSize %} twoCall{% endif %} solado-size__list" role="list">
+            {% for filter_t in tags %}
+            {% assign tag = filter_t | strip %}
+            {% assign tag_value = tag | handleize %}
+            {% assign filtertag = forloop.index | minus:1 %}
+            {% assign filtertagid = 2 | times : filtertag %}
+            {% if collection.tags contains tag %}
+            <li>
+              <label for="{{block.id}}-{{filtertagid}}"><input class="custCheck optTag" type="checkbox" value="{{ tag_value }}" id="{{block.id}}-{{filtertagid}}" {% if current_tags contains tag %}checked{% endif %} />
+              <span class="checkbox"></span>{{tag}}</label>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+      </div>
+      {% endif %}
+  
+      {% if block.type == 'by_color' %}
+      <div class="sidebar_widget filterBox">            
+        <div class="widget-title">{{block.settings.title}}</div>
+          {% assign tags = block.settings.filter_tags | split: ',' %}
+          <ul class="clrFl" role="list" {% if isSize %}style="column-count:{{section.settings.flSize}}"{% endif %}>
+            {% for filter_t in tags %}
+            {% assign tag = filter_t | strip %}
+            {% assign tag_value = tag | handleize %}
+            {% assign filtertag = forloop.index | minus:1 %}
+            {% assign filtertagid = 2 | times : filtertag %}
+            {% if collection.tags contains tag %}
+            <li class="color">
+              <label for="{{block.id}}-{{ filtertagid }}" class="m0 fl-checkbox{% if value.count == 0 and value.active == false %} disabled{% endif %}">
+              	<input class="custCheck optTag" type="checkbox" value="{{ tag_value }}" id="{{block.id}}-{{ filtertagid }}" {% if current_tags contains tag %}checked{% endif %} />
+                <span class="swt{{tag_value}} {{block.settings.color_size}} {{block.settings.color_style}} clrbox" style="background-color:{{tag_value}};"></span>
+                <span class="tooltip-label top">{{tag}}</span>
+              </label>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+      </div>
+      {% endif %}
+
+      {% comment %} *** Filters BY ... *** {% endcomment %}
+      {% if block.type == 'filter_by' %}
+      		<form id="CollectionFiltersForm" class="flForm">
+              {%- assign filtersOpt = collection.filters -%}
+              {% if request.page_type == 'search' %}
+                  {%- assign filtersOpt = search.filters -%}
+              	  <input type="hidden" name="q" value="{{ search.terms }}">
+              {% endif %}
+              {%- assign total_active_values = 0 -%}
+                  {%- for filter in filtersOpt -%}
+                      {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
+                      {% case filter.type %}
+                          {% when 'list' %}
+                              <div class="sidebar_widget filterBox" data-index="{{ forloop.index }}" {{drower}}>
+                                  <div class="widget-title">
+                                      <span class="fl f-jcsb f-aic {{section.settings.bx_ttlw}} {{section.settings.bx_tcase}}">
+                                        {{ filter.label | escape }}
+                                        <span class="count-bubble">{% if filter.active_values.size > 0 %}{{ filter.active_values.size }}{% endif %}</span> 
+                                      </span>
+                                  </div>
+                                {%- liquid
+                                          assign iscolor = false
+                                          assign isSize = false
+                                          assign colorOptions = settings.colorOpt | downcase | replace:", ","," | replace:" , ","," | replace:" ,","," | split: ","
+                                          assign sizeOptions = block.settings.column | downcase | replace:", ","," | replace:" , ","," | replace:" ,","," | split: ","
+                                          assign fname = filter.label | downcase
+                                          if colorOptions contains fname
+                                              assign iscolor = true
+                                          endif
+                                          if sizeOptions contains fname
+                                              assign isSize = true
+                                          endif
+                                      -%}
+                                      {% if iscolor %}
+                                          <ul class="clrFl" role="list" {% if isSize %}style="column-count:{{section.settings.flSize}}"{% endif %}>
+                                          {%- for value in filter.values -%}
+                                              <li class="color">
+                                                  <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="m0 fl-checkbox{% if value.count == 0 and value.active == false %} disabled{% endif %}">
+                                                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" id="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="custCheck"
+                                                          {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                                                      <span class="swt{{value.label| handleize}} {{block.settings.color_size}} {{block.settings.color_style}} clrbox" style="background-color:{{value.value|downcase}};"></span>
+                                                      <span class="tooltip-label top">{{ value.value }}</span>
+                                                  </label>
+                                              </li>
+                                          {%- endfor -%}
+                                          </ul>
+                                      {% else %}
+                                          <ul class="widget-content flOpt{% if isSize %} twoCall{% endif %}" role="list">
+                                          {%- for value in filter.values -%}
+                                              <li {% if value.count == 0 and value.active == false %}class="disabled"{% endif %}>
+                                                  <label for="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="m0 fl-checkbox{% if value.count == 0 and value.active == false %} disabled{% endif %}">
+                                                      <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" id="Filter-{{ filter.label | escape }}-{{ forloop.index }}" class="custCheck"
+                                                          {% if value.active %}checked{% endif %} {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                                                    <span class="checkbox"></span> {{ value.label | escape }} {% if section.settings.dis_prod_cntl %}<span class="prcnt">({{ value.count }})</span>{% endif %}
+                                                  </label>
+                                              </li>
+                                          {%- endfor -%}
+                                          </ul>
+                                      {% endif %}
+
+                              </div>
+                          {% when 'price_range' %}
+                              {% liquid
+                                  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+                                  assign uses_comma_decimals = false
+                                  if currencies_using_comma_decimals contains cart.currency.iso_code
+                                      assign uses_comma_decimals = true
+                                  endif
+                              %}
+                              <div class="sidebar_widget filterBox flPrice" data-index="{{ forloop.index }}" {{drower}}>
+                                  <div class="widget-title">
+                                      <span class="fl f-jcsb f-aic {{section.settings.bx_ttlw}} {{section.settings.bx_tcase}}">
+                                          {{ filter.label | escape }}
+                                          <span class="count-bubble{% if filter.min_value.value or filter.max_value.value %}{{ filter.active_values.size }} count-bubble--dot{% endif %}"></span>
+                                      </span>
+                                  </div>
+                                  <div class="filterDD hide">
+                                      <price-range class="fl flList {{section.settings.optcase}}">
+                                          <div class="field">
+                                              <label class="field__label" for="Filter-{{ filter.label | escape }}-GTE">{{ 'collections.general.from' | t }}</label>
+                                              <input class="prRange w_100" name="{{ filter.min_value.param_name }}" id="Filter-{{ filter.label | escape }}-GTE" type="number" placeholder="0" min="0"
+                                                  {%- if filter.min_value.value -%}
+                                                      {%- if uses_comma_decimals -%}
+                                                          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' | round }}"
+                                                     	  {%- assign minPrice = filter.min_value.value | money_without_currency | replace: ',', '' | round -%}
+                                                      {%- else -%}
+                                                          value="{{ filter.min_value.value | money_without_currency | replace: ',', '' | round }}"
+                                                     	  {%- assign minPrice = filter.min_value.value | money_without_currency | replace: ',', '' | round -%}
+                                                      {% endif %}
+                                                  {%- else -%}
+                                                  	{%- assign minPrice = 0 -%}
+                                                  {%- endif -%}
+                                                  max="{{ filter.range_max | money_without_currency | replace: ',', '' }}" />
+                                          </div>
+                                          <div class="field" style="margin-left:10px;">
+                                              <label class="field__label" for="Filter-{{ filter.label | escape }}-LTE">{{ 'collections.general.to' | t }}</label>
+                                              <input class="prRange w_100" name="{{ filter.max_value.param_name }}" id="Filter-{{ filter.label | escape }}-LTE" type="number" placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}" min="0"
+                                                  {%- if filter.max_value.value -%}
+                                                      {%- if uses_comma_decimals -%}
+                                                          value="{{ filter.max_value.value | money_without_currency | replace: ',', '' | round }}"
+                                                     	  {%- assign maxPrice = filter.max_value.value | money_without_currency | replace: ',', '.' | round -%}
+                                                      {%- else -%}
+                                                          value="{{ filter.max_value.value | money_without_currency | replace: ',', ''| replace: '.00', '' }}"
+                                                     	  {%- assign maxPrice = filter.max_value.value | money_without_currency | replace: ',', '' | round -%}
+                                                      {% endif %}
+                                                  {%- else -%}
+                                                  	{%- assign maxPrice = filter.range_max | money_without_currency | replace: ',', '' | round -%}
+                                                  {%- endif -%}
+                                                  max="{{ filter.range_max | money_without_currency | replace: ',', '' | round }}" />
+                                          </div>
+                                      </price-range>
+                                  </div>
+                                  <div><input class="range-slider" type="hidden" value="{{minPrice}},{{maxPrice}}" /></div>
+                              </div>
+                          {% endcase %}
+                      {%- endfor -%}
+
+
+              {% if collection.current_vendor or collection.current_type %}<input type="hidden" name="q" value="{{ collection.current_vendor }}{{ collection.current_type }}">{% endif %}
+              <div class="hide">
+                {% if section.settings.sb_position == 'top' %}<label class="collection-filters__label" for="SortBy">{{ 'collections.general.sort_by_label' | t }}</label>{% endif %}
+                {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                <select name="sort_by" class="select__select sortBy" id="SortBy" aria-describedby="a11y-refresh-page-message">
+                  {%- for option in collection.sort_options -%}<option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected="selected"{% endif %}>{{ option.name | escape }}</option>{%- endfor -%}
+                </select>
+                <input type="hidden" name="view" value="{% if pageurl == 'list' %}list{% else %}grid{% endif %}">
+                <noscript><button type="submit" class="button button--small">{{ 'collections.general.sort_button' | t }}</button></noscript>
+              </div>
+            </form>
+      {% endif %}
+
+      {% comment %} *** Product Slider *** {% endcomment %}
+      {% if block.type == 'products' %}
+      <div class="sidebar_widget small--hide medium--hide">
+        <div class="widget-title {% if section.settings.enable_clps_blocks %} collapsible{% endif %}">{{block.settings.title}}</div>
+        <div class="widget-content">
+          {% if block.settings.sidebar_products != blank %}
+          <div class="side-pr-{{block.settings.side_prod_opt}}" {% if block.settings.side_prod_opt == "slider" %}id="sideProdSlider" data-slick='{"slidesToShow":1,"slidesToScroll":1, "autoplay":true,"autoplaySpeed":6000,{%- if settings.rtl -%}"rtl": true,{%- endif -%} "infinite": true }'{% endif %}>
+              {% for product in collections[block.settings.sidebar_products].products limit:block.settings.num_of_products %}
+              {% if block.settings.side_prod_opt == "slider" %}
+                <div class="item">{% include 'product-card-grid' %}</div>
+              {% else %}
+                {% include 'product-card-grid-columns' %}
+              {% endif %}
+              {% endfor %}
+            {% if block.settings.side_all_products %}
+            <div class="text-center"><a href="{{block.settings.sidebar_products}}" class="btn">{{ block.settings.btn_txt}}</a></div>
+            {% endif %} 
+          </div>
+          {% else %}
+          <p>Please select collection from store admin > customize > Collection page > sidebar</p>
+          {% endif %} 
+        </div>
+      </div>
+      {% endif %}
+
+      {% comment %} *** Image Banner *** {% endcomment %}
+      {% if block.type == 'image_bnr' %}
+      <div class="sidebar_widget static-banner small--hide medium--hide">
+        {% if block.settings.side_bnr_link != blank %}
+        <a href="{{ block.settings.side_bnr_link }}">
+          {% endif %}
+          {% if block.settings.side_bnr_img != blank %}
+          {{ block.settings.side_bnr_img | img_url: '300x' | img_tag }}
+          {% else %}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% if block.settings.side_bnr_link != blank %}
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% comment %} *** Static Text Block *** {% endcomment %}
+      {% if block.type == 'static_text' %}
+      <div class="sidebar_widget small--hide medium--hide">
+        <div class="widget-title">{{block.settings.title}}</div>
+        <div class="widget-content">
+          {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+          {% else %}
+          <p>Please select collection from store admin > customize > Collection page > sidebar</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+</div>
+<style>
+  .solado-size__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .solado-size__list li {
+    width: 50%;
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+</style>
+{%- for filter in filtersOpt -%}
+    {% if filter.type == 'price_range' %}
+	<script type="text/javascript">
+    	window.addEventListener('DOMContentLoaded',function(){
+			priceSlider = function(){
+      			var minPrice = $('input[name="filter.v.price.gte"]').val(),
+            		maxPrice = $('input[name="filter.v.price.lte"]').val();
+    			$('.range-slider').jRange({
+                	from: 0,
+                    to: '{{ filter.range_max | money_without_currency | replace: ',', '' | round }}',
+                    step: 1,
+                  	format: '{{cart.currency.symbol}}%s',
+                    width: 250,
+                    showLabels: true,
+                    isRange : true,
+                    ondragend: function(value){
+						var values = value.split(',');
+                      	if(minPrice != values[0]){
+                        	$('input[name="filter.v.price.gte"]').val(values[0]).trigger('change');
+                        }
+                      	if(maxPrice != values[1]){
+                        	$('input[name="filter.v.price.lte"]').val(values[1]).trigger('change');
+                        }
+                    }
+				});
+  			};
+            priceSlider();
+        });
+	</script>
+    <style>
+      .slider-container { width:100%; margin:30px 0; }
+      .slider-container .back-bar { height:5px; position:relative; background-color:#eee; }
+      .slider-container .back-bar .selected-bar { position:absolute; height:100%; background-color:{{settings.color_body_text}}; }
+      .slider-container .back-bar .pointer { position:absolute; top:-4px; width:14px; height:14px; cursor:col-resize; opacity: 1; z-index:2;
+        background-color: {{ settings.color_body_text | color_lighten: 70 }}; border:1px solid  {{ settings.color_body_text | color_lighten: 20 }}; border-radius:50%; 
+      }
+      .slider-container .back-bar .pointer.last-active { z-index:3; }
+      .slider-container .back-bar .pointer-label { position: absolute; top: -17px; font-size:10px; white-space: nowrap; line-height: 1; }
+      .slider-container .back-bar .focused { z-index: 10; }
+      .slider-container .clickable-dummy { cursor:pointer; position:absolute; width:100%; height:100%; z-index:1; }
+      .slider-container .scale { top:2px; position:relative; }
+      .slider-container .scale ins { font-size:10px; text-decoration:none; color:{{ settings.color_body_text | color_lighten: 20 }}; line-height:1; }
+      .slider-container .scale ins:before { content:'{{cart.currency.symbol}}'; }
+      .slider-container.slider-readonly .clickable-dummy, .slider-container.slider-readonly .pointer { cursor:auto; }
+    </style>
+	{% endif %}
+{%- endfor -%}

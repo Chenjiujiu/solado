@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "search": {
+      "type": "main-search",
+      "blocks": {
+        "f6314cd5-acc8-4fd0-b91a-0e8d4ac217e7": {
+          "type": "filter_by",
+          "settings": {
+            "title": "Filter By",
+            "column": "Size",
+            "color_size": "small",
+            "color_style": "rounded"
+          }
+        }
+      },
+      "block_order": [
+        "f6314cd5-acc8-4fd0-b91a-0e8d4ac217e7"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "clr_bg": "#eeeeee",
+        "clr_text": "#111111",
+        "clr_text_des": "#111111",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_color_swatch": true,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "sort_enable": true,
+        "dis_prod_cnt": true,
+        "dis_grid_icn": false,
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 4,
+        "mobile-grid": 2,
+        "rows": "24",
+        "pagination": "button",
+        "collection_sidebar": true,
+        "sidebar_position": "popup"
+      }
+    }
+  },
+  "order": [
+    "search"
+  ]
+}

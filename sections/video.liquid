@@ -1,0 +1,252 @@
+<div class="content-indent{% if section.settings.hide_mobile %} small--hide{% endif %} {{ section.settings.top-offeset}} wow fadeIn"> 	
+  <div class="wow fadeIn {{section.settings.style}}{% unless section.settings.section_width %} page-width {% else %}fullwidth-{{section.id}} {% endunless %}">  
+  	
+   <div class="video-sec{% if section.settings.snow_effect %} falling-snow{% endif %}{% if section.settings.snow_style == "style2" %} style2{% else %} style1{% endif %}">   
+      {% if section.settings.video_url == blank and section.settings.mp4url == blank	%}
+      	<div class="video-wrapper">
+          <iframe src="//www.youtube.com/embed/_9VUPq3SxOc?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe>
+        </div>
+      {% else %}         
+         {% if section.settings.video_url.type == "youtube" %}        
+         <div class="video-wrapper"><iframe src="//www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0&showinfo=0&vq=720" width="850" height="480" frameborder="0" allowfullscreen></iframe></div>
+         {% endif %}
+         {% if section.settings.video_url.type == "vimeo" %}
+         <div class="video-wrapper"><iframe src="//player.vimeo.com/video/{{ section.settings.video_url.id }}?byline=0&portrait=0&badge=0" width="850" height="480" frameborder="0" allowfullscreen></iframe></div>
+         {% endif %}     
+     
+         {% if section.settings.video_url == blank and section.settings.mp4url != blank %}
+         <video width="100%" autoplay loop muted playsinline>
+           <source src="{{section.settings.mp4url}}" codecs="avc1.4d002a, mp4a.40.2" type="video/mp4">
+           Your browser does not support the video tag.
+           </source>
+         </video>    
+          {% endif %}    
+      {% endif %}              
+    {%- if section.settings.title != blank or section.settings.btntxt != blank -%}
+    <div class="video-text {{ section.settings.text_align }}">
+      <span class="ttl{% if section.settings.hide_text %} small--hide{% endif %}">{{ section.settings.title }}</span>      
+      {% if section.settings.btntxt != blank %}
+      <a href="{{section.settings.btnurl}}" class="btn{% if section.settings.hide_btn %} small--hide{% endif %} {{section.settings.btn-style}}" >{{ section.settings.btntxt}}</a>
+      {% endif %}
+    </div>
+    {% endif %}
+   </div>
+  
+  </div>  
+</div>
+<style>
+ .ttl {color:{{section.settings.color_ttl}};}
+ @media only screen and (min-width: 1025px) {
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-desk}}px; padding-right:{{ section.settings.pad-desk}}px; }
+  } 
+  @media only screen and (max-width: 1024px) {
+     .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-ipad}}px; padding-right:{{ section.settings.pad-ipad}}px; }
+   } 
+  @media only screen and (max-width: 767px) {
+     .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-mbl}}px; padding-right:{{ section.settings.pad-mbl}}px; }
+   } 
+</style>
+{% schema %}
+  {
+    "name": "Video",
+    "class": "index-section",
+    "settings": [	       	
+	 {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        },
+		 {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": false
+	  },
+{
+           "type": "checkbox",
+           "id": "hide_mobile",
+           "label": "Hide Section in Mobile?",
+           "default": false
+        },
+{
+		"type":"checkbox",
+		"id":"snow_effect",
+		"label":"Enable Snow Effect?",
+		"default": false,
+		"info":"For Christmas"
+	   },
+        {
+          "type": "select",
+          "id": "snow_style",
+          "label": "Snow Style",
+          "default": "style1",         
+          "options": [
+            {
+            "value": "style1",
+            "label": "Falling Down"
+            },
+            {
+            "value": "style2",
+            "label": "Falling From Left"
+            }
+            ]
+          }, 	
+	 {
+        "type": "paragraph",
+        "content": "Left/Right Padding : Fullwidth Section Only==="
+      }, 	
+      {
+        "type": "range",
+        "id": "pad-desk",
+        "label": "Desktop",
+        "default": 55,
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-ipad",
+        "label": "Tablet",
+        "default": 15,
+        "min": 0,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-mbl",
+        "label": "Mobile",
+        "default": 10,
+        "min": 0,
+        "max": 20,
+        "step": 1
+      },	
+ 		{
+        "type": "header",
+        "content": "YouTube or Vimeo link"
+      },
+      {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video link",
+      "accept": ["youtube", "vimeo"]
+      },     
+	 {
+        "type": "header",
+          "content": "Or MP4 Video [recommended]"
+      }, 
+	 {
+      "type": "textarea",
+      "id": "mp4url",
+      "label": "Mp4 video link",
+	  "info":"Paste video url. Upload and copy video url from Settings --> File. Video  size must not exceed 20 mb. It is shopify limit for video"      
+      },
+	  {
+        "type": "textarea",
+        "id": "title",
+        "label": "Text to be display over video",
+        "default": "Video Text",
+		"info":"Use <strong>text here</strong> to make text bold"
+      },
+{	
+           "type": "checkbox",
+           "id": "hide_text",
+           "label": "Hide Text in Mobile?",
+           "default": false,	
+		   "info":"Due to lack of space on mobile device, We advice either to hide button or text hover video"
+        },
+	  {
+        "type": "text",
+        "id": "btntxt",
+        "label": "Button Text"        
+      },
+ 		{
+        "type": "url",
+        "id": "btnurl",
+        "label": "Button Url"        
+      },
+		{
+           "type": "checkbox",
+           "id": "hide_btn",
+           "label": "Hide Button in Mobile?",
+           "default": false,	
+		   "info":"Due to lack of space on mobile device, We advice either to hide button or text hover video"
+        },
+		{
+            "type": "select",
+            "id": "btn-style",
+            "label": "Select Button",
+            "default": "btn",
+            "options": [
+              {
+              "label": "Solid Button 1",
+              "value": "btn"
+              },
+              {
+              "label": "Solid Button 2",
+              "value": "btn--secondary"
+              },
+              {
+              "label": "Solid Button 3",
+              "value": "btn3"
+              },
+              {
+              "label": "Border Button 1",
+              "value": "bdr-btn1"
+              },
+              {
+              "label": "Border Button 2",
+              "value": "bdr-btn2"
+              } 
+            ]
+        },
+ 		{
+            "type": "select",
+            "id": "text_align",
+            "label": "Text Position",
+            "default": "left",			
+            "options": [
+              { "label": "Left", "value": "left" },
+ 			  { "label": "Left Bottom", "value": "leftbottom" },
+			  { "label": "Top Center", "value": "topcenter" },
+			  { "label": "Center", "value": "center" },
+              { "label": "Bottom Center", "value": "bottomcenter" },
+			  { "label": "Right Bottom", "value": "rightbottom" },
+              { "label": "Right", "value": "right" }
+            ]
+          },
+	  {
+        "type": "color",
+        "id": "color_ttl",
+        "label": "Text Color",
+        "default": "#fff"
+      },	
+	 {
+        "type": "paragraph",      
+        "content": "Set font size from --> Theme Settings --> Fonts, Colors and Styles --> Video"
+      }
+    ],
+ "presets": [
+      {
+        "name": "Video",
+         "category": "5. Social"         
+    }
+]
+}
+{% endschema %}

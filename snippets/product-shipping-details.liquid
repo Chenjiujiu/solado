@@ -1,0 +1,333 @@
+{%- if shop.currency == 'EUR' -%}
+	{%- assign currencySymbol = '€' -%}
+{%- elsif shop.currency == 'USD' -%}
+	{%- assign currencySymbol = '$' -%}
+{% else %}
+	{%- assign currencySymbol = '£' -%}
+{%- endif -%}
+<div class="drawer__shipping" style="display: none;">
+	<div class="drawer_shipping_close"></div>
+
+	<div class="product_shipping_dialog">
+		<h2 class="product-shipping__header drawers__heading">Shipping Details</h2>
+		<div class="drawer__close_shipping">
+			<svg class="drawer__close" fill="none" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+				<path d="M7.15 6.09a.125.125 0 010-.177l4.631-4.631A.75.75 0 1010.72.222L6.09 4.85a.125.125 0 01-.178 0L1.281.221a.75.75 0 00-1.062 1.06l4.63 4.632a.125.125 0 010 .177L.22 10.72a.75.75 0 001.061 1.06l4.631-4.63a.125.125 0 01.177 0l4.631 4.63a.75.75 0 001.061-1.06L7.15 6.09z" fill="#000"></path>
+			</svg>
+		</div>
+		<select name="shopping-detail-switch" id="shopping-detail-switch" value="hc-us-panel" >
+			<option value="hc-us-panel">United States</option>
+			<option value="hc-uk-panel">United Kingdom</option>
+			<option value="hc-eu-panel">European Union</option>
+			<option value="hc-ca-panel">Canada</option>
+			<option value="hc-au-panel">Australia</option>
+			<option value="hc-restof-panel">REST OF WORLD</option>
+		</select>
+		<ul btn="btn" class="product_shipping_title" data-target="#a1">
+			<li class="tab_title_active" id="us">US</li>
+			<li id="uk">UK</li>
+			<li id="eu">EU</li>
+			<li id="ca">CA</li>
+			<li id="au">AU</li>
+			<li id="restof">REST OF WORLD</li>
+		</ul>
+		<div class="box" id="a1">
+			<!--  United States-US -->
+			<div class="tab__panel tab_active" id="hc-us-panel">
+				<h3 class="hc-tab USA">🚚 Standard</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab USA">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}4.95</td>
+						<td colspan="1" rowspan="1">6-10 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">6-10 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab USA">✈️ Express</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab USA">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}12.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}29.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab USA">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						Shipping Policies
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab USA">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab USA">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+
+			<!--  United Kingdom-UK -->
+			<div class="tab__panel" id="hc-uk-panel">
+				<h3 class="hc-tab Kingdom">🚚 Standard</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Kingdom">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}3.95</td>
+						<td colspan="1" rowspan="1">5-8 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">5-8 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab Kingdom">✈️ Express</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Kingdom">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}11.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}27.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab Kingdom">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						<b>Shipping Policies</b>
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab Kingdom">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab Kingdom">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+
+			<!--  Europe-EU -->
+			<div class="tab__panel" id="hc-eu-panel">
+				<h3 class="hc-tab Europe">🚚 STANDARD</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}4.95</td>
+						<td colspan="1" rowspan="1">6-12 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">6-12 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab Europe">✈️ EXPRESS</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}12.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}29.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab Europe">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						<b>Shipping Policies</b>
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab Europe">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab Europe">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+
+			<!--  Canada-CA -->
+			<div class="tab__panel" id="hc-ca-panel">
+				<h3 class="hc-tab Europe">🚚 STANDARD</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}6.95</td>
+						<td colspan="1" rowspan="1">7-12 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">7-12 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab Europe">✈️ EXPRESS</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}14.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}34.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab Europe">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						<b>Shipping Policies</b>
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab Europe">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab Europe">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+
+			<!--  Australia-AU -->
+			<div class="tab__panel" id="hc-au-panel">
+				<h3 class="hc-tab Europe">🚚 STANDARD</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}4.95</td>
+						<td colspan="1" rowspan="1">7-12 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">7-12 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab Europe">✈️ EXPRESS</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab Europe">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}12.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}29.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab Europe">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						<b>Shipping Policies</b>
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab Europe">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab Europe">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+
+			<!--  Rest of World -->
+			<div class="tab__panel" id="hc-restof-panel">
+				<h3 class="hc-tab RestofWorld">🚚 STANDARD</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab RestofWorld">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}4.95</td>
+						<td colspan="1" rowspan="1">6-15 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">Free</td>
+						<td colspan="1" rowspan="1">6-15 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<h3 class="hc-tab RestofWorld">✈️ EXPRESS</h3>
+				<table border="1" cellpadding="0" cellspacing="0" class="hc-tab RestofWorld">
+					<tbody>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ＜ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}12.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					<tr>
+						<td colspan="1" rowspan="1">Orders ≥ {{currencySymbol}}59</td>
+						<td colspan="1" rowspan="1">{{currencySymbol}}29.95</td>
+						<td colspan="1" rowspan="1">4-7 Business Days</td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="hc-tab RestofWorld">①Estimated number of days you will receive your order after placing it on the website. This time includes processing and in-transit time for your order, please refer to our
+					<a href="https://uk.solado.com/policies/shipping-policy" target="_blank">
+						<b>Shipping Policies</b>
+					</a>
+					<b>.</b>
+				</p>
+				<p class="hc-tab RestofWorld">②Starts when your order has been shipped, and does not include standard processing time of up to 1-3 business days.
+				</p>
+				<p class="hc-tab RestofWorld">③Orders must equal or exceed the amount shown after all discounts and coupons have been applied to qualify for the promotion.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+    .product-additional-wrap .section {
+        cursor: pointer;
+    }
+</style>
+
+<script type="text/javascript">
+    window.addEventListener('DOMContentLoaded',function(){
+        $(".product-description .section-emphasis").click(function(e){
+            document.getElementsByTagName('body')[0].style.height = '100%';
+            document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+            $(".drawer__shipping").show();
+        });
+        $(".drawer__close_shipping").click(function(e){
+            $(".drawer__shipping").hide();
+            document.getElementsByTagName('body')[0].style.height = '';
+            document.getElementsByTagName('body')[0].style.overflow = '';
+        });
+        $(".drawer_shipping_close").click(function(e){
+            $(".drawer__shipping").hide();
+            document.getElementsByTagName('body')[0].style.height = '';
+            document.getElementsByTagName('body')[0].style.overflow = '';
+        });
+
+        $(".drawer__shipping [btn='btn']").on("click", "li", function() {
+            $(this).addClass('tab_title_active').siblings().removeClass('tab_title_active');
+            var $index = $(this).index()
+            $('.drawer__shipping #a1').children().eq($index).show().siblings().hide()
+        })
+        $("#shopping-detail-switch").on("change",function(){
+            var tabId = $(this).val();
+            /**console.log("选中的tabId",tabId);**/
+            var activeTab =$("#"+tabId);
+            activeTab.show();
+            activeTab.siblings().hide();
+        });
+    });
+</script>

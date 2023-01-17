@@ -1,0 +1,135 @@
+
+.usf-hide-theme-search .search-results,
+.usf-has-no-facets .usf-sidebar,
+.usf-horz-layout .usf-sidebar,
+.usf-horz-layout .usf-toolbar,
+.usf-has-no-facets .usf-toolbar,
+.usf-mobile .usf-toolbar, 
+.usf-sidebar .sidebar_cate .subLinks{
+	display: none !important
+}
+.usf-has-filter-drawer .usf-facets,
+.usf-has-filter-drawer .usf-sr-container,
+.usf-sr-empty,
+#usf_filters {
+	width: 100%
+}
+.usf-sidebar.popup #usf_filters {
+	display: inline-block;
+	margin-top: 25px;
+}
+.usf-results.usf-grid{
+	display: flex;
+	flex-wrap: wrap;
+}
+.usf-has-filter-drawer .usf-sr-container,
+.usf-has-filter-drawer .usf-sr-container {
+	padding-left: 0;
+}
+.usf-swym {
+    vertical-align: middle!important;
+}
+.usf-swym.swym-add-to-wishlist-view-product:after {
+    color: transparent;
+}
+.usf-swym.btn.swym-add-to-wishlist-view-product:hover{
+    color: #fff!important;
+}
+.usf-list .swym-button.swym-add-to-wishlist-view-product{
+        background-color: black;
+}
+/** overwrite solado **/
+.solado-official-gdpr .usf-sr-config {
+    margin-top: 0;
+    margin-bottom: 9px;
+}
+.solado-official-gdpr.usf-mobile .usf-views{
+    margin: 9px 0 9px;
+}
+.solado-official-gdpr.usf-mobile .usf-sr-summary{
+    margin: 9px 0 9px;
+}
+
+.solado-official-gdpr .usf-sr-config__mobile-filters-wrapper .usf-c-select>button,.solado-official-gdpr .usf-sr-config__mobile-filters-wrapper .usf-filters>button{
+    padding: 0px 20px;
+    height: 32px;
+}
+
+.solado-official-gdpr .usf-sr-config__mobile-filters-wrapper .usf-c-select {
+    width: calc(50% - 5px);
+    margin-left: 5px;
+}
+
+.solado-official-gdpr  .usf-sr-config__mobile-filters-wrapper .usf-filters {
+    width: calc(50% - 5px);
+    margin-right: 5px;
+    border-right: 1px solid var(--usf-border-color);
+}
+
+.solado-official-gdpr .usf-view.usf-btn{
+    font-size: 16px;
+}
+
+.solado-official-gdpr.usf-mobile .usf-views button:last-child {
+    margin-left: 10px;
+}
+
+.solado-official-gdpr .usf-view.usf-btn{
+    font-size: 16px;
+}
+
+.solado-official-gdpr .usf-is--compact .usf-is-product {
+    width: 25%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.solado-official-gdpr .usf-is--compact .usf-is-product .usf-img-wrapper{
+    width: 100%;
+    max-height: none;
+}
+
+.solado-official-gdpr.usf-mobile .usf-is--compact .usf-is-product {
+    width: unset;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.solado-official-gdpr.usf-mobile .usf-is--compact .usf-is-product .usf-img-wrapper{
+    width: 60px;
+    max-height: 85px;
+}
+body:not(.usf-mobile) .custom-hot-words{
+    margin: 10px 16px;
+} 
+
+.solado-official-gdpr .usf-is--compact .usf-is-matches.usf-is-products {
+    width: 100%;
+}
+
+@media only screen and (min-width: 1280px){
+    .solado-official-gdpr .usf-popup.usf-is.usf-is--compact{
+        max-width: 1200px;
+    }
+}
+
+.swym-add-to-wishlist-view-product:hover::after {
+    color: white!important;
+}
+
+.input-group .usf-remove{
+    position: absolute;
+    top: 13px;
+    right: 24px; 
+    opacity: 0; 
+}
+.input-group:hover .usf-remove{
+    opacity: 1;
+}
+.input-group .usf-remove:before, .input-group .usf-remove:after{
+       background-color: #395f9f;
+    width: 11px;
+}
+.usf-has-clear-btn .input-group input[type="search"]::-webkit-search-cancel-button{
+    display: none !important; 
+}  

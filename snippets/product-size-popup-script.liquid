@@ -1,0 +1,131 @@
+<style>
+  .tab {
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid transparent;
+    outline: none;
+    cursor: pointer;
+    padding: 10px 6px;
+    transition: 0.3s;
+    font-size: 14px;
+    color: #333;
+  }
+
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    border-bottom: 2px solid #000;
+    color: #000;
+  }
+
+  /* Create an active/current tablink class */
+  .tab button.active {
+    border-bottom: 2px solid #000;
+    color: #000;
+  }
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    padding: 6px 0px;
+  }
+  .second-product-detail{
+    margin-top:30px;
+  }
+  .product-detail .tabs-title {
+    display: flex;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #000;
+    height: 16px;
+    margin: 8px 0 20px 0;
+  }
+  
+  /*.product .sec-ttl .h3{*/
+  /*  font-style: normal;*/
+  /*  font-weight: 600;*/
+  /*  font-size: 18px;*/
+  /*  line-height: 22px;*/
+  /*}*/
+
+  .product-detail .product-description {
+    margin-top: 12px;
+  }
+  .product-detail .product-description .section{
+    display:flex;
+  }
+  .product-detail .product-description .section>div{
+    height:60px;
+    background: #EDEDED;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .product-detail .product-description .section .t-label{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .product-detail .product-description .section-emphasis {
+    width:65%;
+    margin-right: 10px;
+    padding-left: 14px;
+  }
+  .product-detail .product-description .section-action {
+    width:35%;
+    padding-left: 14px;
+  }
+  .product-detail .product-description .learn-more {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    margin-top: 4px;
+  }
+  
+  .out-review .loox-reviews-default{
+  	max-width: none;
+  }
+  @media only screen and (max-width: 1024px){
+  	.product-detail .product-description .section{
+      flex-direction: column;
+    }
+    .product-detail .product-description .section-emphasis{
+      width:100%;
+    }
+    .product-detail .product-description .section-action{
+      width:100%;
+      margin-top:8px;
+    }
+  }
+</style>
+<script type="text/javascript">
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i = i + 1) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i = i + 1) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+
+  document.getElementById("defaultSizeOpen").click();
+</script>

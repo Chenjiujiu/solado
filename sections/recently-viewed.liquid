@@ -1,0 +1,209 @@
+{% if section.settings.show_recently_products == true %}
+<div class="recent-product" id="{{ section.id }}" data-pr="{{ product.handle | handleize }}" data-section-id="{{ section.id }}"
+     data-section-type="carousel">
+  <div class="{% if settings.product_latyout != "style6" %}page-width{% if settings.product_fullwidth %} fullwidth{% endif %}{% endif %}">
+    {%- if section.settings.recently_title != blank  or section.settings.recently_sub_title != blank -%}
+    <div class="sec-ttl {{ settings.title_align}}">
+      <h3 class="h3">{{ section.settings.recently_title | escape }}</h3>     
+      {%- if section.settings.recently_sub_title != blank -%}<span>{{section.settings.recently_sub_title}}</span>{%- endif -%}           
+    </div>
+    {%- endif -%}
+    <div id="products-{{ section.id }}">
+      {%- if settings.product_latyout == "style6" -%}
+      <div id="productSlider-{{ section.id }}" class="grid collection-columns"></div>
+      {%- else -%}
+      <div id="productSlider-{{ section.id }}" class="grid-products carousel" data-slick='{"slidesToShow": {{ section.settings.grid }},"slidesToScroll": 1, {%- if settings.rtl -%}"rtl": true,{%- endif -%} "infinite": true, "autoplay":{{section.settings.recently_autoplay}}, "autoplaySpeed": {{section.settings.autoplay_speed}}, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": {{ section.settings.tablet-grid }} }},{"breakpoint": 767,"settings":{"slidesToShow":{{ section.settings.mobile-grid }} }} ]}'></div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+<style>
+  .recent-product .grid-products{
+  	margin:0 -5px; /** 减去图片2边的边距，为了对齐 **/
+  }
+  .recent-product .grid__item{
+  	padding-left: 17px; /** 34 **/
+    padding-right: 17px;
+  }
+  .recent-product .page-width {
+    padding-left: 63px;  /** 80 -17 **/
+    padding-right: 63px;
+  }
+  .recent-product .slick-arrow{
+  	top: calc(50% - 44px);
+  }
+  @media only screen and (max-width: 1024px){
+    .recent-product .grid__item{
+      padding-left: 8px; /** 16 **/
+      padding-right: 8px;
+    }
+    .recent-product .page-width {
+      padding-left: 12px; /**16 -4 **/
+      padding-right: 12px;
+    }
+    .recent-product .slick-arrow{
+      top: calc(50% - 65px);
+    }
+  }
+</style> 
+<script>
+	window.addEventListener('DOMContentLoaded',function(){
+    	var rcCookie = "recentproducts",
+      		pr = "{{ product.handle | handleize }}";
+        if($.cookie(rcCookie) == null){
+			var str = pr;
+        } else {
+          	var ctrItems = String($.cookie(rcCookie)).split("+");
+	        if(ctrItems.length < {{section.settings.recently_pr_limit | plus: 1}}){
+            	if($.cookie(rcCookie).indexOf(pr) == -1) {
+    	        	var str = pr + '+' + $.cookie(rcCookie);
+        		}
+        	} else {
+              	if($.cookie(rcCookie).indexOf(pr) == -1) {
+    	        	var str = pr + '+' + ctrItems.slice(0, -1).join("+");
+        		}
+        	}
+		}
+		$.cookie(rcCookie, str, {expires:1, path:'/'});
+  
+  		var crproduct = {{ product.handle | json }};
+		$.ajax({
+        	url: '/collections/all/'+$.cookie(rcCookie)+'__pr='+crproduct+'?view=prlist',
+            dataType: 'html',
+            type: 'GET',
+            success: function(data) {
+            	if($(data).find('.grid-view-item').length){
+                	$('#productSlider-{{section.id}}').html(data);
+				} else {
+					$('#{{ section.id }}').hide();
+                }
+            },
+            error: function(data) {
+				console.log('ajax error');
+            },
+            complete: function() {
+            	$('#productSlider-{{ section.id }}').slick('refresh');
+                $(theme.init);
+            }
+        });
+	});
+</script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Recently Viewed Products",
+	"class": "content-indent default",
+    "settings": [
+		{
+        "type": "checkbox",
+        "id": "show_recently_products",
+        "label": "Show Recently Products",
+        "default": true,
+		"info": "Need to create and setup page for this. Check [How to setup recently view](https://www.adornthemes.com/knowledge-base/how-to-setup-recently-viewed-products-section/)"
+      },
+	 {
+        "type": "checkbox",
+        "id": "recently_autoplay",
+        "label": "Carousel Autoplay",
+        "default": false
+      },
+ 	 {
+        "type": "select",
+        "id": "autoplay_speed",
+        "label": "Carousel Autoplay Speed",
+        "options": [
+          { "value": "3000", "label": "3 seconds" },
+          { "value": "4000", "label": "4 seconds" },
+          { "value": "5000", "label": "5 seconds" },
+          { "value": "6000", "label": "6 seconds" },
+          { "value": "7000", "label": "7 seconds" },
+          { "value": "8000", "label": "8 seconds" },
+          { "value": "9000", "label": "9 seconds" },
+          { "value": "10000", "label": "10 seconds" },
+		  { "value": "12000", "label": "12 seconds" },
+		  { "value": "15000", "label": "15 seconds" }
+        ],
+        "default": "3000"
+      },
+ 	 {
+        "id": "recently_title",
+        "type": "text",
+        "label": "Section Title",
+        "default": "Recently Viewed Products"
+      },
+ 	  {
+        "id": "recently_sub_title",
+        "type": "text",
+        "label": "Section Sub title",
+        "default": "You can stop autoplay, increase/decrease aniamtion speed and number of grid to show and products from store admin."
+      },
+      {
+        "type": "paragraph",
+        "content": "Products Per Row"
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": 3,
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": 2,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+      {
+        "type": "text",
+        "id": "recently_pr_limit",
+        "label": "Number of Products to Show",
+        "default": "8"
+      },
+	 {
+        "type": "select",
+        "id": "color_type",
+        "label": "Swatch Type",
+        "default": "color",
+        "info": "Custom color name should be predefined in 'Custom Colors' section.",
+        "options": [
+          {
+            "value": "color",
+            "label": "Color Swatch"
+          },
+          {
+            "value": "vrimage",
+            "label": "Variant Image"
+          }
+        ]
+      },
+		{
+        "type": "text",
+        "id": "color_style",
+		"label": "colorStyle",
+        "default": "rounded"        
+      },
+		{
+        "type": "text",
+        "id": "color_size",
+		"label": "colorSize",
+        "default": "small"        
+      }
+	]
+  }
+{% endschema %}

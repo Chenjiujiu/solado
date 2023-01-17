@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "404": {
+      "type": "404",
+      "settings": {
+        "title": "Page Not Found",
+        "title2": "The page you requested does not exist.",
+        "btntext": "Continue shopping",
+        "btntlnk": "\/",
+        "gobackbtntext": ""
+      }
+    }
+  },
+  "order": [
+    "404"
+  ]
+}

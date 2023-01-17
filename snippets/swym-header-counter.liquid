@@ -1,0 +1,19 @@
+<script class="swym-wishlist-header-counter-custom">
+function renderWishlistCounter(swat) {
+	var counter_elem = document.querySelectorAll(".swym-wishlist-header-counter"); 
+  if (counter_elem) {
+		for (var i = 0; i < counter_elem.length; i++) {
+          if (swat.renderWishlistCount) {
+				swat.renderWishlistCount(counter_elem[i], function(count, element) {
+					// console.log("debug - renderWishlistCount", count, element);
+				});
+			}
+		}
+	}
+}
+  
+if (!window.SwymCallbacks) {
+	window.SwymCallbacks = [];
+}
+window.SwymCallbacks.push(renderWishlistCounter);
+</script>

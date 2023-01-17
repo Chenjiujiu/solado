@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-track",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "page"
+  ]
+}

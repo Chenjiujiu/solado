@@ -1,0 +1,236 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": true,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    },
+    "16338545239476adca": {
+      "type": "custom-content",
+      "blocks": {
+        "16338545239476adca-0": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p><strong>Shopify<\/strong> is a commerce platform that allows anyone to set up an online store and sell their products. Merchants can also sell their products in person with Shopify POS.<br\/><br\/>Shopify started over ten years ago when our founder Tobi wanted to sell snowboards with his company at that time called Snowdevil. He quickly realized it was incredibly challenging to sell snowboards online without an easy to use <strong>ecommerce platform<\/strong>. So he decided to create it himself, and Shopify was born.<br\/><br\/>Shopify is now the leading commerce platform designed for businesses of all sizes. Whether you sell online, on social media, in store, or out of the trunk of your car, Shopify has you covered. The first Shopify store was our own, and it’s been our mission to make commerce better for everyone ever since.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "left"
+          }
+        },
+        "e4c03b4c-01c2-4638-a22f-3e088fc3ddda": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p>Whether you’re a budding jewelry designer and want to start selling your products, or a musician and want to sell your latest mixtape, or if you have an established business and want to grow, Shopify can help you. Hundreds of thousands of entrepreneurs from over 175 countries trust Shopify to help sell their products.<br\/><br\/>Below you’ll find the different products or services that you can sell on Shopify. Even if you know what you’re selling already, it may give you some ideas for other services you could sell to grow your business.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "top-middle",
+            "align_text": "left"
+          }
+        },
+        "6a46b443-05ba-4787-b513-e808cda91df6": {
+          "type": "text",
+          "settings": {
+            "title": "Our Mission",
+            "font-size": "h3",
+            "text": "<p>Duis aute irure dolor in eprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "left"
+          }
+        },
+        "c16f4e2f-5995-4eca-bc1b-49df22daf4db": {
+          "type": "video",
+          "settings": {
+            "video_url": "",
+            "mp4url": "https:\/\/cdn.shopify.com\/s\/files\/1\/0036\/7306\/3491\/files\/about-new.mp4?v=1609242230",
+            "enable_cntrl": false,
+            "is_autoplay": true,
+            "enable_sound": false,
+            "title": "",
+            "text_align": "left",
+            "color_ttl": "#fff",
+            "width": "50%",
+            "alignment": "center"
+          }
+        }
+      },
+      "block_order": [
+        "16338545239476adca-0",
+        "e4c03b4c-01c2-4638-a22f-3e088fc3ddda",
+        "6a46b443-05ba-4787-b513-e808cda91df6",
+        "c16f4e2f-5995-4eca-bc1b-49df22daf4db"
+      ],
+      "settings": {
+        "title": "Our Story",
+        "subtitle": "Est. 2017",
+        "top-offeset": "none",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1633854526fe6f7796": {
+      "type": "feature-row",
+      "blocks": {
+        "1633854526fe6f7796-0": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/about.jpg",
+            "layout": "left",
+            "title": "Why we?",
+            "text": "<p>Avon comes with easy-to-use interface and outstanding support. You can implement your own design. You can easily change the store's appearance as per your requirements using our ready sections and options available.<\/p>",
+            "button_label": "Read more",
+            "button_link": "shopify:\/\/pages\/about-us",
+            "btn-size-desk": "btn-sm",
+            "btn-size-mob": "mob-btn-sm",
+            "text_align": "text-left",
+            "text_clr": "#000",
+            "text_bg_clr": "#f5f5f5",
+            "button_bg_clr": "#000",
+            "button_bdr_clr": "#000",
+            "button_text_clr": "#fff"
+          }
+        },
+        "2c77c122-4689-45ac-a8e1-d465e227857a": {
+          "type": "image_with_text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/our-vision.jpg",
+            "layout": "right",
+            "title": "Our Vision",
+            "text": "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<\/p>",
+            "button_label": "",
+            "button_link": "",
+            "btn-size-desk": "btn-sm",
+            "btn-size-mob": "mob-btn-sm",
+            "text_align": "text-left",
+            "text_clr": "#000",
+            "text_bg_clr": "#f5f5f5",
+            "button_bg_clr": "#000",
+            "button_bdr_clr": "#000",
+            "button_text_clr": "#fff"
+          }
+        }
+      },
+      "block_order": [
+        "1633854526fe6f7796-0",
+        "2c77c122-4689-45ac-a8e1-d465e227857a"
+      ],
+      "settings": {
+        "top-offeset": "default",
+        "section_width": false,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "1633854914ca5a5c77": {
+      "type": "custom-content",
+      "blocks": {
+        "1633854914ca5a5c77-0": {
+          "type": "text",
+          "settings": {
+            "title": "FOUNDERS",
+            "font-size": "h3",
+            "text": "<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "center",
+            "align_text": "left"
+          }
+        },
+        "47c39c84-5f8b-42fb-a361-2bd86810119a": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/demo2-about-2.jpg",
+            "title": "ANDREA SWIFT",
+            "font-size": "h5",
+            "text": "<p>DIRECTOR<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "b862fbcb-5921-45cb-b752-6f89c1a31a67": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/demo2-about-1.jpg",
+            "title": "SIMONA HALEP",
+            "font-size": "h5",
+            "text": "<p>FOUNDER & CEO<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        },
+        "496c6c9c-2a77-4357-9a35-f2dcef8c19db": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/demo2-about-3.jpg",
+            "title": "STIVE SMITH",
+            "font-size": "h4",
+            "text": "<p>CO FOUNDER<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "top-middle",
+            "align_text": "center"
+          }
+        }
+      },
+      "block_order": [
+        "1633854914ca5a5c77-0",
+        "47c39c84-5f8b-42fb-a361-2bd86810119a",
+        "b862fbcb-5921-45cb-b752-6f89c1a31a67",
+        "496c6c9c-2a77-4357-9a35-f2dcef8c19db"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "default",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "16338545239476adca",
+    "1633854526fe6f7796",
+    "1633854914ca5a5c77"
+  ]
+}

@@ -1,0 +1,162 @@
+{%- liquid
+	assign boxstyle = section.settings.prbox_style | default: 'style1'
+	
+    if section.settings.prbox_style != blank
+  		assign secondImg = section.settings.secondary_image
+		assign vendorName = section.settings.show_vendor
+  		assign actionBtn = section.settings.prlist_btn_show
+  		assign actionBtnmb = section.settings.btn_mobiles
+  		assign prReview = settings.show_reviewgrid
+  		assign colorSwatch = section.settings.show_color_swatch
+	else
+  		assign secondImg = settings.secondary_image
+  		assign vendorName = settings.show_vendor
+  		assign actionBtn = settings.prlist_btn_show
+  		assign actionBtnmb = settings.btn_mobiles
+  		assign prReview = settings.show_reviewgrid
+  		assign colorSwatch = settings.show_color_swatch
+	endif
+	
+    assign product_box = forloop.index | minus:1
+	assign delay_time = 50 | times : product_box
+	assign quickUrl = product.url | split: "?" | first
+-%}
+
+{% capture buttons %}
+
+  <div class="button-set{% if actionBtnmb %} small--hide{% endif %}">
+    {% if settings.enable_wishlist %}
+    	{% comment %}
+    	<a class="btn wishlist addto-wishlist" href="{{pages[settings.wishlist_page].url}}" rel="{{ product.handle | handleize }}">
+          	<i class="iconfont icon-zan"></i><span class="tooltip-label">{{ 'products.wishlist.add_to' | t}}</span>
+    	</a>
+    	{% endcomment %}
+      <button data-with-epi="true" class="btn btn-options product_{{product.id}} " data-swaction="addToWishlist" data-product-id="{{product.id | json}}" data-variant-id="{{product.variants[0].id}}" data-product-url="{{ shop.url }}{{ product.url }}">
+        <i class="iconfont icon-zan"></i>
+      </button>
+    {% endif %}
+    {% if product.available and settings.catalogmode == false %}
+      {% assign variantCount = product.variants | size %}    
+      {% if variantCount > 1 %}
+    
+          <a class="btn btn-options quick-view" href="{{ quickUrl }}?view=quickaddcart" rel="nofollow">
+	          <i class="iconfont" aria-hidden="true"><svg t="1662018719365" class="icon" style="vertical-align: text-top;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1445" width="200" height="200"><path d="M685.048062 288.942636c-17.463566 0-31.751938-14.288372-31.751938-31.751938 0-74.617054-63.503876-134.945736-141.296124-134.945737s-141.296124 60.328682-141.296124 134.945737c0 17.463566-14.288372 31.751938-31.751938 31.751938s-31.751938-14.288372-31.751938-31.751938c0-109.544186 92.08062-198.449612 204.8-198.449613 113.513178 0 204.8 88.905426 204.8 198.449613 0 17.463566-13.494574 31.751938-31.751938 31.751938z" fill="#040000" p-id="1446"></path><path d="M496.124031 965.258915H176.223256c-25.40155 0-49.215504-10.31938-65.885272-29.370543-16.669767-19.051163-24.607752-43.658915-22.226356-68.266667l63.503876-563.596899c4.762791-44.452713 42.865116-78.586047 87.317829-78.586046h544.545737c45.246512 0 82.555039 33.339535 87.317829 78.586046l32.545737 288.148837c1.587597 17.463566-10.31938 33.339535-27.782946 34.927132-17.463566 1.587597-33.339535-10.31938-34.927132-27.782946l-32.545736-288.148837c-1.587597-12.700775-11.906977-22.226357-24.607752-22.226356H239.727132c-12.700775 0-23.020155 9.525581-24.607752 22.226356l-63.503876 563.596899c-0.793798 9.525581 3.175194 15.875969 6.350387 19.051163 2.381395 3.175194 8.731783 7.937984 18.257365 7.937985h319.900775c17.463566 0 31.751938 14.288372 31.751938 31.751938s-14.288372 31.751938-31.751938 31.751938z" fill="#040000" p-id="1447"></path><path d="M859.683721 826.344186H604.08062c-17.463566 0-30.95814-14.288372-30.958139-30.958139s14.288372-30.95814 30.958139-30.95814h255.603101c17.463566 0 30.95814 14.288372 30.958139 30.95814s-13.494574 30.95814-30.958139 30.958139z" fill="#040000" p-id="1448"></path><path d="M731.882171 954.939535c-17.463566 0-30.95814-14.288372-30.95814-30.95814V667.584496c0-17.463566 14.288372-30.95814 30.95814-30.958139s30.95814 14.288372 30.958139 30.958139v255.603101c0 17.463566-13.494574 31.751938-30.958139 31.751938z" fill="#040000" p-id="1449"></path></svg></i>
+    	  </a>
+       
+      {% else %}
+        <a class="btn add-to-cart quick-view" href="javascript:void(0);" id="{{ product.variants.first.id }}" rel="1"><i class="iconfont" aria-hidden="true"><svg t="1662018719365" class="icon" style="vertical-align: text-top;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1445" width="200" height="200"><path d="M685.048062 288.942636c-17.463566 0-31.751938-14.288372-31.751938-31.751938 0-74.617054-63.503876-134.945736-141.296124-134.945737s-141.296124 60.328682-141.296124 134.945737c0 17.463566-14.288372 31.751938-31.751938 31.751938s-31.751938-14.288372-31.751938-31.751938c0-109.544186 92.08062-198.449612 204.8-198.449613 113.513178 0 204.8 88.905426 204.8 198.449613 0 17.463566-13.494574 31.751938-31.751938 31.751938z" fill="#040000" p-id="1446"></path><path d="M496.124031 965.258915H176.223256c-25.40155 0-49.215504-10.31938-65.885272-29.370543-16.669767-19.051163-24.607752-43.658915-22.226356-68.266667l63.503876-563.596899c4.762791-44.452713 42.865116-78.586047 87.317829-78.586046h544.545737c45.246512 0 82.555039 33.339535 87.317829 78.586046l32.545737 288.148837c1.587597 17.463566-10.31938 33.339535-27.782946 34.927132-17.463566 1.587597-33.339535-10.31938-34.927132-27.782946l-32.545736-288.148837c-1.587597-12.700775-11.906977-22.226357-24.607752-22.226356H239.727132c-12.700775 0-23.020155 9.525581-24.607752 22.226356l-63.503876 563.596899c-0.793798 9.525581 3.175194 15.875969 6.350387 19.051163 2.381395 3.175194 8.731783 7.937984 18.257365 7.937985h319.900775c17.463566 0 31.751938 14.288372 31.751938 31.751938s-14.288372 31.751938-31.751938 31.751938z" fill="#040000" p-id="1447"></path><path d="M859.683721 826.344186H604.08062c-17.463566 0-30.95814-14.288372-30.958139-30.958139s14.288372-30.95814 30.958139-30.95814h255.603101c17.463566 0 30.95814 14.288372 30.958139 30.95814s-13.494574 30.95814-30.958139 30.958139z" fill="#040000" p-id="1448"></path><path d="M731.882171 954.939535c-17.463566 0-30.95814-14.288372-30.95814-30.95814V667.584496c0-17.463566 14.288372-30.95814 30.95814-30.958139s30.95814 14.288372 30.958139 30.958139v255.603101c0 17.463566-13.494574 31.751938-30.958139 31.751938z" fill="#040000" p-id="1449"></path></svg></i><span class="tooltip-label">{{ 'products.product.add_to_cart' | t}}</span></a>
+    	{% unless settings.ajax_cart %}<form action="/cart/add" method="post" enctype="multipart/form-data" class="hide"><input type="hidden" name="id" value="{{ product.variants.first.id }}" /></form>{% endunless %}
+      {% endif %}
+    {% endif %}
+    
+  </div>
+
+{% endcapture %}
+
+{% capture buttons2 %}
+  {%- unless actionBtn -%}
+  <div class="button-set{% if actionBtnmb %} small--hide{% endif %}">
+    {% if settings.enable_wishlist %}<a class="btn wishlist addto-wishlist" href="{{pages[settings.wishlist_page].url}}" rel="{{ product.handle | handleize }}"><i class="iconfont icon-zan"></i><span class="tooltip-label">{{ 'products.wishlist.add_to' | t}}</span></a>{% endif %}
+  </div>
+  {%- endunless -%}
+{% endcapture %}
+
+{% capture addtocart %}
+  {%- unless actionBtn -%}
+ <div class="flatbtn{% if actionBtnmb %} small--hide{% endif %}">
+     {% if product.available %}
+      {% assign variantCount = product.variants | size %}    
+      {% if variantCount > 1 %}
+        {% if settings.enable_quickshop %}
+          <a class="btn btn-options quickShop" href="{{ quickUrl }}?view=quickaddcart" rel="nofollow">{{ 'products.product.quick_shop' | t}}<span class="tooltip-label">{{ 'products.product.quick_shop' | t}}</span></a>
+        {% else %}
+           <a class="btn btn-options" href="{{ product.url | within: collection }}">{{ 'products.product.select_options' | t}}<span class="tooltip-label">{{ 'products.product.select_options' | t}}</span></a>                  	
+        {% endif %}
+      {% else %}
+        <a class="btn add-to-cart" href="javascript:void(0);" id="{{ product.variants.first.id }}" rel="1">{{ 'products.product.add_to_cart' | t}}<span class="tooltip-label">{{ 'products.product.add_to_cart' | t}}</span></a>
+      {% endif %}
+      <form action="/cart/add" method="post" enctype="multipart/form-data" class="hide"><input type="hidden" name="id" value="{{ product.variants.first.id }}" /></form>
+    {% endif %}
+    </div>
+  {%- endunless -%}
+{% endcapture %}
+
+{% capture productTimer %}
+	{%- if settings.display_countdown and product.metafields.my_fields.countdown != blank -%}<div class="saleTime desktop small--hide medium--hide" data-date="{{product.metafields.my_fields.countdown}}"></div>{%- endif -%}
+{% endcapture %}
+{% capture productTimerMobile %}
+	{%- if settings.display_countdown and product.metafields.my_fields.countdown != blank -%}<div class="saleTime mobile large-up--hide" data-date="{{product.metafields.my_fields.countdown}}"></div>{%- endif -%}
+{% endcapture %}
+<div class="grid-view-item {{boxstyle}}{% unless product.available %} sold-out{% endunless %} wow fadeIn" data-wow-delay="{{delay_time}}ms">
+  {% if boxstyle == "style2" %}<a class="overly" href="{{ product.url | within: collection }}"></a>{% endif %}
+  <div class="grid-view_image">
+    <a class="grid-view-item__link" href="{{ product.url | within: collection }}">
+      <div class="grid-view-item__image lazyload{% if secondImg and product.images.size > 1 %} primary{% endif %}" data-bgset="{% render 'prgrid-img', image: product.featured_image, sizes: sizes %}" data-sizes="auto" data-parent-fit="contain"></div>
+      {%- if secondImg and product.images.size > 1 and boxstyle != "style2" -%}
+      <div class="grid-view-item__image lazyload hover" data-bgset="{% render 'prgrid-img', image: product.images[1] %}" data-sizes="auto" data-parent-fit="contain"></div>
+      {%- endif -%}
+      {%- if colorSwatch -%}<div class="grid-view-item__image hover variantImg"></div>{%- endif -%}
+    </a>
+    <!--<div>{{product.descriptionAnchor }}</div> -->
+    {%- assign enableLbl = false -%}
+    {%- if settings.sold_lbl -%}{%- unless product.available -%}{%- assign enableLbl = true -%}{%- endunless -%}{%- endif -%}
+    {%- if product.compare_at_price > product.price or product.tags contains settings.pr_label1 or product.tags contains settings.pr_label2 or product.tags contains settings.pr_label3 -%}
+    	{%- assign enableLbl = true -%}
+    {%- endif -%}
+    {%- if settings.pr_lbl and enableLbl -%}
+    <div class="product-labels {{ settings.select_label_style }}">
+      {%- if settings.sale_lbl and product.compare_at_price > product.price -%}
+        {% if settings.sale_label_style == "salelabel" %}
+          <label class="lbl on-sale">{{ 'products.product.on_sale' | t}}</label>
+        {% else %}
+          <label class="lbl on-sale">-{{ product.compare_at_price_min | minus: product.price | times: 100 | divided_by: product.compare_at_price_min }}%</label>
+        {% endif %}
+      {%- endif -%}
+      {%- if product.tags contains settings.pr_label1 -%}<label class="lbl pr-label1">{{settings.pr_label1}}</label>{%- endif -%}
+      {%- if product.tags contains settings.pr_label2 -%}<label class="lbl pr-label2">{{settings.pr_label2}}</label>{%- endif -%}
+      {%- if product.tags contains settings.pr_label3 -%}<label class="lbl pr-label3">{{settings.pr_label3}}</label>{%- endif -%}
+      {%- if settings.sold_lbl -%}{%- unless product.available -%}<label class="lbl sold-out"><span>{{ 'products.product.sold_out' | t}}</span></label>{%- endunless -%}{%- endif -%}
+    </div>
+    {%- endif -%}
+
+    {{ productTimer}}
+    {% comment %}
+	{% assign product_created_at = product.created_at | date: '%s' %}
+    {% assign time_ago = 'now' | date: '%s' | minus: product_created_at | divided_by: 86400 %}
+    {% if time_ago < 30 %}
+       <span class="new-sticker">New</span>
+    {% endif %}
+    {% endcomment %}
+    
+    {% if boxstyle == "style1" or boxstyle == "style4" %}{{buttons}}{% endif %}
+    {% if boxstyle == "style5" %}{{buttons2}}{% endif %}
+  </div>
+  {% if boxstyle == "style3" %}
+    {% if onlyRound %}
+       {% include 'color-swatches' %}
+    {%else%}
+      {% include 'color-swatches-only-round' %}
+    {% endif %}
+  {% endif %}
+  <div class="details">
+    {% if vendorName %}<div class="grid-view-item__vendor">{{ product.vendor }}</div>{% endif %}
+    <a href="{{ product.url | within: collection }}" class="grid-view-item__title">{{ product.title }}</a>
+    {% unless settings.catalogmode %}<div class="grid-view-item__meta">{% include 'product-price' %}</div>{% endunless %}
+    {% if prReview %}
+      <a href="{{ product.url | within: collection }}?preview=1">
+        {% include 'ratings' %}
+      </a>
+    {% endif %}
+    {% if boxstyle != "style3" %}
+      {% if onlyRound %}
+         {% include 'color-swatches' %}
+      {%else%}
+        {% include 'color-swatches-only-round' %}
+      {% endif %}
+    {% endif %}
+    {% if boxstyle == "style5" %}{{addtocart}}{% endif %}
+    {% if boxstyle == "style2" or boxstyle == "style3" %}{{buttons}}{% endif %}
+    {{ productTimerMobile}}
+  </div>
+  {% if settings.enable_quickshop %}<div class="shopWrapper" id="ProductSection-{{product.id}}"></div>{% endif %}
+</div>

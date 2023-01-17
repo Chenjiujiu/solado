@@ -1,0 +1,400 @@
+{% capture productslider %}
+<div class="content-indent product-rows-more {{ section.settings.top-offeset}}">
+  {% if section.settings.section_cov %}<div class="section-cover" style="background-color:{{section.settings.sec_bg_clr}};">{% endif%}
+  <div class="page-width" id="{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="carousel">
+    {%- if section.settings.title != blank  or section.settings.subtitle != blank -%}
+    <div class="sec-ttl {{ settings.title_align}} wow fadeIn">
+      <h3 class="h3">{{ section.settings.title }}</h3>     
+      {%- if section.settings.subtitle != blank -%}<span>{{section.settings.subtitle}}</span>{%- endif -%}
+    </div>
+    {%- endif -%}
+
+    {%- liquid
+    	case section.settings.grid
+      		when 2
+    			assign grid_ds = 'large-up--one-half'
+    			assign image_size = '150,350,550,750,950'
+      		when 3 
+    			assign grid_ds = 'large-up--one-third'
+                assign image_size = '150,350,550,750'
+      		when 4 
+    			assign grid_ds = 'large-up--one-quarter'
+                assign image_size = '150,350,550,750'
+      		when 5 
+    			assign grid_ds = 'large-up--one-fifth'
+                assign image_size = '150,350,550'
+      		when 6 
+    			assign grid_ds = 'large-up--one-sixth'
+                assign image_size = '130,300,500'
+      		when 7
+    			assign grid_ds = 'large-up--one-seventh'
+                assign image_size = '130,280,400'
+    	endcase
+    -%}
+    {% case section.settings.tablet-grid %}
+      {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+      {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+      {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+      {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+    {% endcase %}
+    {% case section.settings.mobile-grid %}
+      {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+      {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+      {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+    {% endcase %}
+
+    {% if section.settings.collection != blank %}
+    <div id="productSlider-{{ section.id }}" class="grid grid-products">
+      {%- assign collection = collections[section.settings.collection] -%}
+ 
+      {%- assign defaultNumber =  section.settings.rows | plus: 0 -%} {% comment%}string转为数字{% endcomment %}
+      {%- assign onlyRound = true -%}
+      {% for product in collection.products limit: defaultNumber %}
+      <div class="grid__item item {{grid_mb}} {{grid_tb}} {{grid_ds}}" >{% include 'product-card-grid-cart',onlyRound, sizes: image_size %}</div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center">Please select a collection to display the products</p>
+    {% endif %}
+   {%- assign nextPageUrl = section.settings.collection.url  | append: "?view=cartloadmore" | append: "&page=1" | append: "&limit=" | append: section.settings.limit_of_loadmore | append: "&grid=" | append: section.settings.grid | append: "&tabletgrid=" | append: section.settings.tablet-grid| append: "&mobilegrid=" | append: section.settings.mobile-grid -%}
+   <div class="load-more" href="{{nextPageUrl}}">LOAD MORE</div>
+  </div>
+  {% if section.settings.section_cov %}</div> {% endif%}
+</div>
+{% endcapture %}
+<style>
+  .product-rows-more .grid__item{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .product-rows-more  .load-more{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 270px;
+    height: 44px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 60px;
+    cursor: pointer;
+    line-height: 44px;
+  }
+  .product-rows-more.content-indent.default{
+        margin-top: 110px;
+  }
+
+  @media only screen and (max-width: 1024px){
+  	.product-rows-more .grid__item{
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+  @media only screen and (max-width: 767px) {
+     .product-rows-more .load-more{
+        width: 210px;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 30px;
+     }
+    .product-rows-more.content-indent.default{
+            margin-top: 50px;
+      }
+  .product-rows-more .grid-products{
+       margin: 0 -8px;
+  }
+  }
+</style>
+<script>
+	window.addEventListener('DOMContentLoaded',function(){
+    var $container = $("#shopify-section-{{section.id}}");
+        $container.on("click",".product-rows-more .load-more",function(e){
+          var nextPageUrl =  $(e.target).attr("href");
+          $.ajax({
+              url: nextPageUrl,
+              dataType: 'html',
+              type: 'GET',
+              success: function(data) {
+                var $loadmore = $('.load-more',data);
+                if($loadmore.length>0){
+                  $container.find(".product-rows-more .load-more").attr('href',$loadmore.attr("href"));
+                }else{
+                  $container.find(".product-rows-more .load-more").hide();
+                }
+                var $pagelist =$('.pagelist',data);
+                if($pagelist.attr('page')==='1'){
+                  $container.find(".grid-products").html($pagelist.html());
+                }else{
+                  $container.find(".grid-products").append($pagelist.html());
+                }
+              },
+              error: function(data) {
+                console.log('ajax error');
+              },
+              complete: function() {
+                
+              }
+          });
+          /**$("#shopify-section-{{section.id}} .product-rows-more .load-more").hide();**/
+       });
+     });
+</script>
+{{ productslider | strip_newlines | remove: "  " | remove: "	" }}
+{% schema %}
+  {
+    "name": "Products Rows More",
+    "class": "index-section",
+    "settings": [	  		
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Our Collection",
+		 "info":"Use <strong>text here</strong> to make headings bold"
+      },	  
+	  {
+         "type": "textarea",
+         "id": "subtitle",
+         "label": "Sub Heading",
+         "default": "Describe your products, collection etc..."		
+      },
+      {
+         "id": "collection",
+         "type": "collection",
+         "label": "Select Collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "secondary_image",
+        "label": "Show Second Image on hover?",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_vendor",
+        "label": "Show Vendor Name?",
+        "default": false
+      },         
+      {
+        "type": "checkbox",
+        "id": "prlist_btn_show",
+        "label": "Hide Buttons?",
+        "default": false,
+        "info": "add to cart,wishlist,quickview"
+      },
+      {
+        "type": "checkbox",
+        "id": "btn_mobiles",
+        "label": "Hide Buttons on Mobile?",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Color Swatches"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_color_swatch",
+        "label": "Show ?",
+        "default": true
+      },
+      {
+        "type": "select",
+        "id": "color_type",
+        "label": "Swatch Type",
+        "default": "color",
+        "info": "Custom color name should be predefined in 'Custom Colors' section.",
+        "options": [
+          {
+            "value": "color",
+            "label": "Color Swatch"
+          },
+          {
+            "value": "vrimage",
+            "label": "Variant Image"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "vr_bg_position",
+        "label": "Variant Image Position",
+        "default": "50% 0",
+        "options": [
+          {
+            "value": "50% 0",
+            "label": "Center Top"
+          },
+          {
+            "value": "50% 50%",
+            "label": "Center Center"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "color_size",
+        "label": "Swatch Size",
+        "default": "small",
+        "options": [
+          {
+            "value": "small",
+            "label": "Small"
+          },
+          {
+            "value": "medium",
+            "label": "Medium"
+          },
+          {
+            "value": "large",
+            "label": "Large"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "color_style",
+        "label": "Swatch Style",
+        "default": "rounded",
+        "options": [
+          {
+            "value": "rounded",
+            "label": "Rounded"
+          },
+          {
+            "value": "rectangle",
+            "label": "Square"
+          },
+          {
+            "value": "rounded_rectangle",
+            "label": "Rounded Rectangle"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Appearance"
+      },
+	  {
+        "type": "paragraph",
+        "content": "Section ==="
+      },
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+      }, 		
+      {
+        "type": "checkbox",
+        "id": "section_cov",
+        "label": "Use Background?",
+        "default": false
+      },
+	  {
+        "type": "color",
+        "id": "sec_bg_clr",
+        "label": "Background",
+		"default":"#fafafa",
+		"info":"select light color"
+	  },
+	  {
+        "type": "paragraph",
+        "content": "Grid ==="
+      },
+	  {
+        "type": "select",
+        "id": "prbox_style",
+        "label": "Select Style",
+        "default": "style1",
+        "options": [
+          {
+            "value": "style1",
+            "label": "Style 1 - Default Info Center"
+          },
+          {
+            "value": "style2",
+            "label": "Style 2 - Info Hover Image"
+          },
+          {
+            "value": "style3",
+            "label": "Style 3 - Info Below Image"
+          },
+          {
+            "value": "style4",
+            "label": "Style 4 - Default Info Left"
+          },
+		   {
+            "value": "style5",
+            "label": "Style 5 - Display Text Button"
+          }
+        ],
+		"info":"[chekout grid style](https://avon-demo.myshopify.com/pages/grid-style)"      
+      },
+      {
+        "type": "paragraph",
+        "content": "Products Per Row ==="
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": 3,
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": 2,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+      {
+        "type": "text",
+        "id": "rows",
+        "label": "Number of default Product to show",
+        "default": "4"
+      },
+      {
+        "type": "text",
+        "id": "limit_of_loadmore",
+        "label": "Page Size Of Load More",
+        "default": "8"
+      } 
+	 ],
+    "presets": [
+      {
+        "name": "Products Rows More",
+        "category": "1. Products"
+      }
+    ]
+  }
+{% endschema %}

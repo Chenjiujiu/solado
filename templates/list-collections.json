@@ -1,0 +1,184 @@
+{
+  "sections": {
+    "list-collections": {
+      "type": "list-collections-template",
+      "settings": {
+        "section_width": false,
+        "page_title": "Collections 2022",
+        "display_type": "selected",
+        "sort": "alphabetical",
+        "product_count": true,
+        "collection_btn": "Shop Now",
+        "style": "style3",
+        "grid-spacing": 4,
+        "grid-spacing-mbl": 4,
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#ffffff",
+        "collection_ttl_bg_hm": "#000000",
+        "collection_ttl_opt_hm": 0.7
+      }
+    },
+    "1643274866da4d9256": {
+      "type": "collection-banner",
+      "blocks": {
+        "164327486623de5491-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women",
+            "collection_image": "shopify:\/\/shop_images\/women.jpg",
+            "collection_name": "WOMEN TOPS",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "164327486623de5491-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women-fashion",
+            "collection_image": "shopify:\/\/shop_images\/pink.jpg",
+            "collection_name": "NEW ARRIVALS",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "7c366dbf-fe23-465e-b175-43da44d941bb": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/bagpack.jpg",
+            "collection_name": "BAGS",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "9221356a-5ae0-4afc-b16d-64d4143b3be8": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hot-collection",
+            "collection_image": "shopify:\/\/shop_images\/the-founder.jpg",
+            "collection_name": "CROP TOPS",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "b27eeb66-791e-4b05-8fa6-6315694fd428": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/color-bnr5.jpg",
+            "collection_name": "WOMEN SHOES",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "7efc69f2-f52d-4113-96f8-d5e76fe4214e": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "accssories",
+            "collection_image": "shopify:\/\/shop_images\/women-acc.jpg",
+            "collection_name": "ACCESSORIES",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        },
+        "ab96c2ca-3000-4693-b614-07bf7f926184": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/MEN_68f7308a-951b-442a-895d-3305f9ca2689.jpg",
+            "collection_name": "MEN",
+            "collection_name2": "",
+            "textalign": "center",
+            "text-left": false,
+            "collection_btn": "Shop Now",
+            "width": "50%"
+          }
+        }
+      },
+      "block_order": [
+        "164327486623de5491-0",
+        "164327486623de5491-1",
+        "7c366dbf-fe23-465e-b175-43da44d941bb",
+        "9221356a-5ae0-4afc-b16d-64d4143b3be8",
+        "b27eeb66-791e-4b05-8fa6-6315694fd428",
+        "7efc69f2-f52d-4113-96f8-d5e76fe4214e",
+        "ab96c2ca-3000-4693-b614-07bf7f926184"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "none",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "grid-spacing": 15,
+        "grid-spacing-mbl": 5,
+        "grid-spacing-col": 2,
+        "box-width": 40,
+        "box_bg": "#fff",
+        "box_txt": "#000",
+        "disable_zoom": false,
+        "show_buttons": false,
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "164327491985df9699": {
+      "type": "products-rows",
+      "settings": {
+        "title": "<br>\nBEST SELLER",
+        "subtitle": "Shop best selling items from last month",
+        "collection": "women-fashion",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_view_all": "SHOP ALL",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "show_color_swatch": true,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "top-offeset": "default",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "rows": "8"
+      }
+    }
+  },
+  "order": [
+    "list-collections",
+    "1643274866da4d9256",
+    "164327491985df9699"
+  ]
+}

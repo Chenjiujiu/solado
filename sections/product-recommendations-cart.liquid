@@ -1,0 +1,303 @@
+{%- if section.settings.show_product_recommendations -%}
+  {% if request.page_type == "cart" %}
+      {%- for item in cart.items -%}
+          {%- assign product_rec = item.product -%}
+      {%- endfor -%}
+  {%- else -%}
+      {%- assign product_rec = product -%}
+  {%- endif -%}
+	
+  {%- if recommendations.performed -%}
+    {%- if recommendations.products_count > 0 -%}
+      {% case section.settings.grid %}
+      {% when 3 %}{%- assign grid_ds = 'large-up--one-third' -%}
+      {% when 4 %}{%- assign grid_ds = 'large-up--one-quarter' -%}
+      {% when 5 %}{%- assign grid_ds = 'large--one-quarter widescreen--one-fifth' -%}
+      {% when 6 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-sixth' -%}
+      {% when 7 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-seventh' -%}
+      {% endcase %}
+
+      {% case section.settings.tablet-grid %}
+      {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+      {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+      {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+      {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+      {% endcase %}
+
+      {% case section.settings.mobile-grid %}
+      {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+      {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+      {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+      {% endcase %}
+      <!--<div>总计推荐了多少个{{recommendations.products_count}}</div>-->
+      {%- assign arrayHandle = canonical_url | split:'?limit=' -%}
+      {%- assign limitStr = arrayHandle[1]  | plus: 0  -%}
+      {%- assign limit = limitStr | divided_by : 3 -%}
+      <!--<div>参数中总计限制显示多少个{{limit}}</div>-->
+        <div class="product-recommendations product-recommendations-cart" id="{{ section.id }}">
+          <div class="page-width{% if settings.product_fullwidth %} fullwidth{% endif %}">
+            
+            {%- if section.settings.recommanded_title != blank -%}
+            <div class="sec-ttl {{ settings.title_align}}">
+              <h3 class="h3">{{ section.settings.recommanded_title | escape }}</h3>
+              {%- if section.settings.recommanded_sub_title != blank -%}<span>{{section.settings.recommanded_sub_title}}</span>{%- endif -%}        
+            </div> 
+            {%- endif -%}
+           
+            
+            {% assign showNumber = 0 %}
+			{% comment%}获取3倍的数据，避免刚好一组数据全部售罄了{% endcomment %}
+           <div class="list-wrap">
+             {%- for product in recommendations.products -%}
+             {% if product.available %} 
+              <div class="grid__item {{ grid_mb }} {{ grid_tb }} {{grid_ds}}" >{% include 'product-card-grid-cart', max_height: 250 %}</div>
+              {% assign showNumber = showNumber | plus:1 %}
+             {% endif %}
+              {% if showNumber == limit %} 
+                {% break %}
+              {% endif %}
+             {%- endfor -%}
+            </div> 
+          </div>
+          <div class="load-more">LOAD MORE</div>
+        </div>
+    {%- endif -%}
+
+    {%- else  -%}
+      <div class="page-width recommended" id="{{section.id}}" data-base-url="{{ routes.product_recommendations_url }}" data-product-id="{{ product_rec.id }}" data-section-id="{{ section.id }}" data-section-type="carousel" data-limit="{{ section.settings.recommanded_total_product_to_show }}"></div>
+    {%- endif -%}
+  {%- endif -%}
+{% stylesheet %}
+ .product-recommendations .grid__item{
+  	padding-left: 17px; /** 34 **/
+    padding-right: 17px;
+  }
+  .product-recommendations .slick-arrow{
+  	top: calc(50% - 44px);
+  }
+  .product-recommendations-cart .load-more{
+    border: 1px solid #000000;
+    border-radius: 5px;
+    width: 270px;
+    height: 44px;
+    font-weight: 600;
+    font-size: 15px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 60px;
+    cursor: pointer;
+    line-height: 44px;
+  }
+ #shopify-section-{{section.id}} .content-indent.default{
+        margin-top: 110px;
+    margin-bottom: 110px;
+  }
+  @media only screen and (max-width: 1024px){
+    .product-recommendations-cart .grid__item{
+      padding-left: 8px; /** 16 **/
+      padding-right: 8px;
+    }
+  .product-recommendations-cart .page-width{
+      padding-left: 8px !important;
+      padding-right:8px !important;
+  }
+  }
+  @media only screen and (max-width: 767px) {
+     .product-recommendations-cart .load-more{
+        width: 210px;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 30px;
+     }
+#shopify-section-{{section.id}} .content-indent.default{
+        margin-top: 50px;
+    margin-bottom: 64px;
+  }
+  }
+{% endstylesheet %}
+<script>
+	window.addEventListener('DOMContentLoaded',function(){
+      var sectionId = "{{section.id}}";
+      var $container = $("#shopify-section-{{section.id}} .page-width.recommended");
+      /** shopify定制recommendations限制死了， https://shopify.dev/themes/product-merchandising/recommendations/show-product-recommendations**/
+      var limit = {{ section.settings.total_product_to_loadmore }} * 3; /** 为 避免推荐的全是售罄商品，商品数量限制limit乘以3 **/  
+      var baseUrl = $container.data('baseUrl'),
+      productId = $container.data('productId'),
+      productRecommendationsUrl = baseUrl + '?section_id='+sectionId+'&limit=' + limit + '&product_id=' +productId;
+      /**console.log("url=+",productRecommendationsUrl);**/
+      var defaultShowNumber = "{{section.settings.recommanded_total_product_to_show}}";
+
+      
+        $("#shopify-section-{{section.id}}").on("click",".product-recommendations-cart .load-more",function(){
+            /**console.log("加载更多");**/
+              $.ajax({
+                url: productRecommendationsUrl,
+                dataType: 'html',
+                type: 'GET',
+                success: function(data) {
+                  var list = $(".grid__item", data);
+                  var len  = list.length;
+                  var loadMoreLen = {{ section.settings.total_product_to_loadmore }};
+                  var listWrap = $("#shopify-section-{{section.id}} .list-wrap");
+                  if(loadMoreLen==len){
+                    listWrap.html($(".list-wrap", data).html());
+                  }
+                  var mobileGrid =  {{section.settings.mobile-grid}};
+                  var grid =  {{section.settings.grid}};
+                  var md = new MobileDetect(window.navigator.userAgent);
+                  var remainder = 0;
+                  if(md.mobile()){
+                    remainder = len%mobileGrid;
+                  }else{
+                    remainder = len%grid;
+                  }
+                  var showNumber = len - remainder;
+                  var list = $(".grid__item", data).slice(defaultShowNumber-1,showNumber-1);
+                  list.each(function(){
+                           listWrap.append($(this));
+                   });
+                  $("#shopify-section-{{section.id}} .product-recommendations-cart .load-more").hide();
+                },
+                error: function(data) {
+                  console.log('ajax error');
+                },
+                complete: function() {
+                  
+                }
+            });
+       });
+     });
+</script>
+{% schema %}
+  {
+    "name": "Recommended Cart Products",
+	"class": "content-indent default",
+    "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_product_recommendations",
+      "label": "Show dynamic recommendations", 
+	  "info":"Dynamic recommendations change and improve with time. [Learn more](https://help.shopify.com/en/themes/development/recommended-products)",         
+      "default": true
+    },
+     {
+        "id": "recommanded_title",
+        "type": "text",
+        "label": "Section Title",
+        "default": "Recommended  Cart Products"
+      },
+ 	  {
+        "id": "recommanded_sub_title",
+        "type": "text",
+        "label": "Section Sub title",
+        "default": "You can stop autoplay, increase/decrease aniamtion speed and number of grid to show and products from store admin."
+      }, 	  
+	  {
+        "type": "paragraph",
+        "content": "Products Per Row"
+      },
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": 3,
+        "min": 2,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": 2,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },
+      {
+        "type": "text",
+        "id": "recommanded_total_product_to_show",
+        "label": "Number of Product to Show",
+        "default": "8"        
+      },
+      {
+        "type": "text",
+        "id": "total_product_to_loadmore",
+        "label": "Max Total Number of After load more",
+        "default": "12"        
+      },
+{
+        "type": "select",
+        "id": "prbox_style",
+        "label": "Products Grid Style",
+        "default": "style5",
+        "options": [
+          {
+            "value": "style1",
+            "label": "Style 1 - Default Info Center"
+          },
+          {
+            "value": "style2",
+            "label": "Style 2 - Info Hover Image"
+          },
+          {
+            "value": "style3",
+            "label": "Style 3 - Info Below Image"
+          },
+          {
+            "value": "style4",
+            "label": "Style 4 - Default Info Left"
+          },
+		 {
+            "value": "style5",
+            "label": "Style 5 - Display Text Button"
+          }
+        ]
+      },
+ {
+        "type": "checkbox",
+        "id": "show_color_swatch",
+        "label": "Show ?",
+        "default": true
+      },
+	 {
+        "type": "select",
+        "id": "color_type",
+        "label": "Swatch Type",
+        "default": "color",
+        "info": "Custom color name should be predefined in 'Custom Colors' section.",
+        "options": [
+          {
+            "value": "color",
+            "label": "Color Swatch"
+          },
+          {
+            "value": "vrimage",
+            "label": "Variant Image"
+          }
+        ]
+      },
+		{
+        "type": "text",
+        "id": "color_style",
+		"label": "colorStyle",
+        "default": "rounded"        
+      },
+		{
+        "type": "text",
+        "id": "color_size",
+		"label": "colorSize",
+        "default": "small"        
+      }
+	]
+}
+{% endschema %}

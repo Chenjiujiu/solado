@@ -1,0 +1,224 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": true,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    },
+    "1633855561f07462d6": {
+      "type": "custom-content",
+      "blocks": {
+        "1633855561f07462d6-0": {
+          "type": "text",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/custom-banner.png",
+            "title": "We are Shopify experts. Need help growing your Shopify sales?",
+            "font-size": "h3",
+            "text": "<p>We provide innovative solutions to expand your business. Let us take <br\/>your online shop to new dimension in success! Boost your store sales and define your brands with Avone.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "50%",
+            "alignment": "center",
+            "align_text": "left"
+          }
+        },
+        "9fe5e1d4-7ce0-4eb8-8194-05386b167a20": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p><strong>Design Quality<\/strong><br\/><br\/>First impressions of online store is 94% design related. Quality web design establishes trust and credibility. We provide high quality shopify themes.<br\/><br\/><strong>One Click Demo Installation<\/strong><br\/><br\/>It's very easy to install the demo just by a single click. It’s totally automatic and save your time.<br\/><br\/><strong>Top Quality Documentation<\/strong><br\/><br\/>Extensive documentation where each section of the theme and its features are described in a easy way to understand.<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "top-middle",
+            "align_text": "left"
+          }
+        },
+        "bd305d26-e06b-47a7-834e-7c15524d8ca8": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "font-size": "h3",
+            "text": "<p><strong>Unlimited power and customization possibilities<\/strong><br\/><br\/>Save time and frustration by visually editing your site. Build professional layouts in just a few minutes.<br\/><br\/><strong>High Speed & Performance<\/strong><br\/><br\/>Performance matters the most for your online shop ! We leverage the strategy and help you earn maximum ROI.<br\/><br\/><strong>Top Notch Support<\/strong><br\/><br\/>Get the best technical support in 24 hours. If you have questions or problems, we are glad to help you<\/p>",
+            "btntxt": "Read More",
+            "btnurl": "",
+            "width": "25%",
+            "alignment": "center",
+            "align_text": "left"
+          }
+        }
+      },
+      "block_order": [
+        "1633855561f07462d6-0",
+        "9fe5e1d4-7ce0-4eb8-8194-05386b167a20",
+        "bd305d26-e06b-47a7-834e-7c15524d8ca8"
+      ],
+      "settings": {
+        "title": "",
+        "subtitle": "",
+        "top-offeset": "none",
+        "section_width": false,
+        "hide_mobile": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "prbox_style": "style1",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm"
+      }
+    },
+    "1633855612843bbac0": {
+      "type": "collection-list",
+      "blocks": {
+        "1633855612843bbac0-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "women",
+            "collection_name": "",
+            "collection_btn": "Shop Now"
+          }
+        },
+        "1633855612843bbac0-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "hot-collection",
+            "collection_name": "",
+            "collection_btn": "Shop Now"
+          }
+        },
+        "1633855612843bbac0-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "beachwear",
+            "collection_name": "",
+            "collection_btn": "Shop Now"
+          }
+        },
+        "1633855612843bbac0-3": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "men",
+            "collection_name": "",
+            "collection_btn": "Shop Now"
+          }
+        }
+      },
+      "block_order": [
+        "1633855612843bbac0-0",
+        "1633855612843bbac0-1",
+        "1633855612843bbac0-2",
+        "1633855612843bbac0-3"
+      ],
+      "settings": {
+        "title": "FEATURED COLLECTION",
+        "subtitle": "Top Rated Shopify themes and Services from certified Shopify Experts",
+        "top-offeset": "default",
+        "section_width": false,
+        "pad-desk": 55,
+        "pad-ipad": 15,
+        "pad-mbl": 10,
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "hide_mobile": false,
+        "enable_carousel": true,
+        "grid-spacing": 15,
+        "grid-spacing-mbl": 5,
+        "style": "style4",
+        "textalign": "text-center",
+        "leftpadzero": false,
+        "product_count": false,
+        "show_buttons": false,
+        "btn-size-desk": "btn-sm",
+        "btn-size-mob": "mob-btn-sm",
+        "grid": 4,
+        "tablet-grid": 3,
+        "mobile-grid": 2,
+        "collection_ttl_hm": "#111111",
+        "collection_ttl_bg_hm": "#ffffff",
+        "collection_ttl_bg_hm_responsive": "#ffffff",
+        "collection_ttl_opt_hm": 0.8,
+        "disable_zoom": false
+      }
+    },
+    "16338560678563d0cd": {
+      "type": "store-features",
+      "blocks": {
+        "16338560678563d0cd-0": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/truck.jpg",
+            "icons": "ad-truck-l",
+            "title": "FREE SHIPPING",
+            "text": "<p>Lorem Ipsum hasbeen standard daand scrambled.<\/p>",
+            "texturl": ""
+          }
+        },
+        "16338560678563d0cd-1": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/support.jpg",
+            "icons": "ad-truck-l",
+            "title": "24\/7 SUPPORT",
+            "text": "<p>Lorem Ipsum hasbeen standard daand scrambled.<\/p>",
+            "texturl": ""
+          }
+        },
+        "16338560678563d0cd-2": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/SECURE.jpg",
+            "icons": "ad-truck-l",
+            "title": "SECURE PAYMENT",
+            "text": "<p>Lorem Ipsum hasbeen standard daand scrambled.<\/p>",
+            "texturl": ""
+          }
+        },
+        "5b983997-0cec-418a-9802-a4e2764f612b": {
+          "type": "text_block",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/money.jpg",
+            "icons": "ad-truck-l",
+            "title": "MONEY GAURNTEE",
+            "text": "<p>Lorem Ipsum hasbeen standard daand scrambled.<\/p>",
+            "texturl": ""
+          }
+        }
+      },
+      "block_order": [
+        "16338560678563d0cd-0",
+        "16338560678563d0cd-1",
+        "16338560678563d0cd-2",
+        "5b983997-0cec-418a-9802-a4e2764f612b"
+      ],
+      "settings": {
+        "hide_mobile": false,
+        "top-offeset": "default",
+        "title": "WHY BUY FROM US?",
+        "subtitle": "Use this text to share information about your brand with your customers.",
+        "style": "style1",
+        "enable_icons": true,
+        "icon-type": "image",
+        "iconsize": "80",
+        "section_cov": false,
+        "sec_bg_clr": "#fafafa",
+        "icons_clr": "#a9a9a9",
+        "text_clr": "#111111",
+        "border_sep": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "1633855561f07462d6",
+    "1633855612843bbac0",
+    "16338560678563d0cd"
+  ]
+}

@@ -1,0 +1,33 @@
+{%- layout none -%}
+{% capture productList %}
+	{% if canonical_url contains "__pr=" %}
+        {%- assign products_handle = canonical_url | split: '/all/' | last | split:'__pr=' -%}
+        {%- assign products = products_handle[0] | split: '+' -%}
+        {%- assign crproducts = products_handle[1] | split:'?view=' | first | url_decode -%}
+        {%- for handle_product in products -%}
+            {%- if handle_product != blank -%}
+                {%- unless handle_product == crproducts -%}
+                    {%- assign productcode = handle_product | url_decode -%}
+                    {%- assign product = all_products[productcode] -%}
+                    <div class="grid__item">{%- include 'product-card-grid' -%}</div>
+                {%- endunless-%}
+            {%- endif-%}
+        {%- endfor -%}
+
+  {% else %}
+    {%- assign products_handle = canonical_url | split: '/all/' | last -%}
+    {%- assign products = products_handle | split: '+' -%}
+    {%- for handle_product in products -%}
+        {%- assign productcode = handle_product | url_decode -%}
+        {%- if productcode != blank and all_products[productcode].title != blank -%}
+            {%- assign product = all_products[productcode] -%}
+            <div class="grid__item one-half medium-up--one-three large-up--one-quarter">
+                <a class="btn removeItem" title="{{ 'products.wishlist.remove' | t }}" href="{{product.handle}}"><i class="at at-times-r" aria-hidden="true"></i></a>
+              {%- assign onlyRound = true -%}
+              {%- include 'product-card-grid',onlyRound -%}
+            </div>
+        {%- endif-%}
+    {%- endfor -%}
+  {%- endif-%}
+{% endcapture %}
+{{ productList | strip_newlines | remove: "  " | remove: "	" }}

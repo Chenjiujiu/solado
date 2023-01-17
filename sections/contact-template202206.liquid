@@ -1,0 +1,394 @@
+{% unless section.settings.breadcrumb %}{%- if settings.breadcrumb_pg -%}{%- include 'breadcrumb' -%}{%- else -%}<div class="topSpace"></div>{%- endif -%}{% endunless %}
+<div class="page-width contact-template202206">
+  {% unless section.settings.hide_ttl %}<h1 class="page-title">{{page.title}}</h1>{% endunless %}
+  
+
+  {% comment %} contact form {% endcomment %}
+  {% capture contactForm %}
+  	<div class="contact-frm form-vertical">
+        {% if section.settings.contact_title != blank %}<h2 class="h3 first-title">{{ section.settings.contact_title }}</h2>{% endif %}
+        {% if section.settings.contact_text_desc %}<div class="rte sub-title">{{ section.settings.contact_text_desc }}</div>{% endif %}
+        {% form 'contact' %}
+        	{% if form.posted_successfully? %}<p class="note form-success">{{ 'contact.form.post_success' | t }}</p>{% endif %}
+        	{{ form.errors | default_errors }}
+           	<input type="text" id="ContactFormName" name="contact[name]" placeholder="{{ 'contact.form.name' | t }}"  value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="{{ 'contact.form.email' | t }}"  autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" class="{% if form.errors contains 'email' %}input--error{% endif %}">
+        {% unless section.settings.show_phone %}
+        <input type="tel" id="ContactFormPhone" name="contact[phone]" pattern="[0-9\-]*" placeholder="{{ 'contact.form.phone' | t }}"  value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+        {% endunless %} 
+        {% unless section.settings.show_subject %}
+        <input type="text" id="ContactFormSubject" name="contact[subject]" placeholder="{{ 'contact.form.subject' | t }}"  value="{% if form[subject] %}{{ form[subject] }}{% endif %}">
+        {% endunless %}
+        <textarea rows="10" id="ContactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}" >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        {% comment %}<input type="submit" class="btn" value="{{ 'contact.form.submit' | t }}">{% endcomment %}
+      	<input type="submit" class="btn" value="send your message">
+        {% endform %}
+      </div>
+  {% endcapture %}
+  
+	{% capture address %}
+        {% if section.settings.cnt_title != blank %}<h4>{{ section.settings.cnt_title }}</h4>{% endif %}
+        {% if section.settings.store_address != blank or section.settings.store_phone != blank or section.settings.store_email != blank %}
+          <ul class="contact-address">
+            {% if section.settings.store_email != blank %}
+            	<li class="email">
+                  <i class="ad ad-envelope1"></i>
+                  <div class="other-option-content">{{section.settings.store_email }}</div>
+            	</li>
+            {% endif %}
+            {% if section.settings.store_address != blank %}
+            	<li>
+                  <i class="ad ad-location"></i>
+                   <div class="adress-detail">{{section.settings.store_address }}</div>
+            	</li>
+            {% endif %}
+            {% if section.settings.store_phone != blank %}
+            	<li class="phone">
+                  <i class="ad ad-phone-r"></i>
+                   <div>{{section.settings.store_phone }}</div>
+            	</li>
+            {% endif %}
+          </ul>
+  		{% endif %}
+	{% endcapture %}
+  
+  
+    <div class="form-wrap">
+      <div class="contact-form">
+        {{contactForm}}
+      </div>
+      <div class="contact-details">
+        {{address}}
+        {% if section.settings.show_socials %}
+        <div class="follow-us">
+          {% if section.settings.socials_ttl != blank %}<label>{{ section.settings.socials_ttl }}</label>{% endif %}
+          {%- include 'social-media' -%}
+        </div>
+        {% endif %}
+      </div>
+      <div class="contact-gap"></div>
+  	</div>
+    {% unless page.content == blank %}
+    <div class="contact-custom-content">
+      <div class="c-title">
+        {{section.settings.custom_content_title}}
+      </div>
+      <div class="c-content">
+        {{ page.content }}
+      </div>
+    </div>
+    {% endunless %}
+     {{googlemap}}
+  
+</div>
+
+<style>
+  .contact-template202206 .contact-custom-content{
+  	width:800px;
+    margin:0 auto;
+  }
+  .contact-template202206 .contact-custom-content .c-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #000000;
+  }
+  .contact-template202206 .contact-custom-content .c-content{
+    color: #000000;
+    font-style: normal;
+    font-weight: 350;
+    font-size: 14px;
+    line-height: 30px;
+    margin-top:12px;
+    text-align: center; 
+    margin-bottom: 60px
+  }
+  
+  .contact-template202206 .contact-custom-content .c-content p{
+    margin: 0;
+  }
+  
+  .contact-template202206 .contact-custom-content .c-content a{
+  	cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .contact-details { padding:30px; background:{{section.settings.form_bg}}; color:{{section.settings.form_text}};}
+  
+  .contact-address li {
+  	display: flex;
+  }
+  .contact-address i.ad {
+  	display: block;
+    flex-shrink: 0;
+    margin-right: 10px;
+  }
+  .contact-template202206 input{
+  	height:44px;
+    line-height:1;
+    margin-bottom:20px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+  }
+  .contact-template202206 textarea{
+    line-height:1;
+    height: 83px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+  }
+
+  .contact-template202206 .form-vertical .first-title{
+    text-transform: uppercase; 
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    margin: 0 0 10px 0;
+  }
+  
+  .contact-template202206 .form-vertical .sub-title{
+    font-weight: 350;
+    font-size: 14px;
+    line-height: 32px;
+    margin-bottom: 22px;
+    text-align: center;
+  }
+  .contact-template202206 .form-vertical .btn{
+    background: #000000;
+    border-radius: 5px;
+    color: white;
+    width: 100%;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top:10px;
+  }
+  @media only screen and (min-width: 1025px){
+  	.contact-template202206 .form-vertical {
+        padding-right: 0;
+    }
+  }
+  .contact-template .contact-address{
+  	margin-bottom:0px;
+  }
+  .contact-template202206 .contact-address li {
+    padding: 0;
+  }
+  .contact-template202206 .contact-details {
+    padding: 23px 12px;
+    background: #F5F5F5;
+	border-radius: 5px;
+  }
+  .contact-template202206 .contact-gap{
+  	height:54px;
+    border-bottom: 1px solid #DFDFDF;
+    margin-bottom:49px;
+  }
+  .contact-template202206 .email{
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  
+  .contact-template202206 .email{
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+  }
+  
+  .contact-template202206 .adress-detail,.contact-template202206 .other-option-content{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .contact-template202206 .imageCard-wrap{
+    padding-left: 0;
+    padding-right: 31px;width:630px;height:630px;
+  }
+  .contact-template202206 .form-wrap{
+    width: 442px;
+    margin: 0 auto;
+  }
+  
+  @media only screen and (max-width: 1024px){
+    .contact-template202206 .imageCard-wrap{
+      width: 100%;
+      padding: 0;
+      height: auto;
+      margin-top: 40px;
+      margin-bottom: 22px;
+    }
+    .contact-template202206 .form-wrap{
+      padding: 0;
+      width: 100%;
+    }
+    .contact-template202206 .contact-custom-content{
+    	width:auto;
+    }
+    .contact-template202206 .contact-custom-content .c-title{
+      font-size: 18px;
+      line-height: 22px;;
+    }
+    .contact-template202206 .contact-custom-content .c-content{
+      font-style: normal;
+      font-weight: 350;
+      font-size: 12px;
+      line-height: 20px;
+      text-align:center;
+      margin-bottom: 10px;
+    }
+    .contact-template202206 .form-vertical .first-title{
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0 0 9px 0;
+    }
+    .contact-template202206 .form-vertical .sub-title{
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      margin-bottom: 19px;
+    }
+    .contact-template202206 input{
+      margin-bottom: 15px;
+    }
+    .contact-template202206 textarea{
+      height:104px;
+      margin-bottom: 20px;
+    }
+    .contact-template202206 .form-vertical .btn{
+      font-weight: 700;
+    }
+    .contact-template202206 .contact-gap{
+      height:50px;
+      margin-bottom: 36px;
+    }
+  }
+  @media only screen and (max-width: 766px){
+  	.page-width {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+  }
+  .contact-template202206  ::-webkit-input-placeholder { 
+    color: #959595;
+  }
+
+</style>
+
+{% schema %}
+  {
+    "name": "Contact Page",
+	"class":"contact-template",
+    "settings": [
+        {
+          "type": "checkbox",
+          "id": "hide_ttl",
+          "label": "Hide Page Title?",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "breadcrumb",
+          "label": "Hide breadcrumb?",
+          "default": false
+        },
+		{
+          "type": "header",
+          "content": "Custom content"
+        },
+        {
+          "type": "text",
+          "id": "custom_content_title",
+          "label": "Title",
+          "default": "Need Additional Help?"
+        },
+        {
+          "type": "header",
+          "content": "Contact Form"
+        },
+        {
+          "type": "text",
+          "id": "contact_title",
+          "label": "Title",
+          "default": "Drop Us A Line"
+        },
+        {
+          "type": "textarea",
+          "id": "contact_text_desc",
+          "label": "Text Description"
+        },
+		{
+          "type": "checkbox",
+          "id": "show_phone",
+          "label": "Hide Phone Field?",
+		  "default":false
+        },
+		 {
+          "type": "checkbox",
+          "id": "show_subject",
+           "label": "Hide Subject Field?",
+		  	"default":false
+        },
+       {
+          "type": "header",
+          "content": "Contact Details"
+       },
+       {
+          "type": "text",
+          "id": "cnt_title",
+          "label": "Title Text"
+       },
+       {
+          "type": "textarea",
+          "id": "store_address",
+          "label": "Store Address"
+       }, 
+       {
+          "type": "text",
+          "id": "store_phone",
+          "label": "Phone Number"
+       }, 
+       {
+          "type": "text",
+          "id": "store_email",
+          "label": "Email"
+       },
+       {
+		  "type":"checkbox",
+		  "id":"show_socials",
+		  "label":"Show Socials",
+		  "default":false
+	   },
+       {
+		  "type":"text",
+		  "id":"socials_ttl",
+		  "label":"Socials Title",
+		  "default":"Stay Connected"
+	   },
+       {
+		  "type":"header",
+		  "content":"Appearance"
+	   },
+		{
+          "type": "color",
+          "id": "form_bg",
+          "label": "Background Color",
+          "default": "#f8f8f8"
+        },
+	    {
+          "type": "color",
+          "id": "form_text",
+          "label": "Text Color",
+          "default": "#111"
+        }
+	]
+  }
+{% endschema %}

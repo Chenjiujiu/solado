@@ -1,0 +1,181 @@
+<!-- image-gallery-scroll.liquid -->
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.js' | asset_url | script_tag }}
+<section class="index-section gallery__image-sectio home-gallery-scroll" id="home-image-gallery-scroll" data-section-id="{{ section.id }}" >
+  {% if section.settings.title != blank %}
+  <div class="section-title {{ section_heading_classes }} text-center" style="padding-top: 20px">
+    <h3><b>{{ section.settings.title }}</b></h3>
+  </div><!-- /.section-title -->
+  {% endif %}
+  
+{%- assign newSectionId = section.id | replace: "--", "_" -%}
+  
+{% if section.settings.full_width %}<div class="gridlock-fluid"><div class="row">{% endif %}
+  <div class="row">
+    <div class="home-gallery-scroll_{{newSectionId}} swiper-container">
+    <div class="swiper-wrapper">
+    	{{section.settings.likeshop_code}}
+    </div>
+      
+     
+    </div>
+  </div>
+  {% if section.settings.full_width %}</div></div>{% endif %}
+  <style>
+    .gridlock-fluid{
+      padding: 0 32px; /** 原来应该32 减去边距 43- 11 **/
+    }
+    @media only screen and (max-width: 1024px){
+      .gridlock-fluid{
+        padding: 0 8px; /**原来应该16 减去边距 16- 8 **/
+      }
+    }
+    #shopify-section-{{ newSectionId }} .gallery__item .gallery__item-container h3 {
+      font-size: {{ section.settings.heading_font_size_pc }};
+      font-weight: 400;
+    }
+    #shopify-section-{{ newSectionId }} .gallery__item .gallery__item-container p {
+      font-size: {{ section.settings.subheading_font_size_pc }};
+    }
+    #shopify-section-{{ newSectionId }} .gallery__item > a {
+      display: inline-block;
+      width: 100%;
+      padding: {{ settings.focus_border_weight }}px;
+    }
+    @media screen and (max-width: 768px) {
+      #shopify-section-{{ newSectionId }} .gallery__item .gallery__item-container h3 {
+        font-size: {{ section.settings.heading_font_size_mb }};
+      }
+      #shopify-section-{{ newSectionId }} .gallery__item .gallery__item-container p {
+        font-size: {{ section.settings.subheading_font_size_mb }};
+      }
+    }
+  </style>
+  {% if section.settings.title != blank %}
+  <div class="section-subtitle">
+    {% comment %}
+    <h4>{{section.settings.subtitle}} 
+     {% if section.settings.viewalllink != blank %}
+      | <a href="{{section.settings.viewalllink}}">VIEW ALL</a> 
+     {% endif %}
+    </h4>
+    {% endcomment %}
+    <h4><a class="btn" href="{{section.settings.viewalllink}}">VIEW ALL</a> </h4>
+  </div>
+  {% endif %}
+</section>
+
+<div class="clear"></div>
+
+<script>
+  if(document.body.offsetWidth>790){
+  var swiper_{{newSectionId}} = new Swiper('.home-gallery-scroll_{{newSectionId}}', {
+    slidesPerView: 4,
+    spaceBetween : 3,
+    navigation: {
+        nextEl: '.home-gallery-scroll_{{newSectionId}} .swiper-button-next',
+        prevEl: '.home-gallery-scroll_{{newSectionId}} .swiper-button-prev',
+    }
+  });
+  } else{
+    var swiper_{{newSectionId}} = new Swiper('.home-gallery-scroll_{{newSectionId}}', {
+    slidesPerView: 2,
+    spaceBetween : 3,
+    navigation: {
+        nextEl: '.home-gallery-scroll_{{newSectionId}} .swiper-button-next',
+        prevEl: '.home-gallery-scroll_{{newSectionId}} .swiper-button-prev',
+    }
+  });
+  }
+</script>
+<style>
+  #home-image-gallery-scroll .section-title{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 31px;
+  }
+  #home-image-gallery-scroll .section-subtitle {
+    text-align: center;
+    letter-spacing: .02142857rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 16px 16px 0 16px;
+  }
+  @media only screen and (max-width: 1024px){
+    #home-image-gallery-scroll .section-title{
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+    }
+    #home-image-gallery-scroll .section-subtitle {
+      line-height: 14px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Image Gallery Scroll",
+  
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Enable full width",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Heading"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Sub-Heading"
+    },
+    {
+      "type": "url",
+      "id": "viewalllink",
+      "label": "View All Link"
+    },
+    {
+      "type": "textarea",
+      "id": "likeshop_code",
+      "label": "likeshop script"
+    },
+    {
+      "type": "text",
+      "id": "heading_font_size_pc",
+      "label": "Heading font-size In PC",
+      "default": "2.78vw"
+    },
+    {
+      "type": "text",
+      "id": "heading_font_size_mb",
+      "label": "Heading font-size (Mobile)",
+      "default": "6vw"
+    },
+    {
+      "type": "text",
+      "id": "subheading_font_size_pc",
+      "label": "Subheading size In PC",
+      "default": "1.56vw"
+    },
+    {
+      "type": "text",
+      "id": "subheading_font_size_mb",
+      "label": "Subheading size (Mobile)",
+      "default": "4vw"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Gallery Scroll",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

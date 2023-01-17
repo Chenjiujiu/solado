@@ -1,0 +1,113 @@
+{
+  "sections": {
+    "16502692676c4008db": {
+      "type": "image-slideshow",
+      "blocks": {
+        "165026926709db24a3-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/pc_6da29caa-571c-4241-bd28-63c2661b9557.jpg",
+            "mb_image": "shopify:\/\/shop_images\/M.jpg",
+            "link": "",
+            "newTab": false
+          }
+        }
+      },
+      "block_order": [
+        "165026926709db24a3-0"
+      ],
+      "settings": {
+        "section_width": true,
+        "top-offeset": "none",
+        "autoplay": true,
+        "autoplay_speed": "5000",
+        "arrow": false,
+        "dots": false,
+        "snow_effect": false,
+        "snow_style": "style1"
+      }
+    },
+    "collection": {
+      "type": "main-collection-no-usf",
+      "blocks": {
+        "fe77a0fc-9912-4d85-9b2f-9a3a82a0e552": {
+          "type": "categories",
+          "settings": {
+            "title": "Categories",
+            "side_categories": "main-menu"
+          }
+        },
+        "b856f484-8435-4d92-81d2-3540b3d73516": {
+          "type": "by_color",
+          "settings": {
+            "title": "Filter by Color",
+            "filter_tags": "Black,Blue,White,Pink,Brown,Red,Yellow,Green,Gray,Purple,Orange,Gold,Silver,Nude",
+            "color_size": "small",
+            "color_style": "rounded"
+          }
+        },
+        "d79fae14-1939-4e9e-8e73-6e8abf956f07": {
+          "type": "filtertag",
+          "settings": {
+            "title": "Filter By Size",
+            "filter_tags": "XXS,XS,S,M,L,XL,2XL,3XL,4XL,5XL,6XL,O\/S",
+            "twocall": false
+          }
+        },
+        "cb4d8c11-31ff-4908-9736-ed7ee0aeb4ea": {
+          "type": "filtertag",
+          "settings": {
+            "title": "Filter By Price",
+            "filter_tags": "$0-10,$10-15,$15-20,$20-30,$30-40,$40-50,Over$50",
+            "twocall": false
+          }
+        }
+      },
+      "block_order": [
+        "fe77a0fc-9912-4d85-9b2f-9a3a82a0e552",
+        "b856f484-8435-4d92-81d2-3540b3d73516",
+        "d79fae14-1939-4e9e-8e73-6e8abf956f07",
+        "cb4d8c11-31ff-4908-9736-ed7ee0aeb4ea"
+      ],
+      "settings": {
+        "fullwidth": false,
+        "show_collection_name": true,
+        "show_collection_image": true,
+        "banner_position": "content-side",
+        "bheight": 200,
+        "bheightipad": 200,
+        "bheightmob": 100,
+        "banner_style": "info-below",
+        "text-align": "text-left",
+        "collection-des": "bottom",
+        "clr_bg": "rgba(0,0,0,0)",
+        "clr_text": "#111111",
+        "clr_text_des": "#111111",
+        "secondary_image": true,
+        "show_vendor": false,
+        "prlist_btn_show": false,
+        "btn_mobiles": false,
+        "show_color_swatch": true,
+        "color_type": "color",
+        "vr_bg_position": "50% 0",
+        "color_size": "small",
+        "color_style": "rounded",
+        "sort_enable": true,
+        "dis_prod_cnt": true,
+        "dis_grid_icn": false,
+        "prbox_style": "style1",
+        "grid": 4,
+        "tablet-grid": 4,
+        "mobile-grid": 2,
+        "rows": "16",
+        "pagination": "infinite",
+        "collection_sidebar": true,
+        "sidebar_position": "left"
+      }
+    }
+  },
+  "order": [
+    "16502692676c4008db",
+    "collection"
+  ]
+}

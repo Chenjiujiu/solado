@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-template",
+      "settings": {
+        "width": 1200,
+        "hide_ttl": true,
+        "breadcrumb": false,
+        "layout": "style1",
+        "map_address": "",
+        "contact_title": "Contact Us",
+        "contact_text_desc": "Get in touch and let us know how we can help. Have a question but aren’t sure who to contact? Get in touch and a member of our team will reach out to you.",
+        "show_phone": false,
+        "show_subject": false,
+        "store_opening_time": "",
+        "cnt_title": "",
+        "store_address": "Solado Holdings Limited., Room 1911A, Unit F, 19\/F, Golden Bear Centre, 66, Chai Wan Kok Street, Tsuen Wan, Hong Kong Island Hong Kong Sar",
+        "store_phone": "",
+        "store_email": "support@solado.com",
+        "show_socials": true,
+        "socials_ttl": "Stay Connected",
+        "form_bg": "#f8f8f8",
+        "form_text": "#111111"
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

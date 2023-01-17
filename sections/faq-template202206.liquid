@@ -1,0 +1,564 @@
+<style>
+  .faq-template202206 .rte{
+    margin-bottom: 121px;
+  }
+  .faq-template202206 .page-title{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    margin: 0 0 52px 0;
+  }
+  
+  /* Style the tab */
+  .customer-center-wrap .tab {
+    width: 340px;
+    margin-right: 62px;
+  }
+
+  /* Style the buttons that are used to open the tab content */
+  .customer-center-wrap .tab button {
+    display: block;
+    background-color: inherit;
+    color: black;
+    padding: 22px 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+    height: 44px;
+    line-height: 0;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  /* Change background color of buttons on hover */
+  .customer-center-wrap .tab button:hover {
+    background: #000000;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  /* Create an active/current "tab button" class */
+  .customer-center-wrap .tab button.active {
+    background: #000000;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+
+  /* Style the tab content */
+  .customer-center-wrap .tabcontent {
+    flex:1;
+    display: none;
+  }
+  .customer-center-wrap .tabcontent.active{
+    display: block;
+  }
+  .customer-center-wrap .tabcontent .section-wrap .level-1-content{
+    display: none;
+  }
+  .customer-center-wrap .tabcontent .section-wrap.actived .level-1-content{
+    display: block;
+  }
+  .customer-center-wrap .tabcontent  .tabcontent-title{
+    margin-top: 0;
+    padding-bottom: 19px;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .customer-center-wrap .tabcontent  .level-1-title{
+    position: relative;
+    margin: 29px 0 23px 0;
+  }
+  .customer-center-wrap .tabcontent  .section-wrap:first-of-type .level-1-title{
+    margin-top:0;
+  }
+  .customer-center-wrap .tabcontent  .level-1-title>span{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 17px;
+    max-width: calc(100% - 20px);
+    cursor: pointer;
+    display: inline-block;
+  }
+  .customer-center-wrap .tabcontent  .level-1-title i{
+    cursor: pointer;
+    position:absolute;
+    right: 0;
+    top:0;
+    font-size: 22px;
+  }
+  .customer-center-wrap .tabcontent .level-1-content{
+    font-weight: 350;
+    font-size: 13px;
+    line-height: 23px;
+    margin: 21px 0 31px 0;
+  }
+  .customer-center-wrap .tabcontent .section-wrap{
+    border-bottom: 1px solid #DFDFDF;
+  }
+
+  .customer-center-wrap .section-wrap .ad-angle-up-l{ display: none; } 
+  .customer-center-wrap .section-wrap .ad-angle-down-l{ display: block; } 
+  .customer-center-wrap .section-wrap.actived .ad-angle-up-l{ display: block; } 
+  .customer-center-wrap .section-wrap.actived .ad-angle-down-l{ display: none; } 
+
+
+  .customer-center-wrap{
+    display: flex;
+    justify-content: center;
+    padding: 0 89px;
+  }
+  .customer-center-wrap .tablinks-wrap .tablinks{
+  	text-transform: uppercase;
+  }
+   .customer-center-wrap .tablinks-wrap .tablinks+.tablinks{
+     margin-top: 15px;
+  }
+  .customer-center-wrap table{
+    border-collapse: collapse;
+  }
+  .customer-center-wrap table td, .customer-center-wrap table th{
+    border: 1px solid #000;
+    color: #666;
+    height: 30px;
+    padding: 0 8px;
+  }
+  .customer-center-wrap table thead th{
+    background-color: #CCE8EB;
+    width: 100px;
+    box-sizing: border-box;
+  }
+  .customer-center-wrap .brother-links-wrap{
+    margin-top: 52px;
+  }
+  .customer-center-wrap .brother-links-wrap a,.customer-center-wrap .mobile-brother-links-wrap a {
+    display: block;
+    color: black;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+    height: 44px;
+    line-height: 44px;
+    border-radius: 5px;
+    border: 1px solid #000000;
+    margin-top: 15px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .customer-center-wrap a{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #000;
+  }
+
+  .mobile-dropdown-wrap .dropdown {
+    overflow: hidden;
+  }
+
+  /* Dropdown button */
+  .mobile-dropdown-wrap .dropdown .dropbtn {
+    outline: none;
+    color: white;
+    width: 100%;
+    background: #000;
+    margin: 0; /* Important for vertical align on mobile phones */
+    height: 44px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    text-align: left;
+    padding-left: 10px;
+    position: relative;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .mobile-dropdown-wrap .dropdown .dropbtn i {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 20px;
+  }
+
+  /* Dropdown content (hidden by default) */
+  .mobile-dropdown-wrap .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    width: calc( 100% - 32px);
+    background: #fff;
+    text-transform: uppercase;
+  }
+
+  /* Links inside the dropdown */
+  .mobile-dropdown-wrap .dropdown-content>div {
+    color: black;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    height: 44px;
+    line-height: 44px;
+    padding-left: 10px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+
+  /* Add a grey background color to dropdown links on hover */
+  .mobile-dropdown-wrap .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+
+  /* Show the dropdown menu on hover */
+  .mobile-dropdown-wrap .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .mobile-dropdown-wrap {
+    display: none;
+  }
+  @media only screen and (max-width: 1024px){
+    .customer-center-wrap{
+      padding: 0 16px;
+      flex-direction: column;
+    }
+    .customer-center-wrap .tab{
+      display: none;
+    }
+    .customer-center-wrap .tabcontent  .tabcontent-title{
+      display: none;
+    }
+    .mobile-dropdown-wrap {
+      display: block;
+    }
+    .faq-template202206 .page-title{
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom:18px;
+    }
+    .customer-center-wrap .tabcontent .level-1-title>span{
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 14px;
+    }
+    .customer-center-wrap .tabcontent .level-1-content{
+      font-size: 12px;
+      line-height: 19px;
+    }
+    .customer-center-wrap .tabcontent  .section-wrap:first-of-type .level-1-title{
+      margin-top:23px;
+    }
+    .faq-template202206 .rte{
+    	margin-bottom:50px;
+    }
+  }
+  @media only screen and (min-width: 767px){
+    .faq-template202206.default {
+      margin-top: 40px;
+    }
+    .faq-template202206 .mobile-brother-links-wrap{
+    	display:none;
+    }
+  }
+
+</style>
+
+{% unless section.settings.breadcrumb %}{%- if settings.breadcrumb_pg -%}{%- include 'breadcrumb' -%}{%- else -%}<div class="topSpace"></div>{%- endif -%}{% endunless %}
+<div class="content-indent faq-template202206 {{ section.settings.top-offeset}}"> 
+  {% unless section.settings.hide_ttl %}<h1 class="page-title">{{page.title}}</h1>{% endunless %}
+  {% unless page.content == blank %}<div class="rte">{{ page.content }}</div>{% endunless %}
+  <div id="brother-links-data" style="display:none;">
+  	<a href="{{ section.settings.track_order_link_url}}">{{ section.settings.track_order_link_label}}</a>
+    <a href="{{ section.settings.start_return_link_url}}">{{ section.settings.start_return_link_label}}</a>
+    <a href="{{ section.settings.contact_us_link_url}}">{{ section.settings.contact_us_link_label}}</a>
+  </div>
+  
+  {% comment %}
+  {% if section.settings.section_cov %}<div class="section-cover" style="background-color:{{section.settings.sec_bg_clr}};">{% endif%} 
+  <div class="page-width" style="max-width:{{section.settings.max-width}}px;">
+    <div class="faq-{{section.settings.pagestyle}}">
+      <div id="{{section.id}}" class="faqList">        	            
+        {% for block in section.blocks limit: section.blocks.size%}                 
+        {% if block.type == 'faqsection' and block.settings.sectiontitle != blank %}
+        <h4>{{block.settings.sectiontitle}}</h4>
+        {% endif %}    
+        {% if block.type == 'faqs' %}
+        <div class="faq-body">
+          <h5 class="panel-title fl f-jcsb j-aic">{{ block.settings.question}}{% if section.settings.pagestyle =='style1' %}<i class="ad ad-plus-l"></i>{% endif %}</h5>
+          <div id="{{ block.id }}" class="panel-content">{{ block.settings.answer}}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% if section.settings.section_cov %}</div> {% endif%}
+  {% endcomment %}
+</div>
+
+
+<script type="text/javascript">
+  window.addEventListener("DOMContentLoaded", function () {
+    var baseUrl = decodeURI(location.href);
+    var redirectTitle =  (baseUrl.includes("?") && baseUrl.includes("="))?baseUrl.split("?")[1].split("=")[1]:'';
+    /**console.log("redirectTitle=",redirectTitle);**/
+    var mainwrap = $(".customer-center-wrap");
+    var openIndex = 0;
+    if(redirectTitle!==''){
+      var htmlEncode = function(value) {
+        return $('<div/>').text(value).html().replace(/ /g,'&nbsp;')
+      }
+      /**console.log('decodeHtml',htmlEncode(redirectTitle));**/
+      mainwrap.find(".tab .tablinks").each(function(i){
+       if($(this).html()===htmlEncode(redirectTitle)){
+         openIndex = i
+       }
+     });
+    }
+    /**console.log("默认打开第几个",openIndex);**/
+    mainwrap.find(".tab .tablinks").eq(openIndex).addClass("active");
+    mainwrap.find(".tabcontent").eq(openIndex).addClass("active");
+    mainwrap.find(".tabcontent").each(function(i){
+      $(this).find(".section-wrap:first").addClass("actived");
+    });
+    var mobileNav = mainwrap.find(".mobile-dropdown-wrap .dropdown .dropdown-content");
+
+    var firstLabel  = "";
+    mainwrap.find(".tab .tablinks").each(function(i){
+      var label = $(this).text();
+      var mobileItem = $("<div>"+label+"</div>");
+      if(i===openIndex){
+        firstLabel = label;
+        mobileItem.addClass("actived") 
+      }
+      mobileNav.append("<div>"+label+"</div>");
+    });
+    mainwrap.find(".mobile-dropdown-wrap .dropdown .dropbtn>span").text(firstLabel);
+    mainwrap.find(".mobile-dropdown-wrap .dropdown .dropbtn").on("click",function(){
+      $(this).siblings(".dropdown-content").show();
+    });
+	
+    var links = $("#brother-links-data").html();
+    mainwrap.find(".brother-links-wrap").html(links);
+    mainwrap.find(".mobile-brother-links-wrap").html(links);
+
+    mobileNav.on("click","div",function(){
+      $(this).siblings().removeClass("actived");
+      $(this).addClass("actived");
+      var label = $(this).text();
+      $(this).parent().siblings(".dropbtn").find("span").text(label);
+      $(this).parent().hide();
+      var index = $(this).index();
+      mainwrap.find(".tabcontent").removeClass("active");
+      mainwrap.find(".tabcontent").eq(index).addClass("active");
+    });
+
+    mainwrap.find(".section-wrap").on("click",".level-1-title i,.level-1-title span",function(){
+      $(this).parent().parent().toggleClass("actived");
+    });
+
+    mainwrap.find(".tablinks").on("click",function(){
+      var index = $(this).index();
+      mainwrap.find(".tablinks").removeClass("active");
+      $(this).addClass("active");
+      mainwrap.find(".tabcontent").removeClass("active");
+      mainwrap.find(".tabcontent").eq(index).addClass("active");
+    });
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "FAQ Page",
+    "settings": [
+		{
+          "type": "checkbox",
+          "id": "breadcrumb",
+          "label": "Hide breadcrumb?",
+          "default": false
+        },
+		{
+          "type": "header",
+          "content": "External link"
+        },
+		{
+          "type": "text",
+          "id": "track_order_link_label",
+          "label": "Track Order Label",
+          "default": "TRACK ORDER"
+        },
+        {
+          "type": "text",
+          "id": "track_order_link_url",
+          "label": "Track Order Url",
+          "default": "/apps/tracktor/"
+        },
+		{
+          "type": "text",
+          "id": "start_return_link_label",
+          "label": "Start Return label",
+          "default": "START RETURN"
+        },
+		{
+          "type": "text",
+          "id": "start_return_link_url",
+          "label": "Start Return Url",
+          "default": "https://soladoofficial.returnscenter.com/"
+        },
+		{
+          "type": "text",
+          "id": "contact_us_link_label",
+          "label": "Contact Us Url",
+          "default": "CONTACT US"
+        },
+		{
+          "type": "text",
+          "id": "contact_us_link_url",
+          "label": "Contact Us label",
+          "default": "/pages/contact-us"
+        },
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        },
+		 {
+            "type": "checkbox",
+            "id": "section_cov",
+            "label": "Use Background?",
+            "default": false
+          },
+		{
+            "type": "color",
+            "id": "sec_bg_clr",
+            "label": "Background Color",
+			"default":"#fafafa"	
+		 },
+	  {
+            "type": "select",
+            "id": "pagestyle",
+            "label": "FAQs Style",
+            "default": "style1",
+            "options": [
+              {
+                "value": "style1",
+                "label": "Style 1"
+              },
+              {
+                "value": "style2",
+                "label": "Style 2"
+              }
+            ]
+       },	
+	{
+        "type": "range",
+        "id": "max-width",
+        "label": "Desktop",
+        "default": 800,
+        "min": 600,
+        "max": 1200,
+        "step": 100
+      },
+	 {
+        "type": "header",
+        "content": "Style 2"
+      },
+	  {
+        "type": "color",
+        "id": "sec-title-bg",
+        "label": "Section Title Background",
+        "default": "#333"
+      },
+      {
+        "type": "color",
+        "id": "sec-title",
+        "label": "Section Title",
+        "default": "#eee"
+      }
+	],
+   "blocks":[
+     {
+        "type": "faqsection",
+        "name": "Section Title",
+		"settings": [
+          {
+            "type": "text",
+            "id": "sectiontitle",
+            "label": "Section Title"
+          }
+		]
+      },
+	  {
+	    "type":"faqs",
+		"name":"FAQs",
+		"settings":[			
+			{
+			"type":"text",
+			"id":"question",
+			"label":"Question",
+			"default":"How can I get assistance if I need it?"
+			},
+			{
+			"type":"textarea",
+			"id":"answer",
+			"label":"Answer",
+			"default":"Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+			}
+		 ]
+      }
+	],
+    "presets": [
+      {
+        "name": "FAQs",        
+ 		"category": "4. Text",
+		"blocks": [
+          {
+            "type": "faqs"
+          },
+ 		  {
+            "type": "faqs"
+          },
+		   {
+            "type": "faqs"
+          } 
+        ]
+      }
+    ]
+ }
+{% endschema %}

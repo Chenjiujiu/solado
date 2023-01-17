@@ -1,0 +1,56 @@
+{%- case block.settings.mmcolumns -%}
+{% when 1 %}{%- assign column = 'large-up--one-whole' -%}
+{% when 2 %}{%- assign column = 'large-up--one-half' -%}
+{% when 3 %}{%- assign column = 'large-up--one-third' -%}
+{% when 4 %}{%- assign column = 'large-up--one-quarter' -%}
+{% when 5 %}{%- assign column = 'large-up--one-fifth' -%}
+{% when 6 %}{%- assign column = 'large-up--one-sixth' -%}
+{%- endcase -%}
+<li class="grid__item lvl-1 {{ column }} {% if link.active or link.child_active %} active{% endif %}">
+  {%- assign label1 = link.title |  split: '[label' | last | split: ']' | first | prepend: "nm_label" -%}
+  {%if hideFirtLevel %}
+   <div class="site-nav lvl-1">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}<span class="lbl {{label1}}">{{ section.settings[label1] }}</span>{% endif %}</div>
+  {%else%}
+  <a href="{{ link.url }}" class="site-nav lvl-1">{{ link.title | split: '[label' | first }}{% if link.title contains '[label' %}<span class="lbl {{label1}}">{{ section.settings[label1] }}</span>{% endif %}</a>
+  {%endif%}
+    {%- if link.links != blank -%}
+    {% assign collectionUrl = collection.url  %}
+    {% assign matchCount = 0 %}
+  	{% assign matchUrl = false %}
+    {% for childlink in link.links %}
+      {% if collectionUrl == childlink.url %}
+  			{% assign matchUrl = true %}
+  			{% assign matchCount = matchCount|plus: 1 %}
+  			{% break %}
+      {%endif%}
+  		{% for lvl3link in childlink.links %}
+          {% if collectionUrl == lvl3link.url %}
+            {% assign matchUrl = true %}
+            {% assign matchCount = matchCount|plus: 1 %}
+            {% break %}
+          {%endif%}
+  		{% endfor %}
+  		{% if matchUrl %}
+  			{% break %}
+  		{%endif%}
+    {% endfor %}
+  <ul class="subLinks{% if hideFirtLevel and matchCount!=1 %} hide{% endif %}">
+    {%- for childlink in link.links -%}
+    <li class="lvl-2{% if hideFirtLevel==false and childlink.active or childlink.child_active%} active{% endif %}">
+      {%- assign label2 = childlink.title |  split: '[label' | last  | split: ']' | first | prepend: "nm_label" -%}
+      <a href="{{ childlink.url }}" class="site-nav lvl-2{% if hideFirtLevel and collectionUrl == childlink.url %} active{% endif %}">{{ childlink.title | split: '[label' | first }}{% if childlink.title contains '[label' %}<span class="lbl {{label2}}">{{ section.settings[label2] }}</span>{% endif %}</a>
+      {%- if childlink.links != blank -%}
+      <ul class="subLinks">
+        {%- for lvl3link in childlink.links -%}
+        <li class="lvl-3 {% if hideFirtLevel==false and lvl3link.active %}active{% endif %}">
+          {%- assign label3 = lvl3link.title |  split: '[label' | last  | split: ']' | first | prepend: "nm_label" -%}
+          <a href="{{ lvl3link.url }}" class="site-nav lvl-3{% if hideFirtLevel and collectionUrl == lvl3link.url %} active{% endif %}">{{ lvl3link.title | split: '[label' | first }}{% if lvl3link.title contains '[label' %}<span class="lbl {{label3}}">{{ section.settings[label3] }}</span>{% endif %}</a>
+        </li>
+        {%- endfor -%}
+      </ul>
+      {%- endif -%}
+    </li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+</li>

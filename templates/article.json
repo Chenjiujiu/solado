@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "article": {
+      "type": "article-template",
+      "settings": {
+        "sidebar_position": "left",
+        "text_align": "text-left",
+        "featured-img": true,
+        "blog_show_author": true,
+        "blog_show_date": true,
+        "show_share_buttons": true,
+        "show_category": true,
+        "category_box_title": "Category",
+        "show_recent_posts": true,
+        "recent_posts_title": "Recent Posts",
+        "show_banner_ad": true,
+        "banner_link": "",
+        "show_products": true,
+        "collection_title": "Trending Now",
+        "sidebar_collection": "",
+        "number_of_prodcut": "4"
+      }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "article"
+  ]
+}

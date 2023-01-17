@@ -1,0 +1,704 @@
+
+<!-- BEGIN USF -->
+<div class="clPageBnr flex lazyload{% if collection.image %} with-image {% endif %}" {% if section.settings.show_collection_image and collection.image %}data-bgset="{% include 'bgset', image: collection.image %}" data-sizes="auto" data-parent-fit="contain" style="background-image:url({{ collection.image | img_url: '300x' }});"{% endif %}>
+	<h1 class="collection-title" itemprop="name">{{ collection.title }}</h1>
+</div>
+{%- if settings.breadcrumb_cl -%}{%- include 'breadcrumb' -%}{%- else -%}<div class="topSpace"></div>{%- endif -%}
+
+<div class="collection-box {{section.settings.style}}{% unless section.settings.section_width %} page-width{% else %} fullwidth-{{section.id}} fullwidth{% endunless %}" id="{{ section.id }}"
+     data-section-id="{{ section.id }}" {% if section.settings.masonary_grid %}data-section-type="masonary"{% endif %}>
+  {% if collection.description != blank %}<div class="rte collection-description top">{{ collection.description }}</div>{% endif %}  
+  {% case section.settings.grid %}
+    {% when 2 %}{%- assign grid_ds = 'large-up--one-half' -%}
+    {% when 3 %}{%- assign grid_ds = 'large-up--one-third' -%}
+    {% when 4 %}{%- assign grid_ds = 'large-up--one-quarter' -%}
+    {% when 5 %}{%- assign grid_ds = 'large--one-quarter widescreen--one-fifth' -%}
+    {% when 6 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-sixth' -%}
+    {% when 7 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-seventh' -%}
+  {% endcase %}
+
+  {% case section.settings.tablet-grid %}
+    {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+    {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+    {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+    {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+  {% endcase %}
+
+  {% case section.settings.mobile-grid %}
+    {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+    {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+    {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+  {% endcase %}
+  
+  <div class="grid-mr-{{ section.settings.grid-spacing}}">
+    <div class="grid collection-grid{% if section.settings.masonary_grid %} grid-masonary{% else %} grid--uniform{% endif %} {{section.settings.style}} pd-{{ section.settings.grid-spacing}}">
+      {% if section.settings.masonary_grid %}<div class="grid-sizer-{{section.id}} {{grid_mb}} {{grid_tb}} {{grid_ds}}"></div>{% endif %}
+      	{%- assign navName = collection.handle -%}
+      	{% for link in linklists[navName].links %}
+            <div class="grid__item ms-item {{grid_mb}} {{grid_tb}} {{grid_ds}}">
+              {%- assign linkUrl = link.url | split: "/" | last -%}
+              {% include 'collection-grid-item-list-page', collection: collections[linkUrl] %}
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+  <div class="page-width{% if section.settings.fullwidth %} fullwidth {% endif %}" id="Collection">
+    <div class="fl">
+      <div class="fl1 w_100 main-col">
+
+		
+        {% if section.settings.show_collection_image and section.settings.banner_position == 'content-side' %}
+	        <div class="clPageBnr{% if section.settings.banner_style == "info-over" %} flex{% endif %} {{section.settings.banner_style}} {{section.settings.text-align}}{% if collection.image %} with-image {% endif %}"
+    	         {% if section.settings.banner_style == 'info-over' and collection.image %} style="background-image:url({{ collection.image | img_url: '900x400', crop: 'center' }});" {% endif %}>  		                         
+
+              {% if collection.image and section.settings.banner_style == 'info-below' %}
+              {%- assign climg_url = collection.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+              <img class="lazyload collection-image imgFl" src="{{ collection.image | img_url: 'master' }}" width="{{collection.image.width}}" height="{{collection.image.height}}"
+                   data-src="{{ climg_url }}" data-widths="[540,720,1000,1400,1900]" data-aspectratio="{{ collection.image.aspect_ratio }}" data-sizes="auto" alt="{{ collection.image.alt | escape }}" />
+              {% endif %}
+              {% if section.settings.show_collection_name %}<h1 class="collection-title" itemprop="name">{{ collection.title }}</h1>{% endif %}
+            </div>
+        {% endif %}
+        
+        {% if section.settings.show_collection_image == false and section.settings.show_collection_name %} 
+        	<h1 class="collection-title" itemprop="name">{{ collection.title }}</h1>
+        {% endif %}
+		
+        {% if section.settings.collection-des == "top" and collection.description != blank %}
+			<div class="rte collection-description top">{{ collection.description }}</div>
+        {% endif %}      
+        <div class="productList">
+          <!-- Toolbar -->
+		{% if section.settings.collection_sidebar and section.settings.sidebar_position == 'popup'%}
+              	<div class="filters-toolbar flex usf-toolbar">
+                    <button type="button" class="btn btn-filter">
+                      {% comment %}<i class="ad  ad-filter-l" aria-hidden="true"></i>{% endcomment %}
+                      {{ 'collections.filters.title_tags' | t }}
+                  </button>
+                </div>
+				{% endif %}
+          {%- liquid
+              case section.settings.grid
+                  when 2
+                      assign grid_ds = 'large-up--one-half'
+                      assign image_size = '150,350,550,750,950'
+                  when 3 
+                      assign grid_ds = 'large-up--one-third'
+                      assign image_size = '150,350,550,750'
+                  when 4 
+                      assign grid_ds = 'large-up--one-quarter'
+                      assign image_size = '150,350,550,750'
+                  when 5 
+                      assign grid_ds = 'large-up--one-fifth'
+                      assign image_size = '150,350,550'
+                  when 6 
+                      assign grid_ds = 'large-up--one-sixth'
+                      assign image_size = '130,300,500'
+                  when 7
+                      assign grid_ds = 'large-up--one-seventh'
+                      assign image_size = '130,280,400'
+              endcase
+          -%}
+          {% case section.settings.tablet-grid %}
+          {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+          {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+          {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+          {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+          {% endcase %}
+          {% case section.settings.mobile-grid %}
+          {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+          {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+          {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+          {% endcase %}
+          
+          <!--begin usf settings-->
+          {%- liquid
+	assign boxstyle = section.settings.prbox_style | default: settings.prbox_style
+	
+    if section.settings.prbox_style != blank
+  		assign secondImg = section.settings.secondary_image
+		assign vendorName = section.settings.show_vendor
+  		assign actionBtn = section.settings.prlist_btn_show
+  		assign actionBtnmb = section.settings.btn_mobiles
+  		assign prReview = settings.show_reviewgrid
+  		assign colorSwatch = section.settings.show_color_swatch
+	else
+  		assign secondImg = settings.secondary_image
+  		assign vendorName = settings.show_vendor
+  		assign actionBtn = settings.prlist_btn_show
+  		assign actionBtnmb = settings.btn_mobiles
+  		assign prReview = settings.show_reviewgrid
+  		assign colorSwatch = settings.show_color_swatch
+	endif
+	
+    assign product_box = forloop.index | minus:1
+	assign delay_time = 50 | times : product_box
+	assign quickUrl = product.url | split: "?" | first
+-%}
+          {%- assign colorStyle = section.settings.color_style | default: settings.color_style -%}
+          {%- assign colorType = section.settings.color_type | default: settings.color_type -%}
+          {%- assign colorSize = section.settings.color_size | default: settings.color_size -%}
+          {%- assign imgPosition = section.settings.vr_bg_position | default: settings.vr_bg_position -%}
+          
+
+          <script>
+            window._usfGlobalSettings = {
+              enable_wishlist: {{ settings.enable_wishlist | json }},
+              quick_view: {{ settings.quick_view | json }},
+              catalogmode: {{ settings.catalogmode | json }},
+              enable_quickshop: {{ settings.enable_quickshop | json }},
+              ajax_cart: {{ settings.ajax_cart | json }},
+              display_countdown: {{ settings.display_countdown | json }},
+              sale_label_style: {{ settings.sale_label_style | json }},
+              sale_lbl: {{ settings.sale_lbl | json }},
+              pr_label1: {{ settings.pr_label1 | json }},
+              pr_label2: {{ settings.pr_label2 | json }},
+              pr_label3: {{ settings.pr_label3 | json }},
+              sold_lbl: {{ settings.sold_lbl | json }},
+              pr_lbl: {{ settings.pr_lbl | json }},
+              price_lbl: {{ settings.price_lbl | json }},
+              price_lbl_txt: {{ settings.price_lbl_txt | json }},
+              price_style: {{ settings.price_style | json }},
+              select_label_style: {{ settings.select_label_style | json }},
+            };
+             window._usfSwatchSettings = {
+                colorStyle: {{ colorStyle | json }},
+                colorType: {{ colorType | json }},
+                colorSize: {{ colorSize | json }},
+                imgPosition: {{ imgPosition | json }},
+              };
+            window._usfSectionSettings = {
+              show_vendor: {{ section.settings.show_vendor | json }},
+            };
+            
+            window._usf_grid_mb = {{ grid_mb | json }};
+            window._usf_grid_tb = {{ grid_tb | json }};
+            window._usf_grid_ds = {{ grid_ds | json }};
+            window._usf_actionBtn = {{ actionBtn | json }};
+            window._usf_secondImg = {{ secondImg | json }};
+            window._usf_vendorName = {{ vendorName | json }};
+            window._usf_actionBtnmb = {{ actionBtnmb | json }};
+            window._usf_colorSwatch = {{ colorSwatch | json }};
+            window._usf_boxstyle = {{ boxstyle | json }};
+            window._usfWishlistPageUrl = {{pages[settings.wishlist_page].url | json }};
+            window._usfAddToWishlistText = {{ 'products.wishlist.add_to' | t | json }};
+            window._usfQuickViewText = {{ 'products.product.quick_view' | t | json }};
+            window._usfQuickShopText = {{ 'products.product.quick_shop' | t | json }};
+            window._usfSelectOptionsText = {{ 'products.product.select_options' | t | json }};
+            window._usfAddToCartText = {{ 'products.product.add_to_cart' | t | json }};
+            window._usfSaleText = {{ 'products.product.on_sale' | t | json }};
+            window._usfSoldOutText = {{ 'products.product.sold_out' | t | json }};
+            window._usfRegularPriceText = {{ 'products.product.regular_price' | t | json }};
+			window._usf_spacer_image = {{'spacer.png' | asset_img_url: 'master' | json }};
+          </script>
+          <!--end usf settings -->
+
+          <style>
+#usf_container{
+    visibility:hidden;
+}
+</style>
+<div id="usf_container"></div>
+<div class="usf-skeleton-container">
+	<style>              
+	  @media (max-width: 749px){
+		.usf-mobile-hidden{
+		  display: none !important;
+		}
+		.usf-skeleton-container .usf-sr-config__mobile-filters-wrapper{
+		  display: flex;
+		  width: 100%;
+		  flex-wrap: wrap;
+		}
+		.usf-skeleton-container .usf-filters, 
+		.usf-skeleton-container .usf-sr-config__mobile-filters-wrapper .usf-c-select{
+		  height: 49px;
+		  border: 1px solid #ededed;
+		  width: 50%;
+		  border-left: none;
+		  display: flex !important;
+		  align-items: center;
+		}
+		.usf-skeleton-container .usf-filters{
+		  border-left: 1px solid #ededed;
+		}
+
+		.usf-skeleton-container .usf-results{
+		  height: 400px;
+		  margin-left: -20px;
+		  display: flex;
+		  flex-wrap: wrap;
+		}
+		.usf-skeleton-container .usf-sr-config{
+		  display: flex;
+		  align-items: center;
+		  justify-content: space-between;
+		  margin-top: 13px;
+		  flex-wrap: wrap;
+		}
+		
+		.usf-skeleton-container .usf-sr-summary:before{
+		  margin: 0 !important;
+		  width: 100px !important;
+		}
+		.usf-skeleton-container .usf-views:before{
+		  margin: 0 !important;
+		  width: 50px !important;
+		  margin-left: auto !important;
+		}
+		.usf-skeleton-container .usf-grid__item{
+		  width: 50%;
+		  padding-left: 20px;
+		}
+		.usf-skeleton-container .usf-sr-summary, 
+		.usf-skeleton-container .usf-views{
+		  margin: 30px 0 20px 0;
+		  display: block;
+		  width: 50%;
+		}
+		
+		.usf-skeleton-container .usf-filters:before,
+		.usf-skeleton-container .usf-c-select:before{
+		  margin: 30px;
+		}
+	  }
+	  
+	  .usf-skeleton-container .usf-filters:before,
+	  .usf-skeleton-container .usf-c-select:before,
+	  .usf-skeleton-container .usf-sr-summary:before,
+	  .usf-skeleton-container .usf-views:before,
+	  .usf-skeleton-container .usf-facet .usf-title:before,
+	  .usf-skeleton-container .usf-facet .usf-body:before,
+	  .usf-skeleton-container .usf-facet .usf-body:after              
+	  {
+		content:'';
+		display: block;
+		background-color: #0000000b;
+		-webkit-animation: usf-skeleton-animation 2.3s infinite;
+		animation: usf-skeleton-animation 2.3s infinite;
+		height: 10px;
+		border-radius: 10px;
+		width: 100%;                
+	  }
+	  
+	  @keyframes usf-skeleton-animation {
+		0% {
+			opacity: 1
+		}
+
+		50% {
+			opacity: .5
+		}
+
+		100% {
+			opacity: 1
+		}
+	  }
+	  
+	  @media (min-width: 750px){
+		.usf-skeleton-container .usf-desktop-hidden{
+		  display: none !important;
+		}
+		.usf-skeleton-container .usf-facet .usf-title,
+		.usf-skeleton-container .usf-facet .usf-body,
+		.usf-skeleton-container .usf-c-select
+		{
+		  display: block !important;
+		}              
+	  
+		.usf-skeleton-container .usf-sr-config__mobile-filters-wrapper{
+		  display: none;
+		}
+		
+		.usf-skeleton-container .usf-facets{
+		  display: block;
+		  width: 23%;
+		  float: left;
+		  margin-top: 17px;
+		}
+		
+		.usf-skeleton-container .usf-sr-container {
+		  width: 77%;
+		  float: left;
+		  padding-left: 30px;
+		  margin-top: 17px;
+		}
+		
+		.usf-skeleton-container .usf-sr-config{
+		  display: flex;
+		}
+		
+		.usf-skeleton-container .usf-sr-config > .usf-c-select{
+		  width: 200px;
+		}
+		
+		.usf-skeleton-container .usf-sr-summary{
+		  width: 100%;
+		}
+		.usf-skeleton-container .usf-sr-summary:before{
+		  margin: auto;
+		  width: 200px;
+		}
+		.usf-skeleton-container .usf-views:before{
+		}
+		.usf-skeleton-container .usf-grid__item{
+		  width: 50%;
+		  padding-left: 20px;
+		}
+		.usf-skeleton-container .usf-views{
+		  display: block;
+		  width: 50px;
+		}
+		
+		.usf-skeleton-container .usf-sr-container{
+		  min-height: 700px;
+		}
+	  }  
+	  
+	  .usf-skeleton-container .usf-facet{
+		margin-bottom: 40px;
+	  }
+	  
+	  .usf-skeleton-container .usf-facet .usf-title:before{                
+		margin-bottom: 25px;
+		width: 70%;
+	  }
+	  
+	  .usf-skeleton-container .usf-facet .usf-body:before,
+	  .usf-skeleton-container .usf-facet .usf-body:after
+	  {
+		margin-bottom: 16px;
+	  }
+	</style>
+  
+	<div class="usf-facets usf-mobile-hidden">
+	  <div class="usf-facet">
+		<div class="usf-title"></div>
+		<div class="usf-body"></div>                
+	  </div>
+	  <div class="usf-facet">
+		<div class="usf-title"></div>
+		<div class="usf-body"></div>
+	  </div>
+	</div>
+	<div class="usf-sr-container">
+	  <div class="usf-sr-config">
+		<div class="usf-sr-config__mobile-filters-wrapper">
+		  <div class="usf-filters"></div>
+		  <div class="usf-c-select"></div>
+		</div>
+		<div class="usf-views usf-mobile-hidden"></div>
+		<span class="usf-sr-summary"></span>
+		<div class="usf-views usf-desktop-hidden"></div>
+		<div class="usf-c-select usf-mobile-hidden"></div>
+	  </div>
+	  <div class="usf-results usf-grid">
+		<div class="usf-grid__item"></div>
+		<div class="usf-grid__item"></div>
+		<div class="usf-grid__item"></div>
+		<div class="usf-grid__item"></div>
+	  </div>
+	</div>       
+</div>
+        </div>
+        {% if section.settings.collection-des == "bottom" %}
+          {% if collection.description != blank %}<br/><div class="rte collection-description top">{{ collection.description }}</div>{% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+<style>
+  .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-desk}}px; padding-right:{{ section.settings.pad-desk}}px; }
+  .clPageBnr {background-color:{{section.settings.clr_bg}}; height:{{section.settings.bheight}}px;}
+  .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing | divided_by: 2.0  }}px; }
+  .pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing | divided_by: 2.0  }}px {{ section.settings.grid-spacing}}px;}
+  .collection-title, .collection-description { color:{{section.settings.clr_text}}; }
+  .collection-box .collection-grid-item .collection-grid-item__title,
+  .collection-box .collection-grid-item .counts { color:{{ section.settings.collection_ttl_hm}}; }
+  .collection-box .collection-grid-item .details { background:{{section.settings.collection_ttl_bg_hm | color_modify: 'alpha', section.settings.collection_ttl_opt_hm}}; }
+  @media only screen and (max-width: 1024px) { 
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-ipad}}px; padding-right:{{ section.settings.pad-ipad}}px; }
+    .clPageBnr { height:{{section.settings.bheightipad}}px; }
+  }
+  @media only screen and (max-width: 767px) { 
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-mbl}}px; padding-right:{{ section.settings.pad-mbl}}px; }
+    .clPageBnr { height:{{section.settings.bheightmob}}px;}
+    .collection-box .box-{{section.id}} .collection-grid-item .details { background:{{section.settings.collection_ttl_bg_hm_responsive}}; }
+    .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing-mbl | divided_by: 2.0  }}px; }
+  	.pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing-mbl | divided_by: 2.0  }}px {{ section.settings.grid-spacing-mbl}}px;}
+  }
+</style>
+
+<!-- END USF -->
+
+{% comment %}USF
+<div class="clPageBnr flex lazyload{% if collection.image %} with-image {% endif %}" {% if section.settings.show_collection_image and collection.image %}data-bgset="{% include 'bgset', image: collection.image %}" data-sizes="auto" data-parent-fit="contain" style="background-image:url({{ collection.image | img_url: '300x' }});"{% endif %}>
+	<h1 class="collection-title" itemprop="name">{{ collection.title }}</h1>
+</div>
+{%- if settings.breadcrumb_cl -%}{%- include 'breadcrumb' -%}{%- else -%}<div class="topSpace"></div>{%- endif -%}
+
+<div class="collection-box {{section.settings.style}}{% unless section.settings.section_width %} page-width{% else %} fullwidth-{{section.id}} fullwidth{% endunless %}" id="{{ section.id }}"
+     data-section-id="{{ section.id }}" {% if section.settings.masonary_grid %}data-section-type="masonary"{% endif %}>
+  {% if collection.description != blank %}<div class="rte collection-description top">{{ collection.description }}</div>{% endif %}  
+  {% case section.settings.grid %}
+    {% when 2 %}{%- assign grid_ds = 'large-up--one-half' -%}
+    {% when 3 %}{%- assign grid_ds = 'large-up--one-third' -%}
+    {% when 4 %}{%- assign grid_ds = 'large-up--one-quarter' -%}
+    {% when 5 %}{%- assign grid_ds = 'large--one-quarter widescreen--one-fifth' -%}
+    {% when 6 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-sixth' -%}
+    {% when 7 %}{%- assign grid_ds = 'large--one-fifth widescreen--one-seventh' -%}
+  {% endcase %}
+
+  {% case section.settings.tablet-grid %}
+    {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+    {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+    {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+    {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+  {% endcase %}
+
+  {% case section.settings.mobile-grid %}
+    {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+    {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+    {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+  {% endcase %}
+  
+  <div class="grid-mr-{{ section.settings.grid-spacing}}">
+    <div class="grid collection-grid{% if section.settings.masonary_grid %} grid-masonary{% else %} grid--uniform{% endif %} {{section.settings.style}} pd-{{ section.settings.grid-spacing}}">
+      {% if section.settings.masonary_grid %}<div class="grid-sizer-{{section.id}} {{grid_mb}} {{grid_tb}} {{grid_ds}}"></div>{% endif %}
+      	{%- assign navName = collection.handle -%}
+      	{% for link in linklists[navName].links %}
+            <div class="grid__item ms-item {{grid_mb}} {{grid_tb}} {{grid_ds}}">
+              {%- assign linkUrl = link.url | split: "/" | last -%}
+              {% include 'collection-grid-item-list-page', collection: collections[linkUrl] %}
+            </div>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-desk}}px; padding-right:{{ section.settings.pad-desk}}px; }
+  .clPageBnr {background-color:{{section.settings.clr_bg}}; height:{{section.settings.bheight}}px;}
+  .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing | divided_by: 2.0  }}px; }
+  .pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing | divided_by: 2.0  }}px {{ section.settings.grid-spacing}}px;}
+  .collection-title, .collection-description { color:{{section.settings.clr_text}}; }
+  .collection-box .collection-grid-item .collection-grid-item__title,
+  .collection-box .collection-grid-item .counts { color:{{ section.settings.collection_ttl_hm}}; }
+  .collection-box .collection-grid-item .details { background:{{section.settings.collection_ttl_bg_hm | color_modify: 'alpha', section.settings.collection_ttl_opt_hm}}; }
+  @media only screen and (max-width: 1024px) { 
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-ipad}}px; padding-right:{{ section.settings.pad-ipad}}px; }
+    .clPageBnr { height:{{section.settings.bheightipad}}px; }
+  }
+  @media only screen and (max-width: 767px) { 
+    .fullwidth-{{section.id}} { padding-left:{{ section.settings.pad-mbl}}px; padding-right:{{ section.settings.pad-mbl}}px; }
+    .clPageBnr { height:{{section.settings.bheightmob}}px;}
+    .collection-box .box-{{section.id}} .collection-grid-item .details { background:{{section.settings.collection_ttl_bg_hm_responsive}}; }
+    .grid-mr-{{ section.settings.grid-spacing}} { margin:0 -{{ section.settings.grid-spacing-mbl | divided_by: 2.0  }}px; }
+  	.pd-{{ section.settings.grid-spacing}} .collection-grid-item { margin:0 {{ section.settings.grid-spacing-mbl | divided_by: 2.0  }}px {{ section.settings.grid-spacing-mbl}}px;}
+  }
+</style>
+
+
+USF{% endcomment %}
+{% schema %}
+  {
+    "name": "Sub Collection List",
+    "settings": [
+	 {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": true
+	  },
+	  {
+        "type": "paragraph",
+        "content": "Left/Right Padding : Fullwidth Section Only==="
+      }, 	
+      {
+        "type": "range",
+        "id": "pad-desk",
+        "label": "Desktop",
+        "default": 55,
+        "min": 0,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-ipad",
+        "label": "Tablet",
+        "default": 15,
+        "min": 0,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "pad-mbl",
+        "label": "Mobile",
+        "default": 10,
+        "min": 0,
+        "max": 20,
+        "step": 1
+      },
+	  {
+        "type": "header",
+        "content": "Collection Banner and Title",
+		"info":"display collection name, description or image. You can upload image from each collection or select background color"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_collection_image",
+        "label": "Show Collection Image?",
+        "default": true
+      }, 	
+ 	  {
+        "type": "range",
+        "id": "bheight",
+        "label": "Banner Height : Desktop",
+        "default": 300,
+        "min": 50,
+        "max": 400,
+        "step": 10,
+		"unit":"px"		
+      }, 
+ 	  {
+        "type": "range",
+        "id": "bheightipad",
+        "label": "Banner Height : Tablet",
+        "default": 200,
+        "min": 50,
+        "max": 400,
+        "step": 10,
+		"unit":"px"		
+      }, 	
+     {
+        "type": "range",
+        "id": "bheightmob",
+        "label": "Banner Height : Mobile",
+        "default": 100,
+        "min": 50,
+        "max": 400,
+        "step": 10,
+		"unit":"px"		
+      },
+      {
+        "type": "color",
+        "id": "clr_text",
+        "label": "Title Text",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "clr_bg",
+        "label": "Background",
+        "default": "#eee"
+      },
+ 	  {
+        "type": "header",
+        "content": "Appearance"
+      },
+      {
+        "type": "select",
+        "id": "style",
+        "label": "Box style",
+        "default": "style3",
+        "options": [
+			{ "value": "style1", "label": "Style 1" },
+			{ "value": "style2", "label": "Style 2" },
+			{ "value": "style3", "label": "Style 3" },
+			{ "value": "style4", "label": "Style 4" }
+        ]
+      },
+	  {
+		"type":"checkbox",
+		"id":"product_count",
+		"label":"Show Products Count",
+		"default": true
+	  },  
+	  {
+		"type":"checkbox",
+		"id":"masonary_grid",
+		"label":"Masonary Grid",
+		"default": false
+	  },
+	  {
+        "type": "range",
+        "id": "grid-spacing",
+        "label": "Grid Spacing",
+        "default": 4,
+        "min": 0,
+        "max": 30,
+        "step": 2,
+		"unit":"px",
+		"info":"Space between two box/grid"
+      },
+	  {
+        "type": "range",
+        "id": "grid-spacing-mbl",
+        "label": "Grid Spacing Mobile",
+        "default": 4,
+        "min": 0,
+        "max": 30,
+        "step": 2,
+		"unit":"px",
+		"info":"Space between two box/grid"
+      },	 
+	  {
+        "type": "paragraph",
+        "content": "=== Collections per row ==="
+      }, 	
+      {
+        "type": "range",
+        "id": "grid",
+        "label": "Desktop",
+        "default": 4,
+        "min": 2,
+        "max": 7,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "tablet-grid",
+        "label": "Tablet",
+        "default": 3,
+        "min": 1,
+        "max": 5,
+        "step": 1
+      },
+      {
+        "type": "range",
+        "id": "mobile-grid",
+        "label": "Mobile",
+        "default": 2,
+        "min": 1,
+        "max": 3,
+        "step": 1
+      },           
+	   {
+        "type": "color",
+        "id": "collection_ttl_hm",
+        "label": "Title",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "collection_ttl_bg_hm",
+        "label": "Title Background",
+        "default": "#000"
+      },
+      {
+        "type": "range",
+        "id": "collection_ttl_opt_hm",
+        "min": 0,
+        "max": 1,
+        "step": 0.1,
+        "label": "Background Opacity",
+        "unit": "%",
+        "default": 0.7
+      }
+    ]
+  }
+{% endschema %}

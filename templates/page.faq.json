@@ -1,0 +1,130 @@
+{
+  "sections": {
+    "page": {
+      "type": "page-template",
+      "settings": {
+        "section_width": false,
+        "width": 1200,
+        "hide_ttl": false,
+        "hide_hdft": false,
+        "breadcrumb": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "176cef6d-944d-49ed-9976-dfea5a742dce": {
+          "type": "faqsection",
+          "settings": {
+            "sectiontitle": "Shopping"
+          }
+        },
+        "117f2eee-92ed-4918-95d8-4777e9b12d2f": {
+          "type": "faqs",
+          "settings": {
+            "question": "What Shipping Methods Are Available?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus. Sed et est vel velit vestibulum tincidunt non a felis. Phasellus convallis, diam eu facilisis tincidunt, ex nibh vulputate dolor, eu maximus massa libero vel eros."
+          }
+        },
+        "d27d402e-9145-4f5e-bc65-86d45d5623f5": {
+          "type": "faqs",
+          "settings": {
+            "question": "How do I place an Order?",
+            "answer": "Duis nec nisi id ligula dapibus maximus nec eu dui. Proin ornare, ipsum vitae tincidunt rutrum, diam neque accumsan turpis, a dignissim nisi libero non lacus. Nulla quis massa nulla. Morbi metus lacus, sagittis sed est vel, aliquet ultrices nibh. Morbi auctor ex eget egestas auctor. Duis nec nisi id ligula dapibus maximus nec eu dui. Proin ornare, ipsum vitae tincidunt rutrum, diam neque accumsan turpis, a dignissim nisi libero non lacus. Nulla quis massa nulla. Morbi metus lacus, sagittis sed est vel, aliquet ultrices nibh. Morbi auctor ex eget egestas auctor."
+          }
+        },
+        "e5d784f6-e1ed-4e4c-93c2-11db4d73a2b1": {
+          "type": "faqsection",
+          "settings": {
+            "sectiontitle": "Payment"
+          }
+        },
+        "a2786c0f-b40f-49ae-aaa7-0e99e549ab0f": {
+          "type": "faqs",
+          "settings": {
+            "question": "What Payment Methods Are Accepted?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus. Sed et est vel velit vestibulum tincidunt non a felis. Phasellus convallis, diam eu facilisis tincidunt"
+          }
+        },
+        "de13a007-c879-47a9-bc4a-571fc9354b31": {
+          "type": "faqs",
+          "settings": {
+            "question": "Do You Ship Internationally?",
+            "answer": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
+          }
+        },
+        "cd8128ae-28fd-48db-95e9-8265759d181a": {
+          "type": "faqs",
+          "settings": {
+            "question": "What Payment Methods Are Accepted?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus. Sed et est vel velit vestibulum tincidunt non a felis. Phasellus convallis, diam eu facilisis tincidunt, ex nibh vulputate dolor, eu maximus massa libero vel eros. In vulputate metus lacus, eu vehicula dolor feugiat id. Nulla vitae nisl in ex consequat porttitor vel a lectus. Vestibulum viverra in velit ac consequat. Nullam porta nulla eu dignissim cursus."
+          }
+        },
+        "eff9098d-93a7-403d-ad8c-b30d40c1ef0d": {
+          "type": "faqsection",
+          "settings": {
+            "sectiontitle": "Returns"
+          }
+        },
+        "0b283b97-7726-4c4a-a581-2221983d3bb6": {
+          "type": "faqs",
+          "settings": {
+            "question": "Is Buying On-Line Safe?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus. Sed et est vel velit vestibulum tincidunt non a felis. Phasellus convallis, diam eu facilisis tincidunt, ex nibh vulputate dolor, eu maximus massa libero vel eros. In vulputate metus lacus, eu vehicula dolor feugiat id. Nulla vitae nisl in ex consequat porttitor vel a lectus."
+          }
+        },
+        "654077c6-99a9-4f06-bd69-4b238829a3d8": {
+          "type": "faqs",
+          "settings": {
+            "question": "Do I have to pay anything to return my items?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus."
+          }
+        },
+        "e3a276f6-e230-401b-a299-9f3ea00c3c0a": {
+          "type": "faqs",
+          "settings": {
+            "question": "How do I return an item?",
+            "answer": "In vulputate metus lacus, eu vehicula dolor feugiat id. Nulla vitae nisl in ex consequat porttitor vel a lectus. Vestibulum viverra in velit ac consequat. Nullam porta nulla eu dignissim cursus."
+          }
+        },
+        "82a5e086-33fb-4fc4-b564-a2d49b080b48": {
+          "type": "faqsection",
+          "settings": {
+            "sectiontitle": "Shipping"
+          }
+        },
+        "87f47f42-51aa-4b2e-9b3a-b8a18004ac59": {
+          "type": "faqs",
+          "settings": {
+            "question": "How many day take for shipping?",
+            "answer": "Nullam sed neque luctus, maximus diam sed, facilisis orci. Nunc ultricies neque a aliquam sollicitudin. Vivamus sit amet finibus sapien. Duis est dui, sodales nec pretium a, interdum in lacus. Sed et est vel velit vestibulum tincidunt non a felis. Phasellus convallis, diam eu facilisis tincidunt, ex nibh vulputate dolor, eu maximus massa libero vel eros. In vulputate metus lacus, eu vehicula dolor feugiat id. Nulla vitae nisl in ex consequat porttitor vel a lectus."
+          }
+        }
+      },
+      "block_order": [
+        "176cef6d-944d-49ed-9976-dfea5a742dce",
+        "117f2eee-92ed-4918-95d8-4777e9b12d2f",
+        "d27d402e-9145-4f5e-bc65-86d45d5623f5",
+        "e5d784f6-e1ed-4e4c-93c2-11db4d73a2b1",
+        "a2786c0f-b40f-49ae-aaa7-0e99e549ab0f",
+        "de13a007-c879-47a9-bc4a-571fc9354b31",
+        "cd8128ae-28fd-48db-95e9-8265759d181a",
+        "eff9098d-93a7-403d-ad8c-b30d40c1ef0d",
+        "0b283b97-7726-4c4a-a581-2221983d3bb6",
+        "654077c6-99a9-4f06-bd69-4b238829a3d8",
+        "e3a276f6-e230-401b-a299-9f3ea00c3c0a",
+        "82a5e086-33fb-4fc4-b564-a2d49b080b48",
+        "87f47f42-51aa-4b2e-9b3a-b8a18004ac59"
+      ],
+      "settings": {
+        "pagestyle": "style1",
+        "sec-title-bg": "#333333",
+        "sec-title": "#eeeeee"
+      }
+    }
+  },
+  "order": [
+    "page",
+    "faq"
+  ]
+}

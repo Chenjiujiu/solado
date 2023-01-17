@@ -1,0 +1,167 @@
+<div class="content-indent {{ section.settings.top-offeset}}">   
+  {% if section.settings.section_cov %}<div class="section-cover" style="background-color:{{section.settings.sec_bg_clr}};">{% endif%} 
+  <div class="page-width" style="max-width:{{section.settings.max-width}}px;">
+    <div class="faq-{{section.settings.pagestyle}}">
+      <div id="{{section.id}}" class="faqList">        	            
+        {% for block in section.blocks limit: section.blocks.size%}                 
+        {% if block.type == 'faqsection' and block.settings.sectiontitle != blank %}
+        <h4>{{block.settings.sectiontitle}}</h4>
+        {% endif %}    
+        {% if block.type == 'faqs' %}
+        <div class="faq-body">
+          <h5 class="panel-title fl f-jcsb j-aic">{{ block.settings.question}}{% if section.settings.pagestyle =='style1' %}<i class="ad ad-plus-l"></i>{% endif %}</h5>
+          <div id="{{ block.id }}" class="panel-content">{{ block.settings.answer}}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% if section.settings.section_cov %}</div> {% endif%}  
+</div>
+<style>
+  #{{section.id}} h4 { font-weight:600;	background:{{section.settings.sec-title-bg}}; color:{{section.settings.sec-title}}; }
+</style>
+
+<script type="text/javascript">
+window.addEventListener('load', function() {
+  {% if section.settings.pagestyle =='style1' %}
+  
+    $("#{{section.id}} .panel-title").click(function() {
+        $(this).toggleClass("active");
+        $(this).next().slideToggle();
+    }); 
+   $("#{{section.id}} .faq-body:first-child .panel-title").addClass("active");
+   $("#{{section.id}} h4+.faq-body .panel-title").addClass("active");
+  {% endif %} 
+});
+</script>
+
+{% schema %}
+  {
+    "name": "FAQ Page",
+    "settings": [	  	 
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        },
+		 {
+            "type": "checkbox",
+            "id": "section_cov",
+            "label": "Use Background?",
+            "default": false
+          },
+		{
+            "type": "color",
+            "id": "sec_bg_clr",
+            "label": "Background Color",
+			"default":"#fafafa"	
+		 },
+	  {
+            "type": "select",
+            "id": "pagestyle",
+            "label": "FAQs Style",
+            "default": "style1",
+            "options": [
+              {
+                "value": "style1",
+                "label": "Style 1"
+              },
+              {
+                "value": "style2",
+                "label": "Style 2"
+              }
+            ]
+       },	
+	{
+        "type": "range",
+        "id": "max-width",
+        "label": "Desktop",
+        "default": 800,
+        "min": 600,
+        "max": 1200,
+        "step": 100
+      },
+	 {
+        "type": "header",
+        "content": "Style 2"
+      },
+	  {
+        "type": "color",
+        "id": "sec-title-bg",
+        "label": "Section Title Background",
+        "default": "#333"
+      },
+      {
+        "type": "color",
+        "id": "sec-title",
+        "label": "Section Title",
+        "default": "#eee"
+      }
+	],
+   "blocks":[
+     {
+        "type": "faqsection",
+        "name": "Section Title",
+		"settings": [
+          {
+            "type": "text",
+            "id": "sectiontitle",
+            "label": "Section Title"
+          }
+		]
+      },
+	  {
+	    "type":"faqs",
+		"name":"FAQs",
+		"settings":[			
+			{
+			"type":"text",
+			"id":"question",
+			"label":"Question",
+			"default":"How can I get assistance if I need it?"
+			},
+			{
+			"type":"textarea",
+			"id":"answer",
+			"label":"Answer",
+			"default":"Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam"
+			}
+		 ]
+      }
+	],
+    "presets": [
+      {
+        "name": "FAQs",        
+ 		"category": "4. Text",
+		"blocks": [
+          {
+            "type": "faqs"
+          },
+ 		  {
+            "type": "faqs"
+          },
+		   {
+            "type": "faqs"
+          } 
+        ]
+      }
+    ]
+ }
+{% endschema %}

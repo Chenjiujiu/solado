@@ -1,0 +1,47 @@
+<div class="closeFilter {% unless section.settings.sidebar_position == 'popup' %}large-up--hide{% endunless %}"><i class="ad ad-times-r" aria-hidden="true"></i></div>
+<div class="sidebar_tags" data-url="{{shop.url}}{{collection.url | split: "?" | first}}">
+{% for block in section.blocks %}
+	{% if block.type == 'categories' %}
+        <div class="sidebar_widget categories">
+          <div class="widget-title">{{block.settings.title}}</div>
+          <div class="widget-content">
+            <ul class="sidebar_cate">{% for link in linklists[block.settings.side_categories].links %}{% include 'mm-links' %}{% endfor %}</ul>
+          </div>
+        </div>
+    {% endif %}
+   
+      {% comment %} *** Image Banner *** {% endcomment %}
+      {% if block.type == 'image_bnr' %}
+      <div class="sidebar_widget static-banner small--hide medium--hide">
+        {% if block.settings.side_bnr_link != blank %}
+        <a href="{{ block.settings.side_bnr_link }}">
+          {% endif %}
+          {% if block.settings.side_bnr_img != blank %}
+          {{ block.settings.side_bnr_img | img_url: '300x' | img_tag }}
+          {% else %}
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+          {% if block.settings.side_bnr_link != blank %}
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      {% comment %} *** Static Text Block *** {% endcomment %}
+      {% if block.type == 'static_text' %}
+      <div class="sidebar_widget small--hide medium--hide">
+        <div class="widget-title">{{block.settings.title}}</div>
+        <div class="widget-content">
+          {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+          {% else %}
+          <p>Please select collection from store admin > customize > Collection page > sidebar</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+  <div id="usf_filters"></div>
+</div>

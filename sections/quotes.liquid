@@ -1,0 +1,275 @@
+<div class="content-indent {{ section.settings.top-offeset}}">
+<div class="quote-bg wow fadeInUp">  
+    <div class="page-width" data-section-id="{{ section.id }}" data-section-type="quotes">
+      <div class="quote-bg-inner">
+     
+      {%- if section.settings.title != blank -%}
+      	<div class="sec-ttl {{ settings.title_align}}"><h3 class="h3">{{ section.settings.title }}</h3></div>
+      {%- endif -%}
+
+      {% if section.blocks.size > 0 %}
+      <div class="quotes-wrapper {{section.settings.quoteStyle}}">
+        <div class="quotes-slider" id="Quotes-{{ section.id }}" id="Quotes-{{section.id}}" data-slick='{"slidesToShow":{% if section.settings.quoteStyle == "style1" %} 1 {% else %} 3 {% endif %},"autoplay":{{ section.settings.autoplay }}, "autoplaySpeed":{{section.settings.autoplay_speed | times: 1000}},"arrows":{{section.settings.arrow}},"dots":{{section.settings.dots}},{%- if settings.rtl -%}"rtl": true,{%- endif -%}"responsive":[{"breakpoint": 768,"settings":{"slidesToShow":1}} ]}'>
+          {% for block in section.blocks %}
+          <div class="quotes-slide--{{ block.id }}" {{ block.shopify_attributes }}>
+            
+            {% if block.settings.image != blank %}
+            <span class="author-pic">
+              {% if section.settings.quoteStyle == 'style1' or section.settings.quoteStyle == 'style2' %} 
+                <img src="{{block.settings.image |img_url:'100x100',crop: 'center'}}" alt="" /> 
+              {% else %}
+            	<img src="{{block.settings.image |img_url:'500x300',crop: 'center'}}" alt="" /> 
+              {% endif %}
+            </span>
+          
+            {% endif %}
+            <blockquote class="quotes-slider__text text-center">             
+              {% if block.settings.quote != blank %}
+              <div class="rte-setting">{{ block.settings.quote }}</div>
+              {% endif %}
+
+              {% if block.settings.display_rat %}
+              {% if block.settings.rating == 1 %}<span class="ratings"><i class="ad ad-star"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i></span>{% endif %}
+              {% if block.settings.rating == 2 %}<span class="ratings"><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i></span>{% endif %}
+              {% if block.settings.rating == 3 %}<span class="ratings"><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star-o"></i><i class="ad ad-star-o"></i></span>{% endif %}
+              {% if block.settings.rating == 4 %}<span class="ratings"><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star-o"></i></span>{% endif %}
+              {% if block.settings.rating == 5 %}<span class="ratings"><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i><i class="ad ad-star"></i></span>{% endif %}
+              {% endif %}
+
+              {% if block.settings.author != blank %}
+              <p class="authour">{{ block.settings.author }}</p>
+              {% endif %}
+            </blockquote>
+            
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {% if section.blocks.size == 0 %}
+      {% include 'no-blocks' %}
+      {% endif %}
+		</div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Testimonials",
+    "class": "index-section index-section--flush",
+    "max_blocks": 9,
+    "settings": [	 
+	  {
+		"type":"checkbox",
+		"id":"section_width",
+		"label":"Fullwidth?",
+		"default": true
+	  },
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+        }, 	  
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Testimonials"
+      }, 	
+	 {
+        "type": "select",
+        "id": "quoteStyle",
+        "label": "Select Style",
+        "default": "style1",
+        "options": [
+          {
+            "label": "Style 1 - 1 Column",
+            "value": "style1"
+          },
+          {
+            "label": "Style 2 - 3 Column",
+            "value": "style2"
+          },
+          {
+            "label": "Style 3 - 3 Column",
+            "value": "style3"
+          }
+        ]
+      },
+	  {
+        "type": "checkbox",
+        "id": "autoplay",
+        "label": "Auto-rotate slides",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "autoplay_speed",
+        "label": "Autoplay Speed",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1
+      },
+	  {
+        "type": "checkbox",
+        "id": "arrow",
+        "label": "Show Next/Previous Arrows?",
+        "default": true
+      },
+	  {
+        "type": "checkbox",
+        "id": "dots",
+        "label": "Show Dotted Navigation?",
+        "default": false
+      },
+	  {
+        "type": "header",
+        "content":"Appearance"
+      },
+	  {
+        "type": "color",
+        "id": "testimonials_bg",
+        "label": "Background Color",
+        "default": "#f5f5f5"
+      },
+ 	  {
+        "type": "paragraph",
+        "content":"OR"
+      },
+      {
+        "type": "image_picker",
+        "id": "testimonials_bg_img",
+        "label": "Background Image"
+      },
+ 		{
+        "type": "color",
+        "id": "testimonials_hd",
+        "label": "Heading",
+        "default": "#444"
+      },
+      {
+        "type": "color",
+        "id": "testimonials_text",
+        "label": "Text",
+        "default": "#444"
+      },
+		{
+        "type": "color",
+        "id": "text_bg",
+        "label": "Text Background",
+        "default": "#fff"
+       },
+ 		{	
+        "type": "color",
+        "id": "rating_clr",
+        "label": "Rating Stars Color",
+        "default": "#EBB868"		
+      }, 	
+	  {
+        "type": "paragraph",      
+        "content": "Set Font Size From --> Theme Settings --> Fonts, Colors and Styles --> Testimonials"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "quote",
+        "name": "Testimonial",
+        "settings": [
+ 		  {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Upload Image",
+			"info":"Style 1 & Style 2: recommended size 100x100. Style 3: recommended size 500x300"
+          },
+          {
+            "type": "richtext",
+            "id": "quote",
+            "label": "Text",
+            "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+          },
+          {
+            "type": "textarea",
+            "id": "author",
+            "label": "Author",
+            "default": "Author's name"
+          },
+		   {
+            "type":"checkbox",
+            "id":"display_rat",
+            "label":"Display Ratings?",
+            "default": true
+          },
+          {
+            "type": "range",
+            "id": "rating",
+            "label": "Select Rating Stars",
+            "default": 5,
+            "min": 1,
+            "max": 5,
+            "step": 1          
+          } 	
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Testimonials",
+        "category": "4. Text",
+        "blocks": [
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          },
+          {
+            "type": "quote"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+<style>
+ 
+  .quotes-slider .slick-slide { {% if section.settings.text_bg != 'rgba(0,0,0,0)' %} padding:30px; {% else %} padding:0 30px 30px;{% endif %} background:{{ section.settings.text_bg}}; margin:0 15px; }     
+  
+  {% if section.settings.quoteStyle == 'style3' %}
+  .quotes-slider .slick-slide {padding:0;}
+  .quote-bg .author-pic img {border-radius:0;}
+  .quote-bg blockquote {padding:10px 30px 30px;}
+  {% endif %}
+  
+  {% if section.settings.section_width %} 
+  .quote-bg { padding:40px; background-color:{{section.settings.testimonials_bg}}; {% if section.settings.testimonials_bg_img != blank %} background-image:url('{{section.settings.testimonials_bg_img | img_url:'master'}}'); background-repeat:no-repeat; background-position:50% 50%; {% endif %}; } 
+  {% else %}
+  .quote-bg-inner { padding:30px 0; background-color:{{section.settings.testimonials_bg}}; {% if section.settings.testimonials_bg_img != blank %} background-image:url('{{section.settings.testimonials_bg_img | img_url:'master'}}'); background-repeat:no-repeat; background-position:50% 50%; {% endif %} } 
+  {% endif %}  
+  
+  .quote-bg .slick-dots li button { background:none;  border:1px solid {{section.settings.testimonials_text}};}
+  .quote-bg .slick-dots li.slick-active button { background:{{section.settings.testimonials_text}}; }
+  
+  .quote-bg .sec-ttl h3 {color:{{section.settings.testimonials_hd}};}
+  .quotes-slider p { color:{{section.settings.testimonials_text}}; }
+  
+  #Quotes-{{section.id}} .ad { color:{{section.settings.rating_clr}}; font-size:{{settings.star_size}}px; margin-left:1px}
+  #Quotes-{{section.id}} .ad-star { color:{{section.settings.rating_clr | color_modify:'alpha', 0.8}}  }
+</style>

@@ -1,0 +1,152 @@
+<script type="text/javascript">
+    var startTime = new Date().getTime();
+    Object.defineProperty(window, "DoublyGlobalCurrency", {
+        configurable: true,
+        set(DoublyGlobalCurrency) {
+            var endTime = new Date().getTime();
+            /*console.log("get currency cost time =", endTime - startTime);
+            console.log("setting with currentCurrency value " + DoublyGlobalCurrency.currentCurrency);*/
+            var currencyInfo = JSON.parse(JSON.stringify(DoublyGlobalCurrency));
+            var currentCurrency = currencyInfo.currentCurrency;
+            var rates = currencyInfo.rates;
+            var currencySymbolObj = {
+                USD: "$",
+                EUR: "€",
+                GBP: "￡",
+                CAD: "$",
+                AUD: "$",
+                BRL: "R$",
+                ARS: "$",
+                CZK: "Kč",
+                CLP: "$",
+                CNY: "¥",
+                HRK: "kn",
+                DKK: "kr.",
+                EGP: "£",
+                GEL: "₾",
+                HKD: "HK$",
+                HUF: "Ft",
+                INR: "₹",
+                IDR: "Rp",
+                JPY: "¥",
+                JOD: "JD.",
+                KWD: "ك",
+                MYR: "RM",
+                MXN: "$",
+                MNT: "₮",
+                ANG: "ƒ",
+                TWD: "NT$",
+                NZD: "$",
+                KPW: "₩",
+                NOK: "kr",
+                PEN: "S/.",
+                PHP: "₱",
+                PLN: "zł",
+                QAR: "﷼",
+                RON: "lei",
+                RUB: "₽",
+                SAR: "﷼",
+                RSD: "РСД",
+                SGD: "$",
+                ZAR: "R",
+                KRW: "₩",
+                SEK: "kr",
+                CHF: "CHF",
+                THB: "฿",
+                TRY: "TL",
+                AED: "د.إ"
+            };
+            var storeCurrency = "{{ shop.currency }}";		
+	        /**console.log("storeCurrency : " + storeCurrency);**/
+            var currencyRadio = rates[currentCurrency];
+            var storeCurrencySymbol = "$";	
+            if(storeCurrency === "EUR"){/**欧元店铺需要计算用户选择币种与欧元的汇率**/		
+            	currencyRadio = (currencyRadio / rates['EUR']).toFixed(10);		
+            	storeCurrencySymbol = "€";		
+            }
+            var params = {
+                "currencyRadio": currencyRadio,
+                "currencySymbol": currencySymbolObj[currentCurrency],
+                "currentCurrency": currentCurrency,
+                "storeCurrency": storeCurrency,		
+            	"storeCurrencySymbol": storeCurrencySymbol
+            };
+            sessionStorage.setItem("currencyInfo", JSON.stringify(params));
+        }
+    });
+    window.addEventListener('DOMContentLoaded',function(){
+      	$("#cart-drawer .cart-shipping-fortunately").on('click',function(){
+			location.href ="/collections/back-in-stock";
+     	});
+      	/** Taboola Pixels checkout code for mini cart **/
+        $("#cartDWcheckout").click(function(e){
+          _tfa.push({notify: 'event', name: 'start_checkout', id: 1461029});
+        });
+      	/** this code for mini cart to refresh top shopping info **/
+        $(document).on("cart.requestComplete", function (event, cart) { /**console.log(event, cart)**/
+          	console.log('change mini cart',cart);
+            var refreshMiniCartTimer = setTimeout(function () {
+                var $cartDrawr = $("#cart-drawer");
+                var freeShipping = Number($cartDrawr.find(".cart-shipping-fortunately").attr("free_shipping"));
+                var $totalDom = $cartDrawr.find(".cart-subtotal-row .money");
+                var totalPrice = $totalDom.text().match(/\d+(?:\.\d+)?/g)[0];
+
+                var currencySymbol = "$";
+                var currentCurrency = "USD";
+                var currencyRadio = 1.0;
+                console.log("currencySymbol", currencySymbol, currentCurrency, currencyRadio);
+                /** console.log("购物车的", totalPrice, freeShipping); */
+                var $shoppingLink = $cartDrawr.find(".cart-custom-shopping-link");
+                var $fortunately = $cartDrawr.find(".cart-shipping-fortunately");
+                var iffreeshipping =  false;
+                if (totalPrice > freeShipping/currencyRadio) {
+                  iffreeshipping =  true;
+                  $fortunately.find(".to-freeshipping-wrap").css({'display':'none'});
+                  $fortunately.find(".freeshipping-wrap").css({'display':'flex'});
+                } else {
+                  var lack = freeShipping/currencyRadio - totalPrice;
+                  var lackPrice = currencySymbol + lack.toFixed(2) +' '+currentCurrency;
+                  var percent = Math.floor((totalPrice*100)/(freeShipping/currencyRadio));
+                  
+                  $shoppingLink.find(".percent-wrap").attr("percent",percent);
+                  $shoppingLink.find(".amount_remaining").text(lackPrice);
+                  $fortunately.find(".to-freeshipping-wrap").css({'display':'flex'});
+                  $fortunately.find(".freeshipping-wrap").css({'display':'none'});
+                  initCartProgress(false,percent);
+                }
+                $fortunately.attr("iffreeshipping",iffreeshipping);
+              	var $shoppingFor = $cartDrawr.find('.cart-shipping-fortunately'); 
+                if($shoppingFor.length!==0){
+                  if(cart.item_count ===0){
+                    $shoppingFor.hide();
+                  }else{
+                    $shoppingFor.show();
+                  }
+                }
+              	clearTimeout(refreshMiniCartTimer);
+            }, 500);
+        });
+      
+      /** 查询是否为color **/
+      rivets.formatters.isColorOprion = function(value){
+        return value === 'color' || value === 'Color';
+      };
+      /** 查询是否为size **/
+      rivets.formatters.isSizeOprion = function(value){
+        return value === 'size';
+      };
+      /** 初始化style **/
+      rivets.formatters.backgroundColor = function(value){
+        return 'background-color:' +  value
+      };
+      rivets.formatters.eq = function(value, checkAgainst)
+      {
+        return (value == checkAgainst);
+      };
+      rivets.formatters.noteq = function(value, checkAgainst)
+      {
+        return (value != checkAgainst);
+      };
+ });
+  
+</script>

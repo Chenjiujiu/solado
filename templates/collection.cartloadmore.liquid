@@ -1,0 +1,87 @@
+{%- layout none -%}
+{% capture collectionPage %}
+
+{%- assign page_url = content_for_header | split:'"pageurl":"' | last | split:'"' | first | split: request.host | last | replace:'\/','/' | replace:'%20',' ' | replace:'\u0026','&'  -%}
+{% assign page = blank %}
+{% assign limit = blank %}
+{% assign grid = blank %}
+{% assign tablet-grid = blank %}
+{% assign mobile-grid = blank %}
+
+{%- for i in (1..1) -%}
+
+  {%- unless page_url contains "?" -%}{% break %}{%- endunless -%}
+  {%- assign query_string = page_url | split:'?' | last -%}
+  {%- assign qry_parts= query_string | split:'&' -%}
+
+  {%- for part in qry_parts -%}
+    {%- assign key_and_value = part | split:'=' -%}
+    {%- if key_and_value.size > 1 -%}
+      {% if key_and_value[0] == 'page' %}
+        {% assign page = key_and_value[1] %}
+      {% elsif key_and_value[0] == "limit" %}  
+        {% assign limit = key_and_value[1] %}
+      {% elsif key_and_value[0] == "grid" %}  
+        {% assign grid = key_and_value[1] %}
+      {% elsif key_and_value[0] == "tabletgrid" %}  
+        {% assign tablet-grid = key_and_value[1] %}
+      {% elsif key_and_value[0] == "mobilegrid" %}  
+        {% assign mobile-grid = key_and_value[1] %}
+      {% endif %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endfor -%}
+
+{%- liquid
+    	case grid
+      		when 2
+    			assign grid_ds = 'large-up--one-half'
+    			assign image_size = '150,350,550,750,950'
+      		when 3 
+    			assign grid_ds = 'large-up--one-third'
+                assign image_size = '150,350,550,750'
+      		when 4 
+    			assign grid_ds = 'large-up--one-quarter'
+                assign image_size = '150,350,550,750'
+      		when 5 
+    			assign grid_ds = 'large-up--one-fifth'
+                assign image_size = '150,350,550'
+      		when 6 
+    			assign grid_ds = 'large-up--one-sixth'
+                assign image_size = '130,300,500'
+      		when 7
+    			assign grid_ds = 'large-up--one-seventh'
+                assign image_size = '130,280,400'
+    	endcase
+    -%}
+{% case tablet-grid %}
+  {% when 2 %}{%- assign grid_tb = 'medium--one-half' -%}
+  {% when 3 %}{%- assign grid_tb = 'medium--one-third' -%}
+  {% when 4 %}{%- assign grid_tb = 'medium--one-quarter' -%}
+  {% when 5 %}{%- assign grid_tb = 'medium--one-fifth' -%}
+{% endcase %}
+{% case mobile-grid %}
+  {% when 1 %}{%- assign grid_mb = 'small--one-whole' -%}
+  {% when 2 %}{%- assign grid_mb = 'small--one-half' -%}
+  {% when 3 %}{%- assign grid_mb = 'small--one-third' -%}
+{% endcase %}
+  
+{% paginate collection.products by limit %}
+{% comment %}<!--<div>{{ canonical_url }} | {{request.path }} | {{ page }}| {{ limit }}| {{ grid }}| {{ tablet-grid }}| {{ mobile-grid }}</div>-->{% endcomment %}
+ {% comment %} <!--<div>{{ paginate.next}}</div>-->{% endcomment %}
+<div>
+<div class="pagelist"  page="{{page}}">
+ {% for product in collection.products %}
+   <div class="grid__item item small--one-half medium--one-third large-up--one-quarter" >{% include 'product-card-grid-cart', sizes: image_size %}</div>
+ {% endfor %}
+</div>
+  {% if paginate.next %}
+    {%- assign nextPage = page | plus:1  -%}
+  {%- assign nextPageUrl = request.path  | append: "?view=cartloadmore" | append: "&page=" | append: nextPage | append: "&limit=" | append: limit | append: "&grid=" | append: grid | append: "&tabletgrid=" | append: tablet-grid| append: "&mobilegrid=" | append: mobile-grid -%}
+   <div class="load-more" href="{{nextPageUrl}}">LOAD MORE</div>
+  {% endif %}
+  </div>
+{%endpaginate%} 
+
+{% endcapture %}
+{{collectionPage | strip_newlines | remove: "  " | remove: "	" }}

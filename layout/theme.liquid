@@ -1,0 +1,134 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" {% if settings.rtl %}dir="rtl"{% endif %}>
+<head>
+        <!--cozy country redirect optimization code start-->
+        {{shop.metafields.CCR.shopat_script}}
+        <!--cozy country redirect optimization code end-->
+        <script>
+          	window._usfGetProductDescription = 1
+        </script>
+    <!--shop.currency {{shop.currency}} -->
+  {% include 'limespot' %}
+
+  {%- if shop.currency == 'EUR' -%}
+  	{% include 'embedded-code-eu' %}
+  {%- elsif shop.currency == 'USD' -%}
+  	{% include 'embedded-code-us' %}
+  {% else %}
+    {% include 'embedded-code-uk' %}
+  {%- endif -%}
+
+  {{mainjs | strip_newlines | remove: "	" }}
+
+  {%- comment -%}{{ content_for_header }}{%- endcomment -%}
+  {%- render 'header-content' -%}
+
+  {%- if settings.show_language -%}
+	{%- include 'weglot_hreftags' -%}
+	{%- include 'weglot_switcher' -%}
+  {%- endif -%}
+
+  {% render 'shogun-head' %}
+
+	{{ shop.metafields.loox["global_html_head"] }}
+  {% include "omega-tiktok-multi-pixels" %}
+
+
+{% render 'gsf-conversion-pixels' %}
+<script>
+    window._usf_money_format = {{ shop.money_format | json }}
+</script>
+{% render 'usf' %}
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.js' | asset_url | script_tag }}
+{{ 'base.css' | asset_url | stylesheet_tag }}
+	<script>
+    window.addEventListener('message',(msg)=>{
+      console.log("接受到message22",msg)
+    })
+	</script>
+</head>
+<body id="{{ page_title | handle }}" class="template-{{ template | split: '.' | first }} {%- if settings.rtl -%}rtl {%- endif -%}lazyload"
+	{%- if settings.bodybg_img %} data-bgset="{% include 'bgset', image: settings.bodybg_img %}" data-sizes="auto" data-parent-fit="cover" style="background-image:url('{{ settings.bodybg_img | img_url: '50x50' }});"{%- endif -%}>
+<script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+	{%- if settings.enable_age_varification -%}{% render 'age-check' %}{%- endif -%}
+    {%- if settings.layout_style == "boxedlayout" -%}<div class="page-wrapper layout-boxed">{%- endif -%}
+  		{%- include 'header' -%}
+    	{%- if settings.top-information-bar -%}{% section 'top-info-panel' %}{%- endif -%}
+		<main id="PageContainer" class="main-content {{ template | split: '.' | first }}" id="MainContent" role="main">{{ content_for_layout }}
+<limespot></limespot></main>
+    	{%- section 'footer' -%}
+  	{% if settings.layout_style == "boxedlayout" %}</div>{% endif %}
+	{% section 'custom-colors' %}
+  	{% section 'exit-product-popup' %}
+<script src="{{ 'option_selection.js' | shopify_asset_url }}" defer="defer"></script>
+{%- if template.directory == 'customers' -%}<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if content_for_layout contains 'data-stellar-background-ratio' -%}<script src="{{ 'stellar.js' | asset_url }}" defer></script>{%- endif -%}
+{%- if content_for_layout contains 'grid-masonary' -%}<script src="{{ 'masonry.js' | asset_url }}" defer="defer"></script>{%- endif -%}
+{%- if settings.show_multiple_currencies and settings.currency_opt == 'script' -%}{%- render 'currencies' -%}{%- endif -%}
+{%- if settings.enable_site_animation -%}<script src="{{ 'wow.min.js' | asset_url }}" async></script>{%- endif -%}
+<!-- <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script> -->
+<script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+{%- render 'theme-modals' -%}
+{%- if settings.show_sticky_arrow -%}<span id="site-scroll"><i class="ad ad-angle-up-l" aria-hidden="true"></i></span>{%- endif -%}
+<script src="{{ 'script-loader.js' | asset_url }}" defer></script>
+
+	{{ shop.metafields.loox["global_html_body"] }}
+  {% include 'swymSnippet' %}
+  {% render 'special-offers' %}
+  {% include 'swym-header-counter'%}
+  {%include 'swym-custom'%}
+
+<script type="text/javascript">
+var iCookieLength = 30; // Cookie length in days
+var sCookieName = "source"; // Name of first-party cookie to use for last click referrer
+var sSourceParameterName = "source"; // Used by networks to tell you who drove the traffic
+var domain = ".uk.solado.com"; // top level domain
+var _getQueryStringValue = function (sParameterName) {
+var aQueryStringPairs = document.location.search.substring(1).split("&");
+for (var i = 0; i < aQueryStringPairs.length; i++) {
+var aQueryStringParts = aQueryStringPairs[i].split("=");
+if (sParameterName.toLowerCase() == aQueryStringParts[0].toLowerCase()) {
+return aQueryStringParts[1];
+}
+}
+};
+
+var _setCookie = function (sCookieName, sCookieContents, iCookieLength, tlDomain) {
+var dCookieExpires = new Date();
+dCookieExpires.setTime(dCookieExpires.getTime() + (iCookieLength * 24 * 60 * 60 * 1000));
+document.cookie = sCookieName + "=" + sCookieContents + "; expires=" +
+dCookieExpires.toGMTString() +";domain=" + tlDomain + "; path=/;";
+};
+var _getCookie = function (sCookieName) {
+sCookieName += "=";
+var aCookies = document.cookie.split(";");
+for (var i = 0; i < aCookies.length; i++) {
+while (aCookies[i].charAt(0) == " ") aCookies[i] = aCookies[i].substring(1);
+if (aCookies[i].indexOf(sCookieName) != -1) {
+return aCookies[i].substring(sCookieName.length, aCookies[i].length);
+}
+}
+};
+
+if (_getQueryStringValue("awc")) {
+_setCookie(sCookieName, "aw", iCookieLength, domain);
+} else if (_getQueryStringValue('gclid')) {
+_setCookie(sCookieName, 'google', iCookieLength, domain);
+} else if (_getQueryStringValue('msclkid')) {
+_setCookie(sCookieName, 'bing', iCookieLength, domain);
+} else if (_getQueryStringValue('utm_source')) {
+_setCookie(sCookieName, _getQueryStringValue('utm_source'), iCookieLength, domain);
+}
+</script>
+<script src="https://www.dwin1.com/28141.js" type="text/javascript" defer="defer"></script>
+
+{% include 'subscribe-it-helper' %}
+<!-- **BEGIN** Hextom TMS Translator // Main Include - DO NOT MODIFY -->
+    <script src="{{ 'tms-translator.js' | asset_url }}" defer="defer"></script>
+    <!-- **END** Hextom TMS Translator // Main Include - DO NOT MODIFY -->
+
+</body>
+
+</html>

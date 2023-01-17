@@ -1,0 +1,111 @@
+<div class="search-classify">
+  <div class="search-input-group">
+    <span class="search-input-group__btn">
+    <i class="iconfont icon-sousuo"></i>
+  	</span>
+  	<input class="search-input-group__field" type="search" name="search-classify-text" placeholder="Search collection"  autocomplete="off" />
+  </div>
+  <ul class="search-classify-results" style="display:none;"></ul>
+</div>
+
+<style>
+  .search-classify .search-input-group{
+  	border-bottom: 1px solid #eeeeee;
+    margin: 0 10px 6px 10px;
+  }
+  .search-classify .search-input-group .search-input-group__field{
+    color: #050000;
+    padding: 5px 0;
+    background: none;
+    border: 0 none;
+    margin-bottom:0px;
+    width: calc(100% - 26px);
+    margin-left: 6px;
+  }
+  .search-classify .search-input-group .search-input-group__btn{
+    color: #050000;
+  }
+  .search-classify .search-input-group .search-input-group__btn .ad{
+    font-size:14px;
+  }
+  .search-classify .search-classify-results { 
+  	margin-bottom: 40px;
+  }
+  #MobileNav .search-classify .search-classify-results li{
+    border-top:none;
+  }
+  #MobileNav .search-classify .search-classify-results li a{
+  	padding: 4px 10px;
+    font-size: 10px;
+  }
+  .search-classify .search-classify-results li a .marker{
+    color: #333;
+    font-size: 12px;
+    font-weight: bold;
+  }
+</style>
+<script type="text/javascript">
+  var getChildSelector = function(level){
+  	var childSelector = 'li.lvl1';
+    if(level === 1){
+      childSelector = 'li.lvl1';
+    }else if(level === 2){
+      childSelector = 'li.lvl-1';
+    }else if(level === 3){
+      childSelector = 'li.lvl-2';
+    }
+    return childSelector;
+  };
+  
+  var getAllCollections = function(list,$el,level){
+  	var childSelector = getChildSelector(level);
+    var $levelList = $el.find(childSelector);
+    if($levelList.length>0){
+      $levelList.each(function(){
+        var $self = $(this);
+      	var $a = $self.find('>a');
+        list.push({href:$a.attr("href"),label:$a.text()});
+		getAllCollections(list,$self,level+1);
+      });
+    }
+  };
+  
+  window.addEventListener('DOMContentLoaded',function(){
+    var $mobileNav = $("#MobileNav");
+    var $input = $mobileNav.find(".search-classify .search-input-group__field");
+    var list = [];
+    getAllCollections(list,$mobileNav,1);
+    $input.on("keyup",function(val){
+      var searchWord  = $(this).val().toUpperCase();
+      if(searchWord==='' || searchWord.length<2){
+        $mobileNav.find(".search-classify-results").hide();
+      	return;
+      }
+      var result  = list.filter(function(item){
+      	return item.label.indexOf(searchWord)!==-1;
+      });
+      if(result.length>0){
+        if(result.length>6){
+        	result = result.slice(0,6);
+        }
+        var allArr = [];
+        result.forEach(function(item){
+          var html = '<li><a href="'+item.href+'">'+item.label+'</li>';
+          var rgxp = new RegExp(searchWord, 'g');
+          var repl = '<span class="marker">' + searchWord + '</span>';
+          html = html.replace(rgxp, repl);
+          allArr.push(html);
+        });
+        $mobileNav.find(".search-classify-results").html(allArr.join('')).show();
+      }else{
+      	$mobileNav.find(".search-classify-results").html('').hide();
+      }
+    });
+    /** when click the close btn of search input **/
+    $mobileNav.find(".search-input-group__field").on("search", function(){
+      if($(this).val()===''){
+      	 $mobileNav.find(".search-classify-results").hide();
+      }
+    });
+  });
+</script>

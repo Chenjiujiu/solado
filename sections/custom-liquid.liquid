@@ -1,0 +1,82 @@
+<div class="content-indent {{ section.settings.top-offeset}}">
+  {% if section.settings.section_cov %}<div class="section-cover" style="background-color:{{section.settings.sec_bg_clr}};">{% endif%}
+  <div class="page-width" id="{{ section.id }}" data-section-id="{{ section.id }}" data-section-type="carousel">
+    {%- if section.settings.title != blank  or section.settings.subtitle != blank -%}
+    <div class="sec-ttl {{ settings.title_align}} wow fadeIn">
+      <h3 class="h3">{{ section.settings.title }}</h3>     
+      {%- if section.settings.subtitle != blank -%}<span>{{section.settings.subtitle}}</span>{%- endif -%}
+    </div>
+    {%- endif -%}
+    {% if section.settings.custom_liquid != blank %}{{ section.settings.custom_liquid }}{% endif %}
+  </div>
+  {% if section.settings.section_cov %}</div>{% endif %}
+</div>
+{% schema %}
+  {
+    "name": "Custom Liquid",
+    "class": "index-section",
+    "settings": [	  		
+      {
+        "type": "textarea",
+        "id": "title",
+        "label": "Heading",
+        "default": "Custom Liquid",
+		 "info":"Use <strong>text here</strong> to make headings bold"
+      },	  
+	  {
+         "type": "textarea",
+         "id": "subtitle",
+         "label": "Sub Heading",
+         "default": "Describe about this section..."
+      },
+      {
+         "id": "custom_liquid",
+         "type": "liquid",
+         "label": "Liquid Code"
+      },
+      {
+        "type": "header",
+        "content": "Appearance Section ==="
+      },
+	  {
+            "type": "select",
+            "id": "top-offeset",
+            "label": "Top OffSet",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              },
+              {
+                "value": "small",
+                "label": "Small"
+              },
+			  {
+                "value": "none",
+                "label": "None"
+              }
+			]
+      }, 		
+      {
+        "type": "checkbox",
+        "id": "section_cov",
+        "label": "Add Background?",
+        "default": false
+      },
+	  {
+        "type": "color",
+        "id": "sec_bg_clr",
+        "label": "Background",
+		"default":"#fafafa",
+		"info":"select light color"
+	  }
+	 ],
+    "presets": [
+      {
+        "name": "7 - Custom Liquid"
+        
+      }
+    ]
+  }
+{% endschema %}
